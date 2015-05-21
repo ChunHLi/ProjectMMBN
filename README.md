@@ -1,2 +1,17 @@
-# ProjectMMBN
-APCS2 Term 2 processing project.
+ProjectMMBN
+=========================================================================================================================
+APCS Final Project Term 2;
+
+Megaman Battle Network Virus Battle Simulator;
+
+Change - Log
+=========================================================================================================================
+5/20/15 - Kah Soon Yap - Made the proposal and printed it out.
+5/20/15 - Shawn Li - Imported sprites and decomposed some of them.
+5/21/15 - Shawn Li - Created Change Log readme.
+
+MileStones
+=========================================================================================================================
+
+To do
+=========================================================================================================================
