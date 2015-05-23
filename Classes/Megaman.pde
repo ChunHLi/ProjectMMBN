@@ -61,4 +61,10 @@ public class Megaman implements Killable{
  public int getCol(){
    return panelCol;
  }
+ public void setRow(int Row){
+   panelRow = Row;
+ }
+ public void setCol(int Col){
+   panelCol = Col;
+ }
 }
