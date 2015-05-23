@@ -9,6 +9,7 @@ class Animation{
     for(int i = 0; i < spriteCount; i++){
         String spriteDirectory = spriteFolderDirectory + i + ".png";
         spriteFrames[i] = loadImage(spriteDirectory);
+        spriteFrames[i].resize((int)(spriteFrames[i].width*1.5),(int)(spriteFrames[i].height*1.5));
     }
   }
   
@@ -19,7 +20,7 @@ class Animation{
     else{
       currentFrame = 0;
     }
-    image(spriteFrames[currentFrame],xpos,ypos - spriteFrames[currentFrame].height);
+    image(spriteFrames[currentFrame],xpos,ypos - spriteFrames[currentFrame].height + 5);
   }
 
 }
