@@ -62,7 +62,7 @@ void draw() {
   processKeys();
   move();
   charge();
-  mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+  mettaurMove();
   checkMode();
   Chips.display(displayMenu);
 }
@@ -274,5 +274,14 @@ void charge(){
 }
 
 void mettaurMove(){
-  
+  if (mettaur.getRow() != megaman.getRow()){
+   if (mettaur.getRow() < megaman.getRow()){
+    mettaur.setRow(mettaur.getRow()+1);
+   }else{
+    mettaur.setRow(mettaur.getRow()-1); 
+   }
+   mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+  }else{
+   mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+  }
 }

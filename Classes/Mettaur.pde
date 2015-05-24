@@ -5,8 +5,8 @@ public class Mettaur implements Killable {
     this(50, 10, 1, 4);
   }
 
-  Animation Standing = new Animation("../Sprites/viruses/Mettaur/01",1);
-  //Animation Attack = new Animation("..Sprites/viruses/Mettaur/",);
+  Animation Standing = new Animation("../Sprites/viruses/Mettaur/01", 1);
+  Animation Attack = new Animation("../Sprites/viruses/Mettaur/02", 13);
 
 
   public Mettaur(int HP, int dmg, int panelRow, int panelCol) {
