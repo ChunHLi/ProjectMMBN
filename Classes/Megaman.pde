@@ -7,7 +7,8 @@ public class Megaman implements Killable {
   Animation ArrivePanel = new Animation("../Sprites/megaman/noCross/03", 4);
   Animation LeavePanel = new Animation("../Sprites/megaman/noCross/04", 4);
   Animation Buster = new Animation("../Sprites/megaman/noCross/07", 8);
-
+  Animation ChargeBlue = new Animation("../Sprites/chargingBuster/01", 7);
+  Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
 
   public Megaman() {
     this(100, 10, 1, 1, "noCross");
@@ -64,6 +65,15 @@ public class Megaman implements Killable {
       }
     }
     currentAnimation = animation;
+  }
+  
+  public void display(float xpos, float ypos, int animation, int mode, int frame){
+    if (animation == 5){
+     ChargeBlue.display(xpos, ypos, frame); 
+    }
+    if (animation == 6){
+     ChargePurp.display(xpos, ypos, frame); 
+    }
   }
 
   public void hurt(int dmg) {

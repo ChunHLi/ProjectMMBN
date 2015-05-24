@@ -12,7 +12,7 @@ class Animation {
       spriteFrames[i].resize((int)(spriteFrames[i].width*1.5), (int)(spriteFrames[i].height*1.5));
     }
   }
-
+  
   void display(float xpos, float ypos) {
     if (currentFrame < spriteCount - 1) {
       currentFrame += 1;
@@ -20,6 +20,10 @@ class Animation {
       currentFrame = 0;
     }
     image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+  }
+  
+  void display(float xpos, float ypos, int frame){
+   image(spriteFrames[frame], xpos, ypos - spriteFrames[frame].height + 5);
   }
 }
 

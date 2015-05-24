@@ -22,7 +22,8 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 8, 4
+  1, 8, 4, 4, 8, 4, 7
+  // , , LeavePanel, ArrivePanel, Buster, Charge
 };
 boolean moved;
 boolean modeChanged;
@@ -31,6 +32,7 @@ int MODE;
 int changeMenuCounter;
 ChipMenu Chips;
 boolean isX, isXReleased;
+int chargeFrame;
 
 void setup() {
   size(360, 240);
@@ -48,6 +50,7 @@ void setup() {
   backGround = new Animation("../Sprites/backgrounds/00", 8);
   Chips = new ChipMenu();
   isXReleased = true;
+  chargeFrame=0;
 }
 
 void draw() {
@@ -55,6 +58,7 @@ void draw() {
   backGround.display(0, height/2);
   image(panels, width/2 - panels.width/2, height/2); 
   processKeys();
+  charge();
   move();
   checkMode();
   Chips.display(displayMenu);
@@ -252,3 +256,13 @@ void changeMenu() {
   }
 }
 
+void charge(){
+  if (MODE == 0){
+   if (!isXReleased){
+     if (chargeFrame < 8){
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame);
+     }
+     chargeFrame++;
+   } 
+  }
+}
