@@ -25,5 +25,22 @@ class Animation {
   void display(float xpos, float ypos, int frame){
    image(spriteFrames[frame], xpos, ypos - spriteFrames[frame].height + 5);
   }
+  
+  void display(int delay, float xpos, float ypos) {
+    wait(delay);
+    if (currentFrame < spriteCount - 1) {
+      currentFrame += 1;
+    } else {
+      currentFrame = 0;
+    }
+    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+  }
+  
+  void wait(int millis){
+    try {
+      Thread.sleep(millis);
+    } catch (InterruptedException e) {
+    }
+  }
 }
 

@@ -23,8 +23,8 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 8, 4, 7
-  // , , LeavePanel, ArrivePanel, Buster, Charge
+  1, 8, 4, 4, 8, 4, 7, 14
+  // , , LeavePanel, ArrivePanel, Buster, Charge, mettaur
 };
 boolean moved;
 boolean modeChanged;
@@ -34,6 +34,8 @@ int changeMenuCounter;
 ChipMenu Chips;
 boolean isX, isXReleased;
 int chargeFrame;
+int mettaurTimer;
+boolean mettaurMove;
 
 void setup() {
   size(360, 240);
@@ -52,7 +54,8 @@ void setup() {
   backGround = new Animation("../Sprites/backgrounds/00", 8);
   Chips = new ChipMenu();
   isXReleased = true;
-  chargeFrame=0;
+  chargeFrame = 0;
+  mettaurTimer = 0;
 }
 
 void draw() {
@@ -62,9 +65,11 @@ void draw() {
   processKeys();
   move();
   charge();
+  mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
   mettaurMove();
   checkMode();
   Chips.display(displayMenu);
+  mettaurTimer++;
 }
 
 void mousePressed() {
@@ -274,14 +279,20 @@ void charge(){
 }
 
 void mettaurMove(){
-  if (mettaur.getRow() != megaman.getRow()){
-   if (mettaur.getRow() < megaman.getRow()){
-    mettaur.setRow(mettaur.getRow()+1);
-   }else{
-    mettaur.setRow(mettaur.getRow()-1); 
-   }
-   mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
-  }else{
-   mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+  if (MODE == 0){
+      if (mettaurTimer > 30){
+        if (mettaur.getRow() != megaman.getRow()){
+         if (mettaur.getRow() < megaman.getRow()){
+          mettaur.setRow(mettaur.getRow()+1);
+         }else{
+          mettaur.setRow(mettaur.getRow()-1); 
+         }
+         mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+        }else{
+         mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
+        }
+        mettaurTimer = 0;
+      }
+    }
   }
 }
