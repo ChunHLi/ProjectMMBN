@@ -6,7 +6,7 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false
+  false, false, false, false, false
 }; 
 Panel[][] Grid = {
   {
@@ -22,7 +22,7 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4
+  1, 8, 4, 4, 13
 };
 boolean moved;
 boolean modeChanged;
@@ -97,6 +97,12 @@ void keyPressed() {
     MODE = 0;
     displayMenu = false;
   }
+  // X (B on GBA)
+  if (keyCode == 88){
+    if (!currentlyMoving()){
+      Keys[4] = true;
+    }
+  }  
   println(keyCode);
 }
 
@@ -189,6 +195,15 @@ void move() {
           Keys[3] = false;
           moved = false;
         }
+      }
+      if (Keys[4]){
+        if (megaman.Buster.currentFrame < FrameCount[4] - 1) {
+          megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 4, 0);
+        }else if (megaman.Buster.currentFrame == FrameCount[4] - 1){
+          megaman.Buster.currentFrame = 0;
+        }
+        Keys[4] = false;
+        
       }
       //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     } else if (!currentlyMoving()) {

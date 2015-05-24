@@ -6,6 +6,7 @@ public class Megaman implements Killable {
   Animation Hurt = new Animation("../Sprites/megaman/noCross/02", 8);
   Animation ArrivePanel = new Animation("../Sprites/megaman/noCross/03", 4);
   Animation LeavePanel = new Animation("../Sprites/megaman/noCross/04", 4);
+  Animation Buster = new Animation("../Sprites/megaman/noCross/07", 7);
 
 
   public Megaman() {
@@ -43,6 +44,9 @@ public class Megaman implements Killable {
         //for (int i = 0; i < LeavePanel.spriteCount; i++){
         LeavePanel.display(xpos, ypos);
         //}
+      }
+      if (animation == 4){
+        Buster.display(xpos, ypos);
       }
     }
     if (mode == 1) {
