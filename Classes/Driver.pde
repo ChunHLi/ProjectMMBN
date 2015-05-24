@@ -30,6 +30,7 @@ boolean displayMenu;
 int MODE;
 int changeMenuCounter;
 ChipMenu Chips;
+boolean isX, isXReleased;
 
 void setup() {
   size(360, 240);
@@ -46,12 +47,14 @@ void setup() {
   megaman = new Megaman();
   backGround = new Animation("../Sprites/backgrounds/00", 8);
   Chips = new ChipMenu();
+  isXReleased = true;
 }
 
 void draw() {
   background(0);
   backGround.display(0, height/2);
   image(panels, width/2 - panels.width/2, height/2); 
+  processKeys();
   move();
   checkMode();
   Chips.display(displayMenu);
@@ -100,10 +103,24 @@ void keyPressed() {
   // X (B on GBA)
   if (keyCode == 88){
     if (!currentlyMoving()){
-      Keys[4] = true;
+      isX = true;
     }
   }  
   println(keyCode);
+}
+
+void keyReleased(){
+  if (keyCode == 88){
+    isX = false;
+    isXReleased = true;
+    Keys[4] = true; 
+  }
+}
+
+void processKeys(){
+ if (isX && isXReleased){
+  isXReleased = false;
+ } 
 }
 
 //this is important.
