@@ -26,6 +26,10 @@ Change - Log
 
 5/23/15 - Shawn Li - chip class created, chipMenu created. Modes are implemented but not perfected.
 
+5/23/15 - Kah Soon Yap - Buster is done. One small bug. Will add in the damage once viruses are implimented.
+
+5/23/15 - Kah Soon Yap - Megabuster is done. Charging animation moves along with Megaman. Make charge time longer?
+
 MileStones
 =========================================================================================================================
 
