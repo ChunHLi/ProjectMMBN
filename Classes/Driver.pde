@@ -58,8 +58,8 @@ void draw() {
   backGround.display(0, height/2);
   image(panels, width/2 - panels.width/2, height/2); 
   processKeys();
-  charge();
   move();
+  charge();
   checkMode();
   Chips.display(displayMenu);
 }

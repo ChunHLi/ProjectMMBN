@@ -69,10 +69,10 @@ public class Megaman implements Killable {
   
   public void display(float xpos, float ypos, int animation, int mode, int frame){
     if (animation == 5){
-     ChargeBlue.display(xpos, ypos, frame); 
+     ChargeBlue.display(xpos-19, ypos+15, frame); 
     }
     if (animation == 6){
-     ChargePurp.display(xpos, ypos, frame); 
+     ChargePurp.display(xpos-19, ypos+15, frame); 
     }
   }
 
