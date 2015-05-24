@@ -2,10 +2,10 @@ public class Mettaur implements Killable {
   private int HP, dmg, panelRow, panelCol;
 
   public Mettaur() {
-    this(50, 10, 1, 1);
+    this(50, 10, 1, 4);
   }
 
-  //Animation Standing = new Animation("../Sprites/viruses/Mettaur/",);
+  Animation Standing = new Animation("../Sprites/viruses/Mettaur/01",1);
   //Animation Attack = new Animation("..Sprites/viruses/Mettaur/",);
 
 
@@ -16,6 +16,12 @@ public class Mettaur implements Killable {
     this.panelCol = panelCol;
   }
 
+  public void display(float xpos, float ypos, int animation, int mode) {
+    xpos+=8;
+    if (animation == 0){
+      Standing.display(xpos, ypos);
+    } 
+  }
 
   public void hurt(int damage) {
     HP-=damage;

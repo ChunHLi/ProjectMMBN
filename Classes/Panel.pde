@@ -17,6 +17,14 @@ public class Panel {
     forMM = true;
     setAtt("reg");
   }
+  
+  public Panel(float xpos, float ypos, boolean Danger){
+    locationX = xpos;
+    locationY = ypos;
+    danger = Danger;
+    forMM = !Danger;
+    setAtt("reg");
+  }
 
   public Panel(boolean Danger, boolean FOR, String att, float xpos, float ypos) {
     setAtt(att);

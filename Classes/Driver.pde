@@ -1,5 +1,6 @@
 import java.util.*;
 Megaman megaman;
+Mettaur mettaur;
 Animation backGround;
 PImage panels;
 PImage enteringChipMenu;
@@ -14,7 +15,7 @@ Panel[][] Grid = {
     }
     , 
   {
-    new Panel(4, 179), new Panel(64, 179), new Panel(124, 179), new Panel(184, 179), new Panel(244, 179), new Panel(304, 179)
+    new Panel(4, 179), new Panel(64, 179), new Panel(124, 179), new Panel(184, 179), new Panel(244, 179, true), new Panel(304, 179)
     }
     , 
   {
@@ -47,6 +48,7 @@ void setup() {
   //of the sequence of frames you want to see. Replace the second parameter
   //with the amount of frames in the sequence.
   megaman = new Megaman();
+  mettaur = new Mettaur();
   backGround = new Animation("../Sprites/backgrounds/00", 8);
   Chips = new ChipMenu();
   isXReleased = true;
@@ -60,6 +62,7 @@ void draw() {
   processKeys();
   move();
   charge();
+  mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
   checkMode();
   Chips.display(displayMenu);
 }
@@ -260,12 +263,16 @@ void changeMenu() {
 void charge(){
   if (MODE == 0){
    if (!isXReleased){
-     if (chargeFrame < 7){
-       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame);
-     } else if (chargeFrame > 6){
-       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-7)%11);
+     if (chargeFrame < 19){
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame%7);
+     } else if (chargeFrame > 18){
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-18)%11);
      }
      chargeFrame++;
    } 
   }
+}
+
+void mettaurMove(){
+  
 }
