@@ -11,7 +11,7 @@ public class Megaman implements Killable {
   Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
 
   public Megaman() {
-    this(100, 10, 1, 1, "noCross");
+    this(100, 1, 1, 1, "noCross");
   }
   public Megaman(int HP, int buster, int panelRow, int panelCol, String cross) {
     this.HP=HP;
@@ -96,6 +96,12 @@ public class Megaman implements Killable {
   }
   public void setCol(int Col) {
     panelCol = Col;
+  }
+  public int getBuster(){
+   return buster; 
+  }
+  public void setBuster(int val){
+   buster = val;
   }
 }
 

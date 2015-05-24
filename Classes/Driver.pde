@@ -126,7 +126,11 @@ void keyReleased(){
     isX = false;
     isXReleased = true;
     Keys[4] = true;
-    chargeFrame = 0;
+    if (chargeFrame >18){
+      if (megaman.getBuster() < 6){
+        megaman.setBuster(megaman.getBuster()*10);
+      } 
+    }
   }
 }
 
@@ -233,6 +237,14 @@ void move() {
         }else if (megaman.Buster.currentFrame == FrameCount[4] - 1){
           megaman.Buster.currentFrame = 0;
           Keys[4] = false;
+          if (mettaur.getRow() == megaman.getRow()){
+           mettaur.hurt(megaman.getBuster());
+           System.out.println(mettaur.getHP());
+          }
+          if (chargeFrame > 18){
+           megaman.setBuster(megaman.getBuster()/10); 
+          }
+          chargeFrame = 0;
         }
 
       //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
@@ -280,7 +292,7 @@ void charge(){
 
 void mettaurMove(){
   if (MODE == 0){
-      if (mettaurTimer > 30){
+     if (mettaurTimer > 30){
         if (mettaur.getRow() != megaman.getRow()){
          if (mettaur.getRow() < megaman.getRow()){
           mettaur.setRow(mettaur.getRow()+1);
@@ -288,11 +300,9 @@ void mettaurMove(){
           mettaur.setRow(mettaur.getRow()-1); 
          }
          mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
-        }else{
-         mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
         }
         mettaurTimer = 0;
       }
     }
-  }
 }
+
