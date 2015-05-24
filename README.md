@@ -30,6 +30,16 @@ Change - Log
 
 5/23/15 - Kah Soon Yap - Megabuster is done. Charging animation moves along with Megaman. Make charge time longer?
 
+5/24/15 - Kah Soon Yap - Charge time is now longer.
+
+5/24/15 - Kah Soon Yap - Mettaur is animated.
+
+5/24/15 - Kah Soon Yap - Mettaur has a very simple AI. Mettaur attack doesn't work.
+
+5/24/15 - Kah Soon Yap - Buster hurts Mettaur.
+
+4/24/15 - Kah Soon Yap - HP now shows at top left corner and below Mettaur.
+
 MileStones
 =========================================================================================================================
 
@@ -37,5 +47,4 @@ To do
 =========================================================================================================================
 
 -Pause game (Kah soon, you should do it, good practice).
--Buster Charge (Kah soon, Try to implement it!)
 -add manual animation of retreating menu when switch from choosing chips to battling (I'll do it).
