@@ -26,6 +26,7 @@ int[] FrameCount = {
   1, 8, 4, 4, 8, 4, 7, 14
   // , , LeavePanel, ArrivePanel, Buster, Charge, mettaur
 };
+PImage[] numberText = new PImage[10];
 boolean moved;
 boolean modeChanged;
 boolean displayMenu;
@@ -45,6 +46,11 @@ void setup() {
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
   enteringChipMenu.resize((int)(enteringChipMenu.width*1.5), (int)(enteringChipMenu.height*1.5));
+  for (int y = 0; y < 10; y++){
+    String txtDirectory = "../Sprites/textArt/text/" + y + ".png";
+    numberText[y] = loadImage(txtDirectory);
+    numberText[y].resize((int)(numberText[y].width*1.5), (int)(numberText[y].height*1.5));
+  }
   //parameter1 gives the directory, parameter2 is the amount of frames
   //look in the directory and replace "07" with the first two numbers
   //of the sequence of frames you want to see. Replace the second parameter
@@ -61,11 +67,11 @@ void setup() {
 void draw() {
   background(0);
   backGround.display(0, height/2);
-  image(panels, width/2 - panels.width/2, height/2); 
+  image(panels, width/2 - panels.width/2, height/2);
+  showHP(); 
   processKeys();
   move();
   charge();
-  mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
   mettaurMove();
   checkMode();
   Chips.display(displayMenu);
@@ -239,7 +245,6 @@ void move() {
           Keys[4] = false;
           if (mettaur.getRow() == megaman.getRow()){
            mettaur.hurt(megaman.getBuster());
-           System.out.println(mettaur.getHP());
           }
           if (chargeFrame > 18){
            megaman.setBuster(megaman.getBuster()/10); 
@@ -300,9 +305,48 @@ void mettaurMove(){
           mettaur.setRow(mettaur.getRow()-1); 
          }
          mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+         mettaurTimer = 0;
+        }else{
+          mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+         //mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
         }
-        mettaurTimer = 0;
-      }
-    }
+     }else{
+      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+     }
+   }
+}
+
+void showHP(){
+  //Megaman's HP
+  fill(56, 80, 104);
+  stroke(255);
+  rect(0, 0, 45, 20);
+  if (megaman.getHP()%10!=1){
+    image(numberText[megaman.getHP()%10], 32, 2);
+  }else{
+    image(numberText[megaman.getHP()%10], 37, 2);
+  }
+  if (megaman.getHP()%100/10 != 1){
+    image(numberText[megaman.getHP()%100/10], 22, 2);
+  }else{
+    image(numberText[megaman.getHP()%100/10], 27, 2);
+  }
+  if (megaman.getHP()%1000/100 != 1){
+    image(numberText[megaman.getHP()%1000/100], 12, 2);
+  }else{
+    image(numberText[megaman.getHP()%1000/100], 17, 2);
+  }
+  
+  //Enemy
+  if (mettaur.getHP()%10!=1){
+    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  }else{
+    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  }
+  if (mettaur.getHP()%100/10 != 1){
+    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  }else{
+    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  }
 }
 
