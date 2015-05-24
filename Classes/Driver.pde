@@ -117,7 +117,8 @@ void keyReleased(){
   if (keyCode == 88){
     isX = false;
     isXReleased = true;
-    Keys[4] = true; 
+    Keys[4] = true;
+    chargeFrame = 0;
   }
 }
 
@@ -259,8 +260,10 @@ void changeMenu() {
 void charge(){
   if (MODE == 0){
    if (!isXReleased){
-     if (chargeFrame < 8){
+     if (chargeFrame < 7){
        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame);
+     } else if (chargeFrame > 6){
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-7)%11);
      }
      chargeFrame++;
    } 
