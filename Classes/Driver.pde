@@ -22,7 +22,7 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 8
+  1, 8, 4, 4, 8, 4
 };
 boolean moved;
 boolean modeChanged;
@@ -204,7 +204,7 @@ void move() {
           megaman.Buster.currentFrame = 0;
           Keys[4] = false;
         }
-    
+
       //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     } else if (!currentlyMoving()) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);

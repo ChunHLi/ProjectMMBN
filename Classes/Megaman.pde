@@ -7,7 +7,6 @@ public class Megaman implements Killable {
   Animation ArrivePanel = new Animation("../Sprites/megaman/noCross/03", 4);
   Animation LeavePanel = new Animation("../Sprites/megaman/noCross/04", 4);
   Animation Buster = new Animation("../Sprites/megaman/noCross/07", 8);
-  Animation BusterBack = new Animation("../Sprites/megaman/noCross/14", 8);
 
 
   public Megaman() {
