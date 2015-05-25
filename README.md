@@ -38,13 +38,29 @@ Change - Log
 
 5/24/15 - Kah Soon Yap - Buster hurts Mettaur.
 
-4/24/15 - Kah Soon Yap - HP now shows at top left corner and below Mettaur.
+5/24/15 - Kah Soon Yap - HP now shows at top left corner and below Mettaur.
 
-MileStones
-=========================================================================================================================
+5/24/15 - Shawn Li - Chip selection window now appears! And disappears! And REappears!
+
 
 To do
 =========================================================================================================================
 
--Pause game (Kah soon, you should do it, good practice).
--add manual animation of retreating menu when switch from choosing chips to battling (I'll do it).
+- For Kah Soon (due 5/25/15) - Pause game (Kah soon, you should do it, good practice).
+
+- For Shawn Li (due 5/25/15) - Add custom bar and animation and make sure you can only access chip selection when bar is full.
+
+- For Anyone (due 5/25/15) - Decompose boss spritesheets.
+
+- For Anyone (due 5/25/15) - Start Protoman and Bass classes.
+
+- For Anyone (due 5/25/15) - Delete unnecessary files.
+
+- Future Goals:
+  1. Choose standard chips to implement.
+  2. Finish Chip and ChipMenu class.
+  3. Add methods to implement chip effects.
+  4. Program protoman and bass AI.
+  5. Program crosses.
+  6. Make transition between battles.
+  7. Beautification of code and game.
