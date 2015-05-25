@@ -9,6 +9,8 @@ float ypos;
 boolean[] Keys = {
   false, false, false, false, false
 }; 
+int customCounter;
+
 Panel[][] Grid = {
   {
     new Panel(4, 142), new Panel(64, 142), new Panel(124, 142), new Panel(184, 142), new Panel(244, 142), new Panel(304, 142)
@@ -24,7 +26,7 @@ Panel[][] Grid = {
   };
 int[] FrameCount = {
   1, 8, 4, 4, 8, 4, 7, 14
-  // , , LeavePanel, ArrivePanel, Buster, Charge, mettaur
+    // , , LeavePanel, ArrivePanel, Buster, Charge, mettaur
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -41,12 +43,12 @@ boolean mettaurMove;
 void setup() {
   size(360, 240);
   background(0);
-  frameRate(30);
+  frameRate(4);
   panels = loadImage("../Sprites/platform/backGround.png");
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
   enteringChipMenu.resize((int)(enteringChipMenu.width*1.5), (int)(enteringChipMenu.height*1.5));
-  for (int y = 0; y < 10; y++){
+  for (int y = 0; y < 10; y++) {
     String txtDirectory = "../Sprites/textArt/text/" + y + ".png";
     numberText[y] = loadImage(txtDirectory);
     numberText[y].resize((int)(numberText[y].width*1.5), (int)(numberText[y].height*1.5));
@@ -68,13 +70,18 @@ void draw() {
   background(0);
   backGround.display(0, height/2);
   image(panels, width/2 - panels.width/2, height/2);
-  showHP(); 
+  if (MODE == 0) {
+    showHP(0);
+  }
   processKeys();
   move();
   charge();
   mettaurMove();
   checkMode();
   Chips.display(displayMenu);
+  if (displayMenu) {
+    showHP(180);
+  }
   mettaurTimer++;
 }
 
@@ -109,41 +116,42 @@ void keyPressed() {
     }
   }
   // A and S (L and R on GBA)
-  if (keyCode == 65 || keyCode == 83) {
+  if ((keyCode == 65 || keyCode == 83) && MODE == 0) {
     MODE = 1;
     modeChanged = true;
   }
   // Z (A on GBA)
-  if (keyCode == 90) {
+  if (keyCode == 90 && MODE == 1) {
     MODE = 0;
+    modeChanged = true;
     displayMenu = false;
   }
   // X (B on GBA)
-  if (keyCode == 88){
-    if (!currentlyMoving()){
+  if (keyCode == 88) {
+    if (!currentlyMoving()) {
       isX = true;
     }
   }  
   println(keyCode);
 }
 
-void keyReleased(){
-  if (keyCode == 88){
+void keyReleased() {
+  if (keyCode == 88) {
     isX = false;
     isXReleased = true;
     Keys[4] = true;
-    if (chargeFrame >18){
-      if (megaman.getBuster() < 6){
+    if (chargeFrame >18) {
+      if (megaman.getBuster() < 6) {
         megaman.setBuster(megaman.getBuster()*10);
-      } 
+      }
     }
   }
 }
 
-void processKeys(){
- if (isX && isXReleased){
-  isXReleased = false;
- } 
+void processKeys() {
+  if (isX && isXReleased) {
+    isXReleased = false;
+  }
 }
 
 //this is important.
@@ -237,20 +245,20 @@ void move() {
         }
       }
     }
-    if (Keys[4]){
-        if (megaman.Buster.currentFrame < FrameCount[4] - 1) {
-          megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 4, 0);
-        }else if (megaman.Buster.currentFrame == FrameCount[4] - 1){
-          megaman.Buster.currentFrame = 0;
-          Keys[4] = false;
-          if (mettaur.getRow() == megaman.getRow()){
-           mettaur.hurt(megaman.getBuster());
-          }
-          if (chargeFrame > 18){
-           megaman.setBuster(megaman.getBuster()/10); 
-          }
-          chargeFrame = 0;
+    if (Keys[4]) {
+      if (megaman.Buster.currentFrame < FrameCount[4] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 4, 0);
+      } else if (megaman.Buster.currentFrame == FrameCount[4] - 1) {
+        megaman.Buster.currentFrame = 0;
+        Keys[4] = false;
+        if (mettaur.getRow() == megaman.getRow()) {
+          mettaur.hurt(megaman.getBuster());
         }
+        if (chargeFrame > 18) {
+          megaman.setBuster(megaman.getBuster()/10);
+        }
+        chargeFrame = 0;
+      }
 
       //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     } else if (!currentlyMoving()) {
@@ -267,13 +275,17 @@ void checkMode() {
   if (modeChanged && MODE == 1) {
     changeMenu();
   }
+  if (modeChanged && MODE == 0) {
+    changeBattle();
+  }
 }
 
 //this causes the scrolling menu animation and toggles menu to display
 void changeMenu() {
-  if (changeMenuCounter < 7) {
+  if (changeMenuCounter < 6) {
     System.out.println("is working");
-    image(enteringChipMenu, -90 + 15*changeMenuCounter, 0);
+    image(enteringChipMenu, -180 + 30*changeMenuCounter, 0);
+    showHP(30*changeMenuCounter);
     changeMenuCounter += 1;
   } else {
     modeChanged = false;
@@ -282,71 +294,91 @@ void changeMenu() {
   }
 }
 
-void charge(){
-  if (MODE == 0){
-   if (!isXReleased){
-     if (chargeFrame < 19){
-       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame%7);
-     } else if (chargeFrame > 18){
-       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-18)%11);
-     }
-     chargeFrame++;
-   } 
+void changeBattle() {
+  if (changeMenuCounter < 6) {
+    System.out.println("is working");
+    image(enteringChipMenu, 0 - 30 * changeMenuCounter, 0);
+    showHP(180 - 30*changeMenuCounter);
+    changeMenuCounter += 1;
+  } else {
+    modeChanged = false;
+    changeMenuCounter = 0;
+    displayMenu = false;
   }
 }
 
-void mettaurMove(){
-  if (MODE == 0){
-     if (mettaurTimer > 30){
-        if (mettaur.getRow() != megaman.getRow()){
-         if (mettaur.getRow() < megaman.getRow()){
-          mettaur.setRow(mettaur.getRow()+1);
-         }else{
-          mettaur.setRow(mettaur.getRow()-1); 
-         }
-         mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
-         mettaurTimer = 0;
-        }else{
-          mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
-         //mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
-        }
-     }else{
-      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
-     }
-   }
+void charge() {
+  if (MODE == 0) {
+    if (!isXReleased) {
+      if (chargeFrame < 19) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame%7);
+      } else if (chargeFrame > 18) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-18)%11);
+      }
+      chargeFrame++;
+    }
+  }
 }
 
-void showHP(){
+void mettaurMove() {
+  if (MODE == 0) {
+    if (mettaurTimer > 30) {
+      if (mettaur.getRow() != megaman.getRow()) {
+        if (mettaur.getRow() < megaman.getRow()) {
+          mettaur.setRow(mettaur.getRow()+1);
+        } else {
+          mettaur.setRow(mettaur.getRow()-1);
+        }
+        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+        mettaurTimer = 0;
+      } else {
+        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+        //mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
+      }
+    } else {
+      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+    }
+  }
+  if (MODE == 1) {
+    mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 1);
+  }
+}
+
+void showHP(int translation) {
   //Megaman's HP
   fill(56, 80, 104);
   stroke(255);
-  rect(0, 0, 45, 20);
-  if (megaman.getHP()%10!=1){
-    image(numberText[megaman.getHP()%10], 32, 2);
-  }else{
-    image(numberText[megaman.getHP()%10], 37, 2);
+  rect(0 + translation, 0, 45, 20);
+  if (megaman.getHP()%10!=1) {
+    image(numberText[megaman.getHP()%10], 32 + translation, 2);
+  } else {
+    image(numberText[megaman.getHP()%10], 37 + translation, 2);
   }
-  if (megaman.getHP()%100/10 != 1){
-    image(numberText[megaman.getHP()%100/10], 22, 2);
-  }else{
-    image(numberText[megaman.getHP()%100/10], 27, 2);
+  if (megaman.getHP()%100/10 != 1) {
+    image(numberText[megaman.getHP()%100/10], 22 + translation, 2);
+  } else {
+    image(numberText[megaman.getHP()%100/10], 27 + translation, 2);
   }
-  if (megaman.getHP()%1000/100 != 1){
-    image(numberText[megaman.getHP()%1000/100], 12, 2);
-  }else{
-    image(numberText[megaman.getHP()%1000/100], 17, 2);
+  if (megaman.getHP()%1000/100 != 1) {
+    image(numberText[megaman.getHP()%1000/100], 12 + translation, 2);
+  } else {
+    image(numberText[megaman.getHP()%1000/100], 17 + translation, 2);
   }
-  
+
   //Enemy
-  if (mettaur.getHP()%10!=1){
+  if (mettaur.getHP()%10!=1) {
     image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  }else{
+  } else {
     image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
   }
-  if (mettaur.getHP()%100/10 != 1){
+  if (mettaur.getHP()%100/10 != 1) {
     image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  }else{
+  } else {
     image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
   }
+}
+
+void displayCustomBar(){
+  
 }
 
