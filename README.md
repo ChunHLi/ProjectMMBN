@@ -42,13 +42,13 @@ Change - Log
 
 5/24/15 - Shawn Li - Chip selection window now appears! And disappears! And REappears!
 
+5/25/15 - Shawn Li - Custom Bar animation and implementation of methods completed.
+
 
 To do
 =========================================================================================================================
 
 - For Kah Soon (due 5/25/15) - Pause game (Kah soon, you should do it, good practice).
-
-- For Shawn Li (due 5/25/15) - Add custom bar and animation and make sure you can only access chip selection when bar is full.
 
 - For Anyone (due 5/25/15) - Decompose boss spritesheets.
 
