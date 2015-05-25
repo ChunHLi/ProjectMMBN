@@ -4,6 +4,7 @@ class Animation {
   int currentFrame;
   int animationDelay;
   int counter;
+  int customBarCount;
 
   Animation(String spriteFolderDirectory, int count) {
     animationDelay = 0;
@@ -51,6 +52,30 @@ class Animation {
       currentFrame = 0;
     }
     image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+  }
+  
+  void displayCustom(float xpos, float ypos){
+    if (customBarCount < 288){
+      image(spriteFrames[currentFrame],xpos, ypos - spriteFrames[currentFrame].height + 5);
+      fill(216,220,247);
+      stroke(88,114,171);
+      rect(xpos + 12, ypos - spriteFrames[currentFrame].height + 15.5, customBarCount/1.5, 7.5);
+      stroke(240,244,255);
+      fill(215,239,249);
+      rect(xpos + 12, ypos - spriteFrames[currentFrame].height + 17.5, customBarCount/1.5, 3.5);
+      customBarCount += 1;
+    }
+    else{
+      currentFrame += 1;
+      if (currentFrame < spriteCount){
+        image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+      }
+      else{
+        currentFrame = 1;
+        image(spriteFrames[currentFrame], xpos,ypos - spriteFrames[currentFrame].height + 5);
+      }
+    }
+    
   }
   
   void wait(int millis){

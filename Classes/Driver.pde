@@ -39,11 +39,12 @@ boolean isX, isXReleased;
 int chargeFrame;
 int mettaurTimer;
 boolean mettaurMove;
+Animation customBar;
 
 void setup() {
   size(360, 240);
   background(0);
-  frameRate(4);
+  frameRate(30);
   panels = loadImage("../Sprites/platform/backGround.png");
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
@@ -64,6 +65,7 @@ void setup() {
   isXReleased = true;
   chargeFrame = 0;
   mettaurTimer = 0;
+  customBar = new Animation("../Sprites/textArt/text/custom",5);
 }
 
 void draw() {
@@ -83,6 +85,9 @@ void draw() {
     showHP(180);
   }
   mettaurTimer++;
+  if (MODE == 0){
+    customBar.displayCustom(width/5,16);
+  }
 }
 
 void mousePressed() {
@@ -116,15 +121,18 @@ void keyPressed() {
     }
   }
   // A and S (L and R on GBA)
-  if ((keyCode == 65 || keyCode == 83) && MODE == 0) {
+  if (((keyCode == 65 || keyCode == 83) && MODE == 0) && customBar.customBarCount == 288){
     MODE = 1;
     modeChanged = true;
+    customBar.customBarCount = 0;
+    customBar.currentFrame = 0;
   }
   // Z (A on GBA)
   if (keyCode == 90 && MODE == 1) {
     MODE = 0;
     modeChanged = true;
     displayMenu = false;
+    customBar.customBarCount = 0;
   }
   // X (B on GBA)
   if (keyCode == 88) {
@@ -376,9 +384,5 @@ void showHP(int translation) {
   } else {
     image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
   }
-}
-
-void displayCustomBar(){
-  
 }
 
