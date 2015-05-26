@@ -46,6 +46,12 @@ Change - Log
 
 5/25/15 - Shawn Li - Listen to that glorious music Kreygasm
 
+5/25/15 - Kah Soon Yap - Slashing done
+
+5/25/15 - Kah Soon Yap - Mettaur now attacks, but no waves appear and does no damage
+
+5/25/15 - Kah Soon Yap - Delayed animation now works
+
 
 To do
 =========================================================================================================================
