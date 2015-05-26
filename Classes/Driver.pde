@@ -1,4 +1,5 @@
 import java.util.*;
+
 Megaman megaman;
 Mettaur mettaur;
 Animation backGround;
@@ -10,6 +11,7 @@ boolean[] Keys = {
   false, false, false, false, false
 }; 
 int customCounter;
+playList OST;
 
 Panel[][] Grid = {
   {
@@ -40,6 +42,7 @@ int chargeFrame;
 int mettaurTimer;
 boolean mettaurMove;
 Animation customBar;
+AudioPlayer virusBattleTheme;
 
 void setup() {
   size(360, 240);
@@ -66,6 +69,19 @@ void setup() {
   chargeFrame = 0;
   mettaurTimer = 0;
   customBar = new Animation("../Sprites/textArt/text/custom",5);
+  OST = new playList();
+  Minim minim1 = new Minim(this);
+  Minim minim2 = new Minim(this);
+  Minim minim3 = new Minim(this);
+  Minim minim4 = new Minim(this);
+  Minim minim5 = new Minim(this);
+  Minim minim6 = new Minim(this);
+  OST.add("../Music/01.mp3",minim1,5000);
+  OST.add("../Music/02.mp3",minim2);
+  OST.add("../Music/03.mp3",minim3);
+  OST.add("../Music/04.mp3",minim4,5000);
+  OST.add("../Music/05.mp3",minim5,21000);
+  OST.add("../Music/06.mp3",minim6);
 }
 
 void draw() {
@@ -88,6 +104,7 @@ void draw() {
   if (MODE == 0){
     customBar.displayCustom(width/5,16);
   }
+  OST.playTheList();
 }
 
 void mousePressed() {
@@ -139,6 +156,9 @@ void keyPressed() {
     if (!currentlyMoving()) {
       isX = true;
     }
+  }
+  if (keyCode == 32){
+    OST.nextSong();
   }  
   println(keyCode);
 }
@@ -291,7 +311,6 @@ void checkMode() {
 //this causes the scrolling menu animation and toggles menu to display
 void changeMenu() {
   if (changeMenuCounter < 6) {
-    System.out.println("is working");
     image(enteringChipMenu, -180 + 30*changeMenuCounter, 0);
     showHP(30*changeMenuCounter);
     changeMenuCounter += 1;
@@ -304,11 +323,12 @@ void changeMenu() {
 
 void changeBattle() {
   if (changeMenuCounter < 6) {
-    System.out.println("is working");
     image(enteringChipMenu, 0 - 30 * changeMenuCounter, 0);
     showHP(180 - 30*changeMenuCounter);
     changeMenuCounter += 1;
-  } else {
+  } 
+  //else if (changeMenuCounter 
+  else {
     modeChanged = false;
     changeMenuCounter = 0;
     displayMenu = false;
