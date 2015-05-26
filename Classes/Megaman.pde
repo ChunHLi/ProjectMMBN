@@ -9,7 +9,7 @@ public class Megaman implements Killable {
   Animation Buster = new Animation("../Sprites/megaman/noCross/07", 8);
   Animation ChargeBlue = new Animation("../Sprites/chargingBuster/01", 7);
   Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
-  Animation Slash = new Animation("../Sprites/megaman/noCross/05", 4, 20);
+  Animation Slash = new Animation("../Sprites/megaman/noCross/05", 4, 1);
 
   public Megaman() {
     this(100, 1, 1, 1, "noCross");

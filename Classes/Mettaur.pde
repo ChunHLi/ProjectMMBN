@@ -6,7 +6,7 @@ public class Mettaur implements Killable {
   }
 
   Animation Standing = new Animation("../Sprites/viruses/Mettaur/01", 1);
-  Animation Attack = new Animation("../Sprites/viruses/Mettaur/02", 13);
+  Animation Attack = new Animation("../Sprites/viruses/Mettaur/02", 13, 1);
 
 
   public Mettaur(int HP, int dmg, int panelRow, int panelCol) {
@@ -22,7 +22,7 @@ public class Mettaur implements Killable {
       Standing.display(xpos, ypos);
     }
     if (animation == 1){
-      Attack.display(20, xpos, ypos); 
+      Attack.display(xpos, ypos); 
     }
   }
 

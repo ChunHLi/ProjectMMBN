@@ -28,7 +28,7 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 8, 4, 7, 14, 4
+  1, 8, 4, 4, 8, 4, 7, 13, 4
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 slash
 };
 PImage[] numberText = new PImage[10];
@@ -310,6 +310,7 @@ void move() {
   if (MODE == 1) {
     megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), megaman.currentAnimation, 1);
   }
+  
 }
 
 void checkMode() {
@@ -363,27 +364,38 @@ void charge() {
 
 void mettaurMove() {
   if (MODE == 0) {
-    if (mettaurTimer > 30) {
-      if (mettaur.getRow() != megaman.getRow()) {
-        if (mettaur.getRow() < megaman.getRow()) {
-          mettaur.setRow(mettaur.getRow()+1);
-        } else {
-          mettaur.setRow(mettaur.getRow()-1);
-        }
-        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+    if (mettaurMove){
+      if (mettaur.Attack.currentFrame < FrameCount[7] - 1){
+        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
+      } else if (mettaur.Attack.currentFrame == FrameCount[7] - 1){
+        mettaurMove = false;
+        mettaur.Attack.currentFrame = 0;
         mettaurTimer = 0;
-      } else {
-        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
-        //mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 0);
       }
     } else {
-      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+      if (mettaurTimer > 30) {
+        if (mettaur.getRow() != megaman.getRow()) {
+          if (mettaur.getRow() < megaman.getRow()) {
+            mettaur.setRow(mettaur.getRow()+1);
+          } else {
+            mettaur.setRow(mettaur.getRow()-1);
+          }
+          mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+          mettaurTimer = 0;
+        } else {
+          mettaurMove = true;
+        }
+  
+      } else {
+        mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
+      }
     }
   }
   if (MODE == 1) {
     mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 1);
   }
 }
+
 
 void showHP(int translation) {
   //Megaman's HP

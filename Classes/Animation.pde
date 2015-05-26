@@ -29,16 +29,18 @@ class Animation {
   }
   
   void display(float xpos, float ypos) {
-    if (animationDelay == counter){
-      if (currentFrame < spriteCount - 1) {
+    if (currentFrame < spriteCount - 1) {
+      if (animationDelay == counter){
         currentFrame += 1;
-      } else {
-        currentFrame = 0;
+        counter = 0;
+      }else{
+       counter++; 
       }
-      image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
-    }else{
-     counter ++; 
+    } else {
+      currentFrame = 0;
     }
+    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+
   }
   
   void display(float xpos, float ypos, int frame){
