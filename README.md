@@ -44,6 +44,8 @@ Change - Log
 
 5/25/15 - Shawn Li - Custom Bar animation and implementation of methods completed.
 
+5/25/15 - Shawn Li - Listen to that glorious music Kreygasm
+
 
 To do
 =========================================================================================================================
