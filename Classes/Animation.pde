@@ -17,6 +17,7 @@ class Animation {
     }
   }
   Animation(String spriteFolderDirectory, int count, int delay) {
+    counter = 0;
     animationDelay = delay;
     spriteCount = count;
     spriteFrames = new PImage[spriteCount];

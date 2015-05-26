@@ -9,6 +9,7 @@ public class Megaman implements Killable {
   Animation Buster = new Animation("../Sprites/megaman/noCross/07", 8);
   Animation ChargeBlue = new Animation("../Sprites/chargingBuster/01", 7);
   Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
+  Animation Slash = new Animation("../Sprites/megaman/noCross/05", 4, 20);
 
   public Megaman() {
     this(100, 1, 1, 1, "noCross");
@@ -49,6 +50,9 @@ public class Megaman implements Killable {
       if (animation == 4){
         Buster.display(xpos, ypos);
       }
+      if (animation == 5){
+        Slash.display(xpos, ypos);
+      }
     }
     if (mode == 1) {
       if (animation == 0) {
@@ -62,6 +66,12 @@ public class Megaman implements Killable {
       }
       if (animation == 3) {
         image(LeavePanel.spriteFrames[LeavePanel.currentFrame], xpos, ypos - LeavePanel.spriteFrames[LeavePanel.currentFrame].height + 5);
+      }
+      if (animation == 4) {
+        image(Buster.spriteFrames[LeavePanel.currentFrame], xpos, ypos - LeavePanel.spriteFrames[LeavePanel.currentFrame].height + 5);
+      }
+      if (animation == 5) {
+        image(Slash.spriteFrames[LeavePanel.currentFrame], xpos, ypos - LeavePanel.spriteFrames[LeavePanel.currentFrame].height + 5);
       }
     }
     currentAnimation = animation;

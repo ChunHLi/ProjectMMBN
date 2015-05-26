@@ -8,7 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false
+  false, false, false, false, false, false
+  //0 left, 1 right, 2 up, 3 down, 4 buster, 5 slash
 }; 
 int customCounter;
 playList OST;
@@ -27,8 +28,8 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 8, 4, 7, 14
-    // , , LeavePanel, ArrivePanel, Buster, Charge, mettaur
+  1, 8, 4, 4, 8, 4, 7, 14, 4
+    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 slash
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -159,7 +160,12 @@ void keyPressed() {
   }
   if (keyCode == 32){
     OST.nextSong();
-  }  
+  }
+  if (keyCode == 86){
+   if (!currentlyMoving()){
+    Keys[5] = true;
+   } 
+  }
   println(keyCode);
 }
 
@@ -287,7 +293,14 @@ void move() {
         }
         chargeFrame = 0;
       }
-
+    }
+    if (Keys[5]){
+      if (megaman.Slash.currentFrame < FrameCount[8] - 1){
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0);
+      } else if (megaman.Slash.currentFrame == FrameCount[8] - 1){
+       megaman.Slash.currentFrame = 0;
+       Keys[5] = false;
+      }
       //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     } else if (!currentlyMoving()) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
