@@ -296,7 +296,7 @@ void move() {
     }
     if (Keys[5]){
       if (megaman.Slash.currentFrame < FrameCount[8] - 1){
-       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0);
+       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, "widesword");
       } else if (megaman.Slash.currentFrame == FrameCount[8] - 1){
        megaman.Slash.currentFrame = 0;
        Keys[5] = false;
@@ -353,9 +353,9 @@ void charge() {
   if (MODE == 0) {
     if (!isXReleased) {
       if (chargeFrame < 19) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 5, 0, chargeFrame%7);
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 98, 0, chargeFrame%7);
       } else if (chargeFrame > 18) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 6, 0, (chargeFrame-18)%11);
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 99, 0, (chargeFrame-18)%11);
       }
       chargeFrame++;
     }
@@ -430,4 +430,7 @@ void showHP(int translation) {
     image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
   }
 }
+
+
+
 
