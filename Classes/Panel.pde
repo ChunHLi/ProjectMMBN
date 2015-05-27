@@ -4,6 +4,7 @@ public class Panel {
   private String attribute;
   private float locationX;
   private float locationY;
+  private int damage;
 
 
   public Panel() {
@@ -28,6 +29,10 @@ public class Panel {
 
   public void setAtt(String att) {
     attribute=att;
+  }
+  
+  public void setDamage(int dmg){
+    damage = dmg;
   }
 
   public boolean isDangerMM() {

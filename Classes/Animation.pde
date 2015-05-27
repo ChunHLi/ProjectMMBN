@@ -34,9 +34,11 @@ class Animation {
         currentFrame += 1;
         counter = 0;
       }else{
-       counter++; 
+       counter++;
+       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }
     } else {
+      image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       currentFrame = 0;
     }
     image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);

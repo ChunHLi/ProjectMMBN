@@ -11,11 +11,11 @@ public class Megaman implements Killable {
   Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
   
   //Swords
-  Animation Slash = new Animation("../Sprites/megaman/noCross/05", 4, 5);
-  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 3, 5);
-  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/02", 3, 2);
-  Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/01", 3, 2);
-  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 3, 2);
+  Animation Slash = new Animation("../Sprites/megaman/noCross/14", 7, 1);
+  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 6, 1);
+  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/02", 6, 1);
+  Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/01", 6, 1);
+  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 6, 50);
 
   public Megaman() {
     this(100, 1, 1, 1, "noCross");
@@ -107,25 +107,43 @@ public class Megaman implements Killable {
       if (chip.equals("sword")){
         Slash.display(xpos, ypos);
         if (Slash.currentFrame > 0){
-          Sword.display(xpos+62, ypos-25);//kinda glitchy atm
+          if (Sword.currentFrame == 3){
+            Sword.display(xpos+74, ypos-28);
+          }else if (Sword.currentFrame == 4){
+            Sword.display(xpos+74, ypos-40);
+          } else {
+            Sword.display(xpos+60, ypos-20); 
+          }
         }
       }
       if (chip.equals("widesword")){
         Slash.display(xpos, ypos);
         if (Slash.currentFrame > 0){
-          WideSword.display(xpos+62, ypos-25);//kinda glitchy atm
+          if (WideSword.currentFrame == 3){
+            WideSword.display(xpos+79, ypos+5);
+          }else if (WideSword.currentFrame == 4){
+            WideSword.display(xpos+77, ypos-30);//+60 -18
+          } else {
+            WideSword.display(xpos+60, ypos+32); 
+          }
         }
       }
       if (chip.equals("longsword")){
         Slash.display(xpos, ypos);
         if (Slash.currentFrame > 0){
-          LongSword.display(xpos+62, ypos-25);//kinda glitchy atm
+          if (LongSword.currentFrame == 3){
+            LongSword.display(xpos+92, ypos-37);
+          }else if (LongSword.currentFrame == 4){
+            LongSword.display(xpos+95, ypos-55);
+          } else {
+            LongSword.display(xpos+62, ypos-3); 
+          }
         }
       }
       if (chip.equals("lifesword")){
         Slash.display(xpos, ypos);
         if (Slash.currentFrame > 0){
-          LifeSword.display(xpos+62, ypos-25);//kinda glitchy atm
+          LifeSword.display(xpos+62, ypos-25);
         }
       }
     }
