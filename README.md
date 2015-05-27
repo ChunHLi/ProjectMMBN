@@ -52,6 +52,8 @@ Change - Log
 
 5/25/15 - Kah Soon Yap - Delayed animation now works
 
+5/26/15 - Shawn Li - Added ChipFolder.
+
 
 To do
 =========================================================================================================================
