@@ -15,7 +15,7 @@ public class Megaman implements Killable {
   //Swords
   Animation Slash = new Animation("../Sprites/megaman/noCross/14", 7, 10);
   Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 5, 1);
-  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 10);
+  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 1);
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/04", 5, 1);
   Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 50);
   //Cannon
@@ -130,19 +130,17 @@ public class Megaman implements Killable {
         } else if (Slash.currentFrame == 4){
           WideSword.displayChips(xpos+81, ypos+2);
         } else if (Slash.currentFrame == 5){
-          WideSword.displayChips(xpos+80, ypos-42);
+          WideSword.displayChips(xpos+81, ypos-40);
         }
       }
       if (chip.equals("longsword")){
         Slash.display(xpos, ypos);
-        if (Slash.currentFrame > 0 ){
-          if (LongSword.currentFrame < 3){
-            LongSword.display(xpos+62, ypos-3);
-          } else if (LongSword.currentFrame < 4){
-            LongSword.display(xpos+91, ypos-18); 
-          }else if (Slash.currentFrame < 6){
-           image(LongSword.spriteFrames[LongSword.currentFrame], xpos+90, ypos-35 - LongSword.spriteFrames[LongSword.currentFrame].height + 5);
-          }
+        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
+          LongSword.displayChips(xpos+62, ypos-3);
+        } else if (Slash.currentFrame == 4){
+          LongSword.displayChips(xpos+91, ypos-18);
+        } else if (Slash.currentFrame == 5){
+          LongSword.displayChips(xpos+90, ypos-35);
         }
       }
       if (chip.equals("lifesword")){
