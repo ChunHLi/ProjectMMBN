@@ -1,5 +1,6 @@
 public class Mettaur implements Killable {
-  private int HP, dmg, panelRow, panelCol;
+
+  int HP, dmg, panelRow, panelCol;
 
   public Mettaur() {
     this(50, 10, 1, 4);
@@ -7,7 +8,6 @@ public class Mettaur implements Killable {
 
   Animation Standing = new Animation("../Sprites/viruses/Mettaur/01", 1);
   Animation Attack = new Animation("../Sprites/viruses/Mettaur/02", 13, 1);
-
 
   public Mettaur(int HP, int dmg, int panelRow, int panelCol) {
     this.HP=HP;
@@ -17,14 +17,17 @@ public class Mettaur implements Killable {
   }
 
   public void display(float xpos, float ypos, int animation, int mode) {
-    if (animation == 0){
+    if (animation == 0) {
       xpos+=6;
       Standing.display(xpos, ypos);
     }
-    if (animation == 1){
-      Attack.display(xpos, ypos); 
+    if (animation == 1) {
+      Attack.display(xpos, ypos);
     }
-    
+  }
+
+  public void attack(ArrayList<virusAttack> VirusForce) {
+    VirusForce.add(new virusAttack(panelRow, panelCol - 1, 10, 0));
   }
 
   public void hurt(int damage) {

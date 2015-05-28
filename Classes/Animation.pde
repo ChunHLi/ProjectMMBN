@@ -83,6 +83,22 @@ class Animation {
     
   }
   
+  void displayMettaurAttack(float xpos, float ypos){
+    if (currentFrame == spriteCount - 1){
+      image(spriteFrames[currentFrame],xpos,ypos - spriteFrames[currentFrame].height + 5);
+      image(spriteFrames[0],xpos - 60,ypos - spriteFrames[0].height + 5);
+      currentFrame += 1;
+    }
+    else if (currentFrame == 0){
+      image(spriteFrames[currentFrame],xpos,ypos - spriteFrames[currentFrame].height + 5);
+      currentFrame += 1;
+    }
+    else if (currentFrame < spriteCount - 1){
+      image(spriteFrames[currentFrame],xpos, ypos - spriteFrames[currentFrame].height + 5);
+      currentFrame += 1;
+    }
+  }
+  
   void wait(int millis){
     try {
       Thread.sleep(millis);
