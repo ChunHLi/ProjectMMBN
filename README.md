@@ -68,6 +68,13 @@ Change - Log
 
 5/27/15 - Shawn Li - Added Mettaur's wave attack.
 
+5/28/15 - Kah Soon Yap - Cleaned up folders
+
+5/28/15 - Kah Soon Yap - Cleaned up chip animations. Much smoother now.
+
+5/28/15 - Kah Soon Yap - Lifesword animation done.
+
+
 
 To do
 =========================================================================================================================
