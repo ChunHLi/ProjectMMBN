@@ -26,6 +26,9 @@ public class Panel {
     dangerForMM = !Danger;
     setAtt("reg");
   }
+  
+  public void panelColor(){
+  }
 
   public void setAtt(String att) {
     attribute=att;

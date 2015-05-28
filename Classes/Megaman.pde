@@ -19,8 +19,8 @@ public class Megaman implements Killable {
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/04", 5, 1);
   Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 50);
   //Cannon
-  Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 50);
-  Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 50);
+  Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 1);
+  Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 1);
 
   public Megaman() {
     this(100, 1, 1, 1, "noCross");

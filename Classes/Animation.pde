@@ -33,8 +33,10 @@ class Animation {
       if (animationDelay == counter){
         currentFrame += 1;
         counter = 0;
+        image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }else{
        counter++;
+       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }
     } else {
       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);

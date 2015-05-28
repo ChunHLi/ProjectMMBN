@@ -172,7 +172,12 @@ void keyPressed() {
   }
   // enter (start on GBA)
   if (keyCode == 10){
-   MODE = 2; 
+   if (MODE != 2){
+     MODE = 2;
+   }
+   else{
+     MODE = 0;
+   } 
    modeChanged = !modeChanged;
   }
   if (keyCode == 32) {
@@ -391,7 +396,7 @@ void move() {
   }
   
   void pause(){
-    imageMode(CENTER);
+    //imageMode(CENTER);
     image(pause, 0, 0);
   }
 
@@ -444,8 +449,13 @@ void move() {
       }
     }
   }
-  if (MODE == 1) {
-    mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 1);
+  if (MODE > 0) {
+    if (mettaurMove){
+      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 1, 1);
+    }
+    else{
+      mettaur.display(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 1);
+    }
   }
 }
 

@@ -17,12 +17,22 @@ public class Mettaur implements Killable {
   }
 
   public void display(float xpos, float ypos, int animation, int mode) {
-    if (animation == 0) {
-      xpos+=6;
-      Standing.display(xpos, ypos);
+    if (mode == 0){
+      if (animation == 0) {
+        xpos+=6;
+        Standing.display(xpos, ypos);
+      }
+      if (animation == 1) {
+        Attack.display(xpos, ypos);
+      }
     }
-    if (animation == 1) {
-      Attack.display(xpos, ypos);
+    else{
+      if (animation == 0){        
+        image(Standing.spriteFrames[Standing.currentFrame], xpos, ypos - Standing.spriteFrames[Standing.currentFrame].height + 5);
+      }
+      else{
+        image(Attack.spriteFrames[Attack.currentFrame], xpos - Attack.spriteFrames[Attack.currentFrame].width/3, ypos - Attack.spriteFrames[Attack.currentFrame].height + 5);
+      }
     }
   }
 
