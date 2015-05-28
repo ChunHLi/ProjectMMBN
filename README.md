@@ -54,11 +54,21 @@ Change - Log
 
 5/26/15 - Shawn Li - Added ChipFolder.
 
+5/26/15 - Kah Soon Yap - Added newbie Chip Folder.
+
+5/26/15 - Kah Soon Yap - Worked on sword animations. Very buggy.
+
+5/27/15 - Kah Soon Yap - Smoothed out sword animation. Better now, but still some problems.
+
+5/27/15 - Kah Soon Yap - Cannon made, no damage yet. Small error in animation.
+
+5/27/15 - Kah Soon Yap - Added elemental Chip Folder
+
 
 To do
 =========================================================================================================================
 
-- For Kah Soon (due 5/25/15) - Pause game (Kah soon, you should do it, good practice).
+- For Kah Soon (due 5/28/15) - Iron out pause bug
 
 - For Anyone (due 5/25/15) - Decompose boss spritesheets.
 
