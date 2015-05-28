@@ -64,17 +64,25 @@ Change - Log
 
 5/27/15 - Kah Soon Yap - Added elemental Chip Folder
 
+5/27/15 - Shawn Li - Added virusAttack, enemy projectiles are a seperate class due to the fact many issues could come up otherwise.
+
+5/27/15 - Shawn Li - Added Mettaur's wave attack.
+
 
 To do
 =========================================================================================================================
 
+- For Shawn (due 5/28/15) - Create flashing tiles.
+
+- For Shawn (due 5/28/15) - Create Megaman hurt methods and other stuff relating to it. 
+
 - For Kah Soon (due 5/28/15) - Iron out pause bug
 
-- For Anyone (due 5/25/15) - Decompose boss spritesheets.
+- For Anyone (due 5/28/15) - Decompose boss spritesheets.
 
-- For Anyone (due 5/25/15) - Start Protoman and Bass classes.
+- For Anyone (due 5/29/15) - Start Protoman and Bass classes.
 
-- For Anyone (due 5/25/15) - Delete unnecessary files.
+- For Anyone (due 5/29/15) - Delete unnecessary files.
 
 - Future Goals:
   1. Choose standard chips to implement.
