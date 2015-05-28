@@ -17,7 +17,7 @@ public class Megaman implements Killable {
   Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 5, 1);
   Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 1);
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/04", 5, 1);
-  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 50);
+  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 10);
   //Cannon
   Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 1);
   Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 1);
@@ -145,8 +145,12 @@ public class Megaman implements Killable {
       }
       if (chip.equals("lifesword")){
         Slash.display(xpos, ypos);
-        if (Slash.currentFrame > 0){
-          LifeSword.display(xpos+62, ypos-25);
+        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
+          LifeSword.displayChips(xpos, ypos+20);
+        } else if (Slash.currentFrame == 4){
+          LifeSword.displayChips(xpos+91, ypos-18);
+        } else if (Slash.currentFrame == 5){
+          LifeSword.displayChips(xpos+90, ypos-35);
         }
       }
       if (chip.equals("cannon")){
@@ -158,24 +162,6 @@ public class Megaman implements Killable {
        } else if (Cannon.currentFrame == 7){
         Blast.displayChips(xpos+85, ypos-15);
        }
-      }
-    }
-    
-    if (mode == 1){
-      if (chip.equals("sword")) {
-        image(Slash.spriteFrames[Slash.currentFrame], xpos, ypos - Slash.spriteFrames[Slash.currentFrame].height + 5);
-      }
-      if (chip.equals("widesword")) {
-        image(Slash.spriteFrames[Slash.currentFrame], xpos, ypos - Slash.spriteFrames[Slash.currentFrame].height + 5);
-      }
-      if (chip.equals("longsword")) {
-        image(Slash.spriteFrames[Slash.currentFrame], xpos, ypos - Slash.spriteFrames[Slash.currentFrame].height + 5);
-      }
-      if (chip.equals("lifesword")) {
-        image(Slash.spriteFrames[Slash.currentFrame], xpos, ypos - Slash.spriteFrames[Slash.currentFrame].height + 5);
-      }
-      if (chip.equals("cannon")) {
-        image(Cannon.spriteFrames[Cannon.currentFrame], xpos, ypos - Cannon.spriteFrames[Cannon.currentFrame].height + 5);
       }
     }
   }
