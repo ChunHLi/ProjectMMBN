@@ -1,0 +1,14 @@
+wideshot3  3 S 100
+flameline3 3 K 170 L
+blizzard   3 * 100
+M-boomer   3 M 170
+elemsand   3 S 120
+heatside   3 D 100
+bubbleside 3 E 110
+windrack   1 * 100
+aquasword  1 N 160
+firesword  1 N 130
+elecsword  1 N 130
+bambsword  1 N 140
+grassstg   1 * N/A
+lance      3 * 130
