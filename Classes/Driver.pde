@@ -312,6 +312,7 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 4, 0);
       } else if (megaman.Buster.currentFrame == FrameCount[4] - 1) {
         megaman.Buster.currentFrame = 0;
+        megaman.Bullet.currentFrame = 0;
         Keys[4] = false;
         if (mettaur.getRow() == megaman.getRow()) {
           mettaur.hurt(megaman.getBuster());
@@ -324,9 +325,9 @@ void move() {
     }
     if (Keys[5]) {
       if (megaman.Slash.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
       } else if (megaman.Slash.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
         megaman.Slash.currentFrame = 0;
         megaman.Sword.currentFrame = 0;
         megaman.WideSword.currentFrame = 0;

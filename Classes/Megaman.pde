@@ -13,9 +13,9 @@ public class Megaman implements Killable {
 
   
   //Swords
-  Animation Slash = new Animation("../Sprites/megaman/noCross/14", 7, 1);
+  Animation Slash = new Animation("../Sprites/megaman/noCross/14", 7, 10);
   Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 5, 1);
-  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 1);
+  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 10);
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/04", 5, 1);
   Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 50);
   //Cannon
@@ -61,7 +61,11 @@ public class Megaman implements Killable {
       if (animation == 4){
         Buster.display(xpos, ypos);
         if (Buster.currentFrame > 1){
-          Bullet.display(xpos+70, ypos-39);
+          if (Buster.currentFrame == 4){
+            Bullet.displayChips(xpos+70, ypos-48);
+          } else {
+            Bullet.displayChips(xpos+70, ypos-39);
+          }
         }
       }
     }
@@ -118,25 +122,15 @@ public class Megaman implements Killable {
         } else if (Slash.currentFrame == 5){
           Sword.displayChips(xpos+70, ypos-30);
         }
-          /*
-          if (Sword.currentFrame < 3){
-            Sword.display(xpos+55, ypos-9);
-          } else if (Sword.currentFrame < 4){
-            Sword.display(xpos+70, ypos-18); 
-          } else if (Slash.currentFrame < 6){
-           image(Sword.spriteFrames[Sword.currentFrame], xpos+70, ypos-30 - Sword.spriteFrames[Sword.currentFrame].height + 5);
-          }*/
       }
       if (chip.equals("widesword")){
         Slash.display(xpos, ypos);
-        if (Slash.currentFrame > 0 ){
-          if (WideSword.currentFrame < 3){
-            WideSword.display(xpos+62, ypos+30);
-          } else if (WideSword.currentFrame < 4){
-            WideSword.display(xpos+81, ypos+2); 
-          }else if (Slash.currentFrame < 6){
-           image(WideSword.spriteFrames[WideSword.currentFrame], xpos+80, ypos-42 - WideSword.spriteFrames[WideSword.currentFrame].height + 5);
-          }
+        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
+          WideSword.displayChips(xpos+62, ypos+30);
+        } else if (Slash.currentFrame == 4){
+          WideSword.displayChips(xpos+81, ypos+2);
+        } else if (Slash.currentFrame == 5){
+          WideSword.displayChips(xpos+80, ypos-42);
         }
       }
       if (chip.equals("longsword")){
