@@ -154,11 +154,11 @@ public class Megaman implements Killable {
       if (chip.equals("cannon")){
        Cannon.display(xpos, ypos);
        if (Cannon.currentFrame == 4 || Cannon.currentFrame == 5){
-        Blast.display(xpos+85, ypos-27);
+        Blast.displayChips(xpos+85, ypos-27);
        } else if (Cannon.currentFrame == 6){
-        Blast.display(xpos+85, ypos-10);
+        Blast.displayChips(xpos+85, ypos-10);
        } else if (Cannon.currentFrame == 7){
-        Blast.display(xpos+85, ypos-27);
+        Blast.displayChips(xpos+85, ypos-15);
        }
       }
     }

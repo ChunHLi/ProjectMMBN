@@ -49,17 +49,6 @@ class Animation {
    image(spriteFrames[frame], xpos, ypos - spriteFrames[frame].height + 5);
   }
   
-  void display(int delay, float xpos, float ypos) {
-    if (currentFrame < spriteCount - 1) {
-      wait(delay);
-      currentFrame += 1;
-    } else {
-      wait(delay);
-      currentFrame = 0;
-    }
-    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
-  }
-  
   void displayCustom(float xpos, float ypos){
     if (customBarCount < 288){
       image(spriteFrames[currentFrame],xpos, ypos - spriteFrames[currentFrame].height + 5);
@@ -100,11 +89,18 @@ class Animation {
     }
   }
   
-  void wait(int millis){
-    try {
-      Thread.sleep(millis);
-    } catch (InterruptedException e) {
+    void displayChips(float xpos, float ypos) {
+    if (currentFrame < spriteCount - 1) {
+      if (animationDelay == counter){
+        currentFrame += 1;
+        counter = 0;
+        image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+      }else{
+       counter++;
+       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+      }
     }
+    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
   }
 }
 
