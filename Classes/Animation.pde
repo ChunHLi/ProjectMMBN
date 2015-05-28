@@ -35,14 +35,12 @@ class Animation {
         counter = 0;
       }else{
        counter++;
-       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }
     } else {
       image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       currentFrame = 0;
     }
     image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
-
   }
   
   void display(float xpos, float ypos, int frame){
@@ -50,10 +48,11 @@ class Animation {
   }
   
   void display(int delay, float xpos, float ypos) {
-    wait(delay);
     if (currentFrame < spriteCount - 1) {
+      wait(delay);
       currentFrame += 1;
     } else {
+      wait(delay);
       currentFrame = 0;
     }
     image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
