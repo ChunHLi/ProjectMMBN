@@ -111,15 +111,21 @@ public class Megaman implements Killable {
     if (mode == 0){
       if (chip.equals("sword")){
         Slash.display(xpos, ypos);
-        if (Slash.currentFrame > 0 ){
+        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
+          Sword.displayChips(xpos+55, ypos-9);
+        } else if (Slash.currentFrame == 4){
+          Sword.displayChips(xpos+70, ypos-18);
+        } else if (Slash.currentFrame == 5){
+          Sword.displayChips(xpos+70, ypos-30);
+        }
+          /*
           if (Sword.currentFrame < 3){
             Sword.display(xpos+55, ypos-9);
           } else if (Sword.currentFrame < 4){
             Sword.display(xpos+70, ypos-18); 
           } else if (Slash.currentFrame < 6){
            image(Sword.spriteFrames[Sword.currentFrame], xpos+70, ypos-30 - Sword.spriteFrames[Sword.currentFrame].height + 5);
-          }
-        }
+          }*/
       }
       if (chip.equals("widesword")){
         Slash.display(xpos, ypos);

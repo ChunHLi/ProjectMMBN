@@ -324,9 +324,9 @@ void move() {
     }
     if (Keys[5]) {
       if (megaman.Slash.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
       } else if (megaman.Slash.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
         megaman.Slash.currentFrame = 0;
         megaman.Sword.currentFrame = 0;
         megaman.WideSword.currentFrame = 0;
