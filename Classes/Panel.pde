@@ -28,6 +28,11 @@ public class Panel {
   }
   
   public void panelColor(){
+    if (dangerForMM){
+      noStroke();
+      fill(248,248,64);
+      rect(locationX - 5,locationY - 24,60,36);
+    }
   }
 
   public void setAtt(String att) {
@@ -37,12 +42,20 @@ public class Panel {
   public void setDamage(int dmg){
     damage = dmg;
   }
+  
+  public void toggleDangerMM(){
+    dangerForMM = !dangerForMM;
+  }
+  
+  public void toggleDangerVirus(){
+    dangerForVirus = !dangerForVirus;
+  }
 
   public boolean isDangerMM() {
     return dangerForMM;
   }
 
-  public boolean isDangerForVirus() {
+  public boolean isDangerVirus() {
     return dangerForVirus;
   }
 
