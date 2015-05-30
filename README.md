@@ -74,6 +74,10 @@ Change - Log
 
 5/28/15 - Kah Soon Yap - Lifesword animation done.
 
+5/28/15 - Shawn Li - added panel flashing.
+
+5/29/15 - Shawn Li - added megaman hurt animation and invincibility.
+
 
 
 To do
