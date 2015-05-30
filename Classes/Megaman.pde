@@ -1,5 +1,5 @@
 public class Megaman implements Killable {
-  int HP, buster, panelRow, panelCol, currentAnimation;
+  int HP, buster, panelRow, panelCol, currentAnimation, invinsibleTimer;
   String cross;
 
   Animation Standing = new Animation("../Sprites/megaman/noCross/01", 1);
@@ -40,26 +40,26 @@ public class Megaman implements Killable {
     if (mode == 0) {
       if (animation == 0) {
         //for (int i = 0; i < Standing.spriteCount; i++){
-        Standing.display(xpos, ypos);
+        Standing.display(xpos, ypos,invinsibleTimer);
         //}
       }
       if (animation == 1) {
         //for (int i = 0; i < Hurt.spriteCount; i++){
-        Hurt.display(xpos, ypos);
+        Hurt.display(xpos, ypos,invinsibleTimer);
         //}
       }
       if (animation == 2) {
         //for (int i = 0; i < ArrivePanel.spriteCount; i++){
-        ArrivePanel.display(xpos, ypos);
+        ArrivePanel.display(xpos, ypos,invinsibleTimer);
         //}
       }
       if (animation == 3) {
         //for (int i = 0; i < LeavePanel.spriteCount; i++){
-        LeavePanel.display(xpos, ypos);
+        LeavePanel.display(xpos, ypos,invinsibleTimer);
         //}
       }
       if (animation == 4){
-        Buster.display(xpos, ypos);
+        Buster.display(xpos, ypos, invinsibleTimer);
         if (Buster.currentFrame > 1){
           if (Buster.currentFrame == 4){
             Bullet.displayChips(xpos+70, ypos-48);
@@ -70,8 +70,11 @@ public class Megaman implements Killable {
       }
     }
     if (mode == 1) {
+      println(mode);
       if (animation == 0) {
-        image(Standing.spriteFrames[Standing.currentFrame], xpos, ypos - Standing.spriteFrames[Standing.currentFrame].height + 5);
+        if (Standing.currentFrame == 0){
+          image(Standing.spriteFrames[Standing.currentFrame], xpos, ypos - Standing.spriteFrames[Standing.currentFrame].height + 5);
+        }
       }
       if (animation == 1) {
         image(Hurt.spriteFrames[Hurt.currentFrame], xpos, ypos - Hurt.spriteFrames[Hurt.currentFrame].height + 5);
@@ -95,10 +98,10 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int animation, int mode, int frame){
     if (mode == 0 ){
       if (animation == 98){
-       ChargeBlue.display(xpos-19, ypos+15, frame); 
+       ChargeBlue.displayF(xpos-19, ypos+15, frame); 
       }
       if (animation == 99){
-       ChargePurp.display(xpos-19, ypos+15, frame); 
+       ChargePurp.displayF(xpos-19, ypos+15, frame); 
       }
     }
     if (mode == 1){
@@ -114,7 +117,7 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int mode, String chip){
     if (mode == 0){
       if (chip.equals("sword")){
-        Slash.display(xpos, ypos);
+        Slash.display(xpos, ypos,invinsibleTimer);
         if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
           Sword.displayChips(xpos+55, ypos-9);
         } else if (Slash.currentFrame == 4){
@@ -124,7 +127,7 @@ public class Megaman implements Killable {
         }
       }
       if (chip.equals("widesword")){
-        Slash.display(xpos, ypos);
+        Slash.display(xpos, ypos,invinsibleTimer);
         if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
           WideSword.displayChips(xpos+62, ypos+30);
         } else if (Slash.currentFrame == 4){
@@ -134,7 +137,7 @@ public class Megaman implements Killable {
         }
       }
       if (chip.equals("longsword")){
-        Slash.display(xpos, ypos);
+        Slash.display(xpos, ypos,invinsibleTimer);
         if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
           LongSword.displayChips(xpos+62, ypos-3);
         } else if (Slash.currentFrame == 4){
@@ -144,7 +147,7 @@ public class Megaman implements Killable {
         }
       }
       if (chip.equals("lifesword")){
-        Slash.display(xpos, ypos);
+        Slash.display(xpos, ypos,invinsibleTimer);
         if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
           LifeSword.displayChips(xpos+30, ypos+10);
         } else if (Slash.currentFrame == 4){
@@ -154,7 +157,7 @@ public class Megaman implements Killable {
         }
       }
       if (chip.equals("cannon")){
-       Cannon.display(xpos, ypos);
+       Cannon.display(xpos, ypos,invinsibleTimer);
        if (Cannon.currentFrame == 4 || Cannon.currentFrame == 5){
         Blast.displayChips(xpos+85, ypos-27);
        } else if (Cannon.currentFrame == 6){
@@ -163,6 +166,16 @@ public class Megaman implements Killable {
         Blast.displayChips(xpos+85, ypos-15);
        }
       }
+    }
+  }
+  
+  public void getHurt(Panel[][] Grid){
+    if (Grid[panelRow][panelCol].isDangerMM() && invinsibleTimer == 0){
+      hurt(Grid[panelRow][panelCol].getDamage());
+      invinsibleTimer = 90;
+    }
+    else if (invinsibleTimer > 0){
+      invinsibleTimer -= 1;
     }
   }
 

@@ -20,10 +20,10 @@ public class Mettaur implements Killable {
     if (mode == 0){
       if (animation == 0) {
         xpos+=6;
-        Standing.display(xpos, ypos);
+        Standing.display(xpos, ypos,0);
       }
       if (animation == 1) {
-        Attack.display(xpos, ypos);
+        Attack.display(xpos, ypos,0);
       }
     }
     else{

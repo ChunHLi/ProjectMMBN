@@ -39,6 +39,10 @@ public class Panel {
     attribute=att;
   }
   
+  public int getDamage(){
+    return damage;
+  }
+  
   public void setDamage(int dmg){
     damage = dmg;
   }

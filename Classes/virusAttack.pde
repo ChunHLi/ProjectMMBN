@@ -19,6 +19,7 @@ public class virusAttack{
   void move(Panel[][] grid){
     if (type == 0){
       if (panelCol > 0){ 
+        grid[panelRow][panelCol].setDamage(10);
         grid[panelRow][panelCol].toggleDangerMM();
         if (mettaurAttack.currentFrame == mettaurAttack.spriteCount){
           mettaurAttack.currentFrame = 1;

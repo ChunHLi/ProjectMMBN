@@ -92,9 +92,10 @@ void setup() {
 
 void draw() {
   background(0);
-  backGround.display(0, height/2);
+  backGround.display(0, height/2,0);
   image(panels, width/2 - panels.width/2, height/2);
   showPanelDanger();
+  megaman.getHurt(Grid);
   if (MODE == 0) {
     showHP(0);
   }
@@ -219,6 +220,9 @@ void processKeys() {
 //this is important.
 //it returns true if megaman is in the middle of an animation.
 boolean currentlyMoving() {
+  if (megaman.invinsibleTimer > 74){
+    return true;
+  }
   for (int i = 0; i < Keys.length; i++) {
     if (Keys[i]) {
       return true;
@@ -325,9 +329,9 @@ void move() {
     }
     if (Keys[5]) {
       if (megaman.Slash.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
       } else if (megaman.Slash.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
         megaman.Slash.currentFrame = 0;
         megaman.Sword.currentFrame = 0;
         megaman.WideSword.currentFrame = 0;
@@ -345,6 +349,12 @@ void move() {
         megaman.Blast.currentFrame = 0;
         Keys[6] = false;
       }
+    }
+    if (megaman.invinsibleTimer > 74){
+      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(),1,0);
+    }
+    if (megaman.invinsibleTimer == 74){
+      megaman.Hurt.currentFrame = 0;
     }
     //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     if (!currentlyMoving()) {

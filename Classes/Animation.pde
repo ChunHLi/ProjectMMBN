@@ -28,8 +28,10 @@ class Animation {
     }
   }
   
-  void display(float xpos, float ypos) {
-    if (currentFrame < spriteCount - 1) {
+  void display(float xpos, float ypos, int invincibleTimer) {
+    if (invincibleTimer % 2 == 1){
+    }
+    else if (currentFrame < spriteCount - 1) {
       if (animationDelay == counter){
         currentFrame += 1;
         counter = 0;
@@ -39,13 +41,13 @@ class Animation {
        image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }
     } else {
-      image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+      image(spriteFrames[spriteCount - 1], xpos, ypos - spriteFrames[spriteCount - 1].height + 5);
       currentFrame = 0;
     }
-    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+    //image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
   }
   
-  void display(float xpos, float ypos, int frame){
+  void displayF(float xpos, float ypos, int frame){
    image(spriteFrames[frame], xpos, ypos - spriteFrames[frame].height + 5);
   }
   
