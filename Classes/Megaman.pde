@@ -21,6 +21,11 @@ public class Megaman implements Killable {
   //Cannon
   Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 1);
   Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 1);
+  //Spreader
+  Animation Spreader = new Animation("../Sprites/megaman/noCross/07", 8);
+  //Bombs
+  Animation Throw = new Animation("../Sprites/megaman/noCross/06", 6, 2);
+  
 
   public Megaman() {
     this(100, 1, 1, 1, "noCross");
@@ -165,6 +170,12 @@ public class Megaman implements Killable {
        } else if (Cannon.currentFrame == 7){
         Blast.displayChips(xpos+85, ypos-15);
        }
+      }
+      if (chip.equals("spreader")){
+       Spreader.display(xpos,ypos,invinsibleTimer); 
+      }
+      if (chip.equals("bomb")){
+       Throw.display(xpos,ypos,invinsibleTimer); 
       }
     }
   }

@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 slash, cannon
+  false, false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 slash, 6 cannon, 7 spreader, 8 bomb
 }; 
 int customCounter;
 playList OST;
@@ -28,8 +28,8 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10
-    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 slash, 9 cannon
+  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6
+    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 slash, 9 cannon. 10 spreader, 11 bomb
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -195,6 +195,16 @@ void keyPressed() {
       Keys[6] = true;
     }
   }
+  if (keyCode == 68) {
+    if (!currentlyMoving()) {
+      Keys[7] = true;
+    }
+  }
+  if (keyCode == 66) {
+    if (!currentlyMoving()) {
+      Keys[8] = true;
+    }
+  }
   println(keyCode);
 }
 
@@ -329,9 +339,9 @@ void move() {
     }
     if (Keys[5]) {
       if (megaman.Slash.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
       } else if (megaman.Slash.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
         megaman.Slash.currentFrame = 0;
         megaman.Sword.currentFrame = 0;
         megaman.WideSword.currentFrame = 0;
@@ -348,6 +358,24 @@ void move() {
         megaman.Cannon.currentFrame = 0;
         megaman.Blast.currentFrame = 0;
         Keys[6] = false;
+      }
+    }
+    if (Keys[7]) {
+      if (megaman.Spreader.currentFrame < FrameCount[10] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
+      } else if (megaman.Spreader.currentFrame == FrameCount[10] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
+        megaman.Spreader.currentFrame = 0;
+        Keys[7] = false;
+      }
+    }
+    if (Keys[8]) {
+      if (megaman.Throw.currentFrame < FrameCount[11] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
+      } else if (megaman.Throw.currentFrame == FrameCount[11] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
+        megaman.Throw.currentFrame = 0;
+        Keys[8] = false;
       }
     }
     if (megaman.invinsibleTimer > 74){
