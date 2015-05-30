@@ -13,11 +13,10 @@ public class Megaman implements Killable {
 
   
   //Swords
-  Animation Slash = new Animation("../Sprites/megaman/noCross/14", 7, 1);
-  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 5, 1);
-  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/01", 5, 1);
-  Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/04", 5, 1);
-  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 5, 1);
+  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 8, 1);
+  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/04", 8, 1);
+  Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/01", 10, 1);
+  Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 10, 1);
   //Cannon
   Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 1);
   Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 1);
@@ -122,44 +121,16 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int mode, String chip){
     if (mode == 0){
       if (chip.equals("sword")){
-        Slash.display(xpos, ypos,invinsibleTimer);
-        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
-          Sword.displayChips(xpos+55, ypos-9);
-        } else if (Slash.currentFrame == 4){
-          Sword.displayChips(xpos+70, ypos-18);
-        } else if (Slash.currentFrame == 5){
-          Sword.displayChips(xpos+70, ypos-30);
-        }
+       Sword.display(xpos, ypos, invinsibleTimer); 
       }
       if (chip.equals("widesword")){
-        Slash.display(xpos, ypos,invinsibleTimer);
-        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
-          WideSword.displayChips(xpos+62, ypos+30);
-        } else if (Slash.currentFrame == 4){
-          WideSword.displayChips(xpos+81, ypos+2);
-        } else if (Slash.currentFrame == 5){
-          WideSword.displayChips(xpos+81, ypos-40);
-        }
+       WideSword.display(xpos-20, ypos+33, invinsibleTimer); 
       }
       if (chip.equals("longsword")){
-        Slash.display(xpos, ypos,invinsibleTimer);
-        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
-          LongSword.displayChips(xpos+62, ypos-3);
-        } else if (Slash.currentFrame == 4){
-          LongSword.displayChips(xpos+91, ypos-18);
-        } else if (Slash.currentFrame == 5){
-          LongSword.displayChips(xpos+90, ypos-35);
-        }
+       LongSword.display(xpos-11, ypos+5, invinsibleTimer); 
       }
       if (chip.equals("lifesword")){
-        Slash.display(xpos, ypos,invinsibleTimer);
-        if (Slash.currentFrame == 1 || Slash.currentFrame == 2 || Slash.currentFrame == 3){
-          LifeSword.displayChips(xpos+30, ypos+10);
-        } else if (Slash.currentFrame == 4){
-          LifeSword.displayChips(xpos+81, ypos-9);
-        } else if (Slash.currentFrame == 5){
-          LifeSword.displayChips(xpos+81, ypos-24);
-        }
+       LifeSword.display(xpos-4, ypos+39, invinsibleTimer); 
       }
       if (chip.equals("cannon")){
        Cannon.display(xpos, ypos,invinsibleTimer);

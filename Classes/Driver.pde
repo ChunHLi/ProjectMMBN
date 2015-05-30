@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 slash, 6 cannon, 7 spreader, 8 bomb
+  false, false, false, false, false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword
 }; 
 int customCounter;
 playList OST;
@@ -28,8 +28,8 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6
-    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 slash, 9 cannon. 10 spreader, 11 bomb
+  1, 8, 4, 4, 5, 4, 7, 13, 8, 10, 8, 6, 8, 10, 10
+    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -99,6 +99,7 @@ void draw() {
   if (MODE == 0) {
     showHP(0);
   }
+  moveCursor();
   processKeys();
   move();
   charge();
@@ -107,6 +108,9 @@ void draw() {
   Chips.display(displayMenu);
   if (displayMenu) {
     showHP(180);
+  }
+  if (MODE == 1) {
+    Chips.displayCursor();
   }
   mettaurTimer++;
   if (MODE == 0) {
@@ -128,30 +132,47 @@ void mousePressed() {
 
 //!currentlyMoving is important in order for megaman to not be able to move in the middle of his animation!
 void keyPressed() {
-  //left
-  if (keyCode == 37) {
-    if (!currentlyMoving() && megaman.getCol() > 0) {
+  if (MODE == 0) {
+    //left
+    if (keyCode == 37) {
+      if (!currentlyMoving() && megaman.getCol() > 0) {
+        Keys[0] = true;
+      }
+    }
+    //right
+    if (keyCode == 39) {
+      if (!currentlyMoving() && megaman.getCol() < 2) {
+        Keys[1] = true;
+      }
+    }
+    //up
+    if (keyCode == 38) {
+      if (!currentlyMoving() && megaman.getRow() > 0) {
+        Keys[2] = true;
+      }
+    }
+    //down
+    if (keyCode == 40) {
+      if (!currentlyMoving() && megaman.getRow() < 2) {
+        Keys[3] = true;
+      }
+    }
+  }
+  if (MODE == 1){
+    if (keyCode == 37){
       Keys[0] = true;
     }
-  }
-  //right
-  if (keyCode == 39) {
-    if (!currentlyMoving() && megaman.getCol() < 2) {
+    if (keyCode == 39){
       Keys[1] = true;
     }
-  }
-  //up
-  if (keyCode == 38) {
-    if (!currentlyMoving() && megaman.getRow() > 0) {
+    if (keyCode == 38){
       Keys[2] = true;
     }
-  }
-  //down
-  if (keyCode == 40) {
-    if (!currentlyMoving() && megaman.getRow() < 2) {
+    if (keyCode == 40){
       Keys[3] = true;
     }
   }
+  
   // A and S (L and R on GBA)
   if (((keyCode == 65 || keyCode == 83) && MODE == 0) && customBar.customBarCount == 288) {
     MODE = 1;
@@ -174,12 +195,13 @@ void keyPressed() {
   }
   // enter (start on GBA)
   if (keyCode == 10) {
-    if (MODE != 2) {
+    if (MODE == 0) {
       MODE = 2;
-    } else {
+      modeChanged = !modeChanged;
+    } else if (MODE == 2){
       MODE = 0;
+      modeChanged = !modeChanged;
     } 
-    modeChanged = !modeChanged;
   }
   if (keyCode == 32) {
     OST.nextSong();
@@ -188,6 +210,21 @@ void keyPressed() {
   if (keyCode == 86) {
     if (!currentlyMoving()) {
       Keys[5] = true;
+    }
+  }
+  if (keyCode == 73) {
+    if (!currentlyMoving()) {
+      Keys[9] = true;
+    }
+  }
+  if (keyCode == 79) {
+    if (!currentlyMoving()) {
+      Keys[10] = true;
+    }
+  }
+  if (keyCode == 80) {
+    if (!currentlyMoving()) {
+      Keys[11] = true;
     }
   }
   if (keyCode == 70) {
@@ -245,6 +282,27 @@ boolean currentlyMoving() {
 //The code is long and complicated because of animations, if you have any questions ask me on facebook.
 //The keys basically store whether a key is pressed. 
 
+void moveCursor() {
+  if (displayMenu) {
+    if (Keys[0]) {
+      Chips.moveCursorLeft(Keys[0]);
+      Keys[0] = false;
+    }
+    if (Keys[1]) {
+      Chips.moveCursorRight(Keys[1]);
+      Keys[1] = false;
+    }
+    if (Keys[2]) {
+      Chips.moveCursorUp(Keys[2]);
+      Keys[2] = false;
+    }
+    if (Keys[3]) {
+      Chips.moveCursorDown(Keys[3]);
+      Keys[3] = false;
+    }
+  }
+}
+  
 void move() {
   //this mode tells the method to only work when not in chip selecting menu.
   if (MODE == 0) {
@@ -338,15 +396,11 @@ void move() {
       }
     }
     if (Keys[5]) {
-      if (megaman.Slash.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
-      } else if (megaman.Slash.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
-        megaman.Slash.currentFrame = 0;
-        megaman.Sword.currentFrame = 0;
+      if (megaman.WideSword.currentFrame < FrameCount[8] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
+      } else if (megaman.WideSword.currentFrame == FrameCount[8] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
         megaman.WideSword.currentFrame = 0;
-        megaman.LongSword.currentFrame = 0;
-        megaman.LifeSword.currentFrame = 0;
         Keys[5] = false;
       }
     }
@@ -376,6 +430,33 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
         Keys[8] = false;
+      }
+    }
+    if (Keys[9]) {
+      if (megaman.Sword.currentFrame < FrameCount[12] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+      } else if (megaman.Sword.currentFrame == FrameCount[12] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+        megaman.Sword.currentFrame = 0;
+        Keys[9] = false;
+      }
+    }
+    if (Keys[10]) {
+      if (megaman.LongSword.currentFrame < FrameCount[13] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+      } else if (megaman.LongSword.currentFrame == FrameCount[13] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.LongSword.currentFrame = 0;
+        Keys[10] = false;
+      }
+    }
+    if (Keys[11]) {
+      if (megaman.LifeSword.currentFrame < FrameCount[14] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+      } else if (megaman.LifeSword.currentFrame == FrameCount[14] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+        megaman.LifeSword.currentFrame = 0;
+        Keys[11] = false;
       }
     }
     if (megaman.invinsibleTimer > 74){
