@@ -14,36 +14,36 @@ class ChipMenu {
   float cursorYPos = 154;
 
   ChipMenu() {
-    tutorialFolder.add(new Chip(70));
-    tutorialFolder.add(new Chip(70));
-    tutorialFolder.add(new Chip(70));
-    tutorialFolder.add(new Chip(71));
-    tutorialFolder.add(new Chip(71));
-    tutorialFolder.add(new Chip(71));
-    tutorialFolder.add(new Chip(72));
-    tutorialFolder.add(new Chip(72));
-    tutorialFolder.add(new Chip(72));
-    tutorialFolder.add(new Chip(1));
-    tutorialFolder.add(new Chip(1));
-    tutorialFolder.add(new Chip(1));
-    tutorialFolder.add(new Chip(4));
-    tutorialFolder.add(new Chip(4));
-    tutorialFolder.add(new Chip(4));
-    tutorialFolder.add(new Chip(179));
-    tutorialFolder.add(new Chip(179));
-    tutorialFolder.add(new Chip(179));
-    tutorialFolder.add(new Chip(91));
-    tutorialFolder.add(new Chip(91));
-    tutorialFolder.add(new Chip(91));
-    tutorialFolder.add(new Chip(9));
-    tutorialFolder.add(new Chip(9));
-    tutorialFolder.add(new Chip(9));
-    tutorialFolder.add(new Chip(5));
-    tutorialFolder.add(new Chip(5));
-    tutorialFolder.add(new Chip(5));
-    tutorialFolder.add(new Chip(58));
-    tutorialFolder.add(new Chip(180));
-    tutorialFolder.add(new Chip(180));
+    tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
+    tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
+    tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
+    tutorialFolder.add(new Chip(80, 'S', "WideSwrd", 71, 0));
+    tutorialFolder.add(new Chip(80, 'S', "WideSwrd", 71, 0));
+    tutorialFolder.add(new Chip(80, 'S', "WideSwrd", 71, 0));
+    tutorialFolder.add(new Chip(80, 'S', "LongSwrd", 72, 0));
+    tutorialFolder.add(new Chip(80, 'S', "LongSwrd", 72, 0));
+    tutorialFolder.add(new Chip(80, 'S', "LongSwrd", 72, 0));
+    tutorialFolder.add(new Chip(40, 'A', "Cannon", 1, 0));
+    tutorialFolder.add(new Chip(40, 'B', "Cannon", 1, 0));
+    tutorialFolder.add(new Chip(40, 'C', "Cannon", 1, 0));
+    tutorialFolder.add(new Chip(20, '!', "AirShot", 4, 0));
+    tutorialFolder.add(new Chip(20, '!', "AirShot", 4, 0));
+    tutorialFolder.add(new Chip(20, '!', "AirShot", 4, 0));
+    tutorialFolder.add(new Chip(0, '!', "Invisibl", 179, 0));
+    tutorialFolder.add(new Chip(0, '!', "Invisibl", 179, 0));
+    tutorialFolder.add(new Chip(0, '!', "Invisibl", 179, 0));
+    tutorialFolder.add(new Chip(50, '!', "Rflectr1", 91, 0));
+    tutorialFolder.add(new Chip(50, '!', "Rflectr1", 91, 0));
+    tutorialFolder.add(new Chip(50, '!', "Rflectr1", 91, 0));
+    tutorialFolder.add(new Chip(30, 'J', "Spreader", 9, 0));
+    tutorialFolder.add(new Chip(30, 'K', "Spreader", 9, 0));
+    tutorialFolder.add(new Chip(30, 'L', "Spreader", 9, 0));
+    tutorialFolder.add(new Chip(10, '!', "Vulcan1", 5, 0));
+    tutorialFolder.add(new Chip(10, '!', "Vulcan1", 5, 0));
+    tutorialFolder.add(new Chip(10, '!', "Vulcan1", 5, 0));
+    tutorialFolder.add(new Chip(50, 'B', "MiniBomb", 58, 0));
+    tutorialFolder.add(new Chip(0, 'B', "Brrier10", 180, 0));
+    tutorialFolder.add(new Chip(0, 'B', "Brrier10", 180, 0));
     chipFolder = tutorialFolder;
     chipInterface = loadImage("../Sprites/chipSelection/000.png");
     chipInterface.resize((int)(chipInterface.width*1.5), (int)(chipInterface.height*1.5));
@@ -59,15 +59,19 @@ class ChipMenu {
     if (doIt) {
       image(chipInterface, 0, 0);
       int counter = 0;
-       while (counter < 5){
-       image(chipFolder.get(counter).icon,15 + counter * 24, 159);
-       counter += 1;
-       }
-       while (counter < 8){
-       image(chipFolder.get(counter).icon,15 + (counter - 5) * 24, 195);
-       counter += 1;
-       }
-       image(chipFolder.get(cursorIndex).chipArt,23,35);
+      while (counter < 5) {
+        image(chipFolder.get(counter).icon, 15 + counter * 24, 159);
+        image(chipFolder.get(counter).letterText, 20 + counter * 24, 181);
+        counter += 1;
+      }
+      while (counter < 8) {
+        image(chipFolder.get(counter).icon, 15 + (counter - 5) * 24, 195);
+        image(chipFolder.get(counter).letterText, 20 + (counter - 5) * 24, 217);
+        counter += 1;
+      }
+      image(chipFolder.get(cursorIndex).chipArt, 23, 35);
+      chipFolder.get(cursorIndex).displayName();
+      chipFolder.get(cursorIndex).displayDamage();
     }
   }
 
