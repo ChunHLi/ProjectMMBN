@@ -78,6 +78,17 @@ Change - Log
 
 5/29/15 - Shawn Li - added megaman hurt animation and invincibility.
 
+5/30/15 - Shawn Li - chips now display on the Custom Menu!!!!
+
+5/30/15 - Kah Soon Yap - Replaced all sword animations. Nothing buggy now.
+
+5/30/15 - Kah Soon Yap - Animations for spreader
+
+5/30/15 - Kah Soon Yap - Animations for throwing bomb.
+
+5/31/15 - Kah Soon Yap - Spread does damage
+
+
 
 
 To do

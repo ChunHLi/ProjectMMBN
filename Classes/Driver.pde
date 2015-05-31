@@ -98,6 +98,7 @@ void draw() {
   image(panels, width/2 - panels.width/2, height/2);
   showPanelDanger();
   megaman.getHurt(Grid);
+  mettaur.getHurt(Grid);
   if (MODE == 0) {
     showHP(0);
   }
@@ -416,6 +417,9 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "cannon");
         megaman.Cannon.currentFrame = 0;
         megaman.Blast.currentFrame = 0;
+        if (mettaur.getRow() == megaman.getRow()) {
+          mettaur.hurt(40);
+        }
         Keys[6] = false;
       }
     }
@@ -425,6 +429,16 @@ void move() {
       } else if (megaman.Spreader.currentFrame == FrameCount[10] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
         megaman.Spreader.currentFrame = 0;
+        if (mettaur.getRow() == megaman.getRow()) {
+          for (int x = mettaur.getRow()-1; x < 3; x++){
+            for (int y = mettaur.getCol()-1; y < 6; y++){
+              try{
+               Grid[x][y].setDamage(40);
+               Grid[x][y].toggleDangerVirus();
+              }catch(ArrayIndexOutOfBoundsException e){}
+            }
+          }
+        }
         Keys[7] = false;
       }
     }
