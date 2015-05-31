@@ -45,12 +45,13 @@ boolean mettaurMove;
 Animation customBar;
 AudioPlayer virusBattleTheme;
 ArrayList<virusAttack> virusForce;
+ArrayList<Chip> tutorialFolder;
 PImage pause;
 
 void setup() {
   size(360, 240);
   background(0);
-  frameRate(30);
+  frameRate(60);
   panels = loadImage("../Sprites/platform/backGround.png");
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
@@ -76,6 +77,7 @@ void setup() {
   customBar = new Animation("../Sprites/textArt/text/custom", 5);
   OST = new playList();
   virusForce = new ArrayList<virusAttack>(0);
+  //tutorialFolder
   Minim minim1 = new Minim(this);
   Minim minim2 = new Minim(this);
   Minim minim3 = new Minim(this);
@@ -179,6 +181,9 @@ void keyPressed() {
     modeChanged = true;
     customBar.customBarCount = 0;
     customBar.currentFrame = 0;
+  }
+  if (keyCode == 81 && MODE == 1){
+    Collections.shuffle(Chips.chipFolder);
   }
   // Z (A on GBA)
   if (keyCode == 90 && MODE == 1) {
