@@ -86,10 +86,9 @@ Change - Log
 
 5/30/15 - Kah Soon Yap - Animations for throwing bomb.
 
-5/31/15 - Kah Soon Yap - Spread does damage
+5/31/15 - Kah Soon Yap - Spread does damage.
 
-
-
+5/31/15 - Shawn Li - display for customMenu.
 
 To do
 =========================================================================================================================
