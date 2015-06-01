@@ -47,7 +47,7 @@ Animation customBar;
 AudioPlayer virusBattleTheme;
 ArrayList<virusAttack> virusForce;
 ArrayList<Chip> tutorialFolder;
-chipAttack attacks = new chipAttack();
+chipAttack attacks;
 PImage pause;
 
 void setup() {
@@ -63,6 +63,7 @@ void setup() {
     numberText[y] = loadImage(txtDirectory);
     numberText[y].resize((int)(numberText[y].width*1.5), (int)(numberText[y].height*1.5));
   }
+  attacks = new chipAttack();
   pause = loadImage("../Sprites/textArt/text/Pause.png");
   pause.resize((int)(pause.width*1.5), (int)(pause.height*1.5));
   //parameter1 gives the directory, parameter2 is the amount of frames
@@ -451,7 +452,8 @@ void move() {
       } else if (megaman.Throw.currentFrame == FrameCount[11] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
-        
+        attacks.setXY("bomb", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+        attacks.change(0);
         Keys[8] = false;
       }
     } 

@@ -1,30 +1,38 @@
 public class chipAttack{
- PImage bomb = loadImage("../Sprites/battleChipAttack/42"); 
- boolean[] chips = {
+ private PImage bomb = loadImage("../Sprites/battleChipAttack/0.png");
+ private boolean[] chips = {
   false
   //0 bomb, 
  };
- int xbomb, ybomb, bombTime;
+ private float xbomb, ybomb, bombTime;
  
  public chipAttack(){
    
+   bomb.resize((int)(bomb.width*1.5), (int)(bomb.height*1.5));
  }
  
  public void move(Panel[][] grid){
    if (chips[0]){
-     if (xbomb < 81){
+     if (xbomb < 300){
       image(bomb, xbomb, ybomb);
-      xbomb+=30;
+      if (bombTime > 30){
+       ybomb+=2; 
+      }else{
+       ybomb-=2; 
+      }
+      xbomb+=5;
+      bombTime++;
      }else{
-      chips[0] = false; 
+      chips[0] = false;
+      bombTime=0;
      }
    }
  }
  
- public boolean[] getChips(){
-  return chips; 
+ public void change(int index){
+  chips[index] = !chips[index]; 
  }
- public void setXY(String chip, int xpos, int ypos){
+ public void setXY(String chip, float xpos, float ypos){
    if (chip.equals("bomb")){
      xbomb=xpos;
      ybomb=ypos;
