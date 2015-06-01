@@ -13,8 +13,8 @@ public class Megaman implements Killable {
 
   
   //Swords
-  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 8, 1);
-  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/04", 8, 1);
+  Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 7, 1);
+  Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/04", 7, 1);
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/01", 10, 1);
   Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 10, 1);
   //Cannon
@@ -121,16 +121,16 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int mode, String chip){
     if (mode == 0){
       if (chip.equals("sword")){
-       Sword.display(xpos, ypos, invinsibleTimer); 
+       Sword.display(xpos-7, ypos+4, invinsibleTimer); 
       }
       if (chip.equals("widesword")){
-       WideSword.display(xpos-20, ypos+33, invinsibleTimer); 
+       WideSword.display(xpos-17, ypos+36, invinsibleTimer); 
       }
       if (chip.equals("longsword")){
-       LongSword.display(xpos-11, ypos+5, invinsibleTimer); 
+       LongSword.display(xpos-11, ypos+12, invinsibleTimer); 
       }
       if (chip.equals("lifesword")){
-       LifeSword.display(xpos-4, ypos+39, invinsibleTimer); 
+       LifeSword.display(xpos-6, ypos+40, invinsibleTimer); 
       }
       if (chip.equals("cannon")){
        Cannon.display(xpos, ypos,invinsibleTimer);

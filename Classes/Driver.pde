@@ -9,7 +9,7 @@ float xpos;
 float ypos;
 boolean[] Keys = {
   false, false, false, false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb throw, 9 sword, 10 longsword, 11 lifesword
 }; 
 int customCounter;
 playList OST;
@@ -28,9 +28,10 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 8, 10, 8, 6, 8, 10, 10
+  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 7, 10, 10
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
 };
+
 PImage[] numberText = new PImage[10];
 boolean moved;
 boolean modeChanged;
@@ -46,6 +47,7 @@ Animation customBar;
 AudioPlayer virusBattleTheme;
 ArrayList<virusAttack> virusForce;
 ArrayList<Chip> tutorialFolder;
+chipAttack attacks;
 PImage pause;
 
 void setup() {
@@ -61,6 +63,7 @@ void setup() {
     numberText[y] = loadImage(txtDirectory);
     numberText[y].resize((int)(numberText[y].width*1.5), (int)(numberText[y].height*1.5));
   }
+  attacks = new chipAttack();
   pause = loadImage("../Sprites/textArt/text/Pause.png");
   pause.resize((int)(pause.width*1.5), (int)(pause.height*1.5));
   //parameter1 gives the directory, parameter2 is the amount of frames
@@ -106,6 +109,7 @@ void draw() {
   processKeys();
   move();
   charge();
+  attacks.move(Grid);
   mettaurMove();
   checkMode();
   Chips.display(displayMenu);
@@ -448,9 +452,11 @@ void move() {
       } else if (megaman.Throw.currentFrame == FrameCount[11] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
+        attacks.setXY("bomb", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+        attacks.change(0);
         Keys[8] = false;
       }
-    }
+    } 
     if (Keys[9]) {
       if (megaman.Sword.currentFrame < FrameCount[12] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
@@ -629,15 +635,17 @@ void showHP(int translation) {
   }
 
   //Enemy
-  if (mettaur.getHP()%10!=1) {
-    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  } else {
-    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  }
-  if (mettaur.getHP()%100/10 != 1) {
-    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  } else {
-    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  if (mettaur.getHP() > 0){
+    if (mettaur.getHP()%10!=1) {
+      image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    } else {
+      image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    }
+    if (mettaur.getHP()%100/10 != 1) {
+      image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    } else {
+      image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    }
   }
 }
 
