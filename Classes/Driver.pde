@@ -51,7 +51,7 @@ PImage pause;
 void setup() {
   size(360, 240);
   background(0);
-  frameRate(60);
+  frameRate(30);
   panels = loadImage("../Sprites/platform/backGround.png");
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
