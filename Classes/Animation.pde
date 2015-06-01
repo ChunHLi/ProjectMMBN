@@ -47,7 +47,7 @@ class Animation {
     //image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
   }
   
-  void displayCursor(float xpos, float ypos){
+  void displayCursor(float xpos, float ypos,int type){
     if (animationDelay == counter){
       if (currentFrame == 0){
         currentFrame += 1;
@@ -61,7 +61,12 @@ class Animation {
       image(spriteFrames[0],xpos,ypos);
     }
     if (currentFrame == 1){
-      image(spriteFrames[1],xpos - 2.25,ypos - 2.25);
+      if (type == 0){
+        image(spriteFrames[1],xpos - 2.25,ypos - 2.25);
+      }
+      else{
+        image(spriteFrames[1],xpos,ypos);
+      }
     }
     counter += 1;
   }

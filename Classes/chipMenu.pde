@@ -9,9 +9,14 @@ class ChipMenu {
   ArrayList<Chip> chipFolder;
   PImage chipInterface;
   Animation Cursor = new Animation("../Sprites/chipSelection/01", 2, 10);
+  Animation CrossCursor = new Animation("../Sprites/chipSelection/crossSelection/01", 2, 10);
+  PImage crossSelect = loadImage("../
   int cursorIndex;
+  int crossCursorIndex;
   float cursorXPos = 10;
   float cursorYPos = 154;
+  float crossCursorXPos = 10;
+  float crossCursorYPos = 12;
 
   ChipMenu() {
     tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
@@ -76,39 +81,41 @@ class ChipMenu {
   }
 
   void displayCursor() {
-    Cursor.displayCursor(cursorXPos, cursorYPos);
+      Cursor.displayCursor(cursorXPos, cursorYPos,0);
+  }
+  
+  void displayCrossCursor(){
+    CrossCursor.displayCursor(crossCursorXPos, crossCursorYPos,1);
   }
 
-  void moveCursorLeft(boolean trigger) {
-    if (cursorIndex != 0 && cursorIndex != 5) {
-      cursorXPos -= 24;
-      cursorIndex -= 1;
-      trigger = !trigger;
-    }
+  void moveCursorLeft() {
+    cursorXPos -= 24;
+    cursorIndex -= 1;
   }
 
-  void moveCursorRight(boolean trigger) {
-    if (cursorIndex != 4 && cursorIndex != 7) {
-      cursorXPos += 24;
-      cursorIndex += 1;
-      trigger = !trigger;
-    }
+  void moveCursorRight() {
+    cursorXPos += 24;
+    cursorIndex += 1;
   }
 
-  void moveCursorUp(boolean trigger) {
-    if (cursorIndex > 4) {
-      cursorYPos -= 36;
-      cursorIndex -= 5;
-      trigger = !trigger;
-    }
+  void moveCursorUp() {
+    cursorYPos -= 36;
+    cursorIndex -= 5;
   }
 
-  void moveCursorDown(boolean trigger) {
-    if (cursorIndex < 3) {
-      cursorYPos += 36;
-      cursorIndex += 5;
-      trigger = !trigger;
-    }
+  void moveCursorDown() {
+    cursorYPos += 36;
+    cursorIndex += 5;
+  }
+  
+  void moveCrossCursorUp(){
+    crossCursorYPos -= 24;
+    crossCursorIndex -= 1;
+  }
+  
+  void moveCrossCursorDown(){
+    crossCursorYPos += 24;
+    crossCursorIndex += 1;
   }
 }
 

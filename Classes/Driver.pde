@@ -35,6 +35,7 @@ PImage[] numberText = new PImage[10];
 boolean moved;
 boolean modeChanged;
 boolean displayMenu;
+boolean displayCrosses;
 int MODE;
 int changeMenuCounter;
 ChipMenu Chips;
@@ -94,7 +95,7 @@ void setup() {
 
 void draw() {
   background(0);
-  backGround.display(0, height/2,0);
+  backGround.display(0, height/2, 0);
   image(panels, width/2 - panels.width/2, height/2);
   showPanelDanger();
   megaman.getHurt(Grid);
@@ -114,6 +115,9 @@ void draw() {
   }
   if (MODE == 1) {
     Chips.displayCursor();
+    if (displayCrosses){
+      Chips.displayCrossCursor();
+    }
   }
   mettaurTimer++;
   if (MODE == 0) {
@@ -161,21 +165,21 @@ void keyPressed() {
       }
     }
   }
-  if (MODE == 1){
-    if (keyCode == 37){
+  if (MODE == 1) {
+    if (keyCode == 37) {
       Keys[0] = true;
     }
-    if (keyCode == 39){
+    if (keyCode == 39) {
       Keys[1] = true;
     }
-    if (keyCode == 38){
+    if (keyCode == 38) {
       Keys[2] = true;
     }
-    if (keyCode == 40){
+    if (keyCode == 40) {
       Keys[3] = true;
     }
   }
-  
+
   // A and S (L and R on GBA)
   if (((keyCode == 65 || keyCode == 83) && MODE == 0) && customBar.customBarCount == 288) {
     MODE = 1;
@@ -183,7 +187,7 @@ void keyPressed() {
     customBar.customBarCount = 0;
     customBar.currentFrame = 0;
   }
-  if (keyCode == 81 && MODE == 1){
+  if (keyCode == 81 && MODE == 1) {
     Collections.shuffle(Chips.chipFolder);
   }
   // Z (A on GBA)
@@ -204,10 +208,10 @@ void keyPressed() {
     if (MODE == 0) {
       MODE = 2;
       modeChanged = !modeChanged;
-    } else if (MODE == 2){
+    } else if (MODE == 2) {
       MODE = 0;
       modeChanged = !modeChanged;
-    } 
+    }
   }
   if (keyCode == 32) {
     OST.nextSong();
@@ -273,7 +277,7 @@ void processKeys() {
 //this is important.
 //it returns true if megaman is in the middle of an animation.
 boolean currentlyMoving() {
-  if (megaman.invinsibleTimer > 74){
+  if (megaman.invinsibleTimer > 74) {
     return true;
   }
   for (int i = 0; i < Keys.length; i++) {
@@ -289,26 +293,47 @@ boolean currentlyMoving() {
 //The keys basically store whether a key is pressed. 
 
 void moveCursor() {
-  if (displayMenu) {
-    if (Keys[0]) {
-      Chips.moveCursorLeft(Keys[0]);
-      Keys[0] = false;
-    }
-    if (Keys[1]) {
-      Chips.moveCursorRight(Keys[1]);
-      Keys[1] = false;
-    }
-    if (Keys[2]) {
-      Chips.moveCursorUp(Keys[2]);
+  if (displayMenu && displayCrosses){
+    if (Keys[2]){
+      Chips.moveCrossCursorUp();
       Keys[2] = false;
     }
-    if (Keys[3]) {
-      Chips.moveCursorDown(Keys[3]);
+    if (Keys[3]){
+      Chips.moveCrossCursorDown();
       Keys[3] = false;
     }
   }
+  else if (displayMenu) {
+    if (Keys[0]) {
+      if (Chips.cursorIndex != 0 && Chips.cursorIndex != 5) {
+        Chips.moveCursorLeft();
+        Keys[0] = false;
+      }
+    }
+    if (Keys[1]) {
+      if (Chips.cursorIndex != 4 && Chips.cursorIndex != 7) {
+        Chips.moveCursorRight();
+        Keys[1] = false;
+      }
+    }
+    if (Keys[2]) {
+      if (Chips.cursorIndex > 4) {
+        Chips.moveCursorUp();
+        Keys[2] = false;
+      }
+      else{
+        displayCrosses = true;
+      }
+    }
+    if (Keys[3]) {
+      if (Chips.cursorIndex < 3) {
+        Chips.moveCursorDown();
+        Keys[3] = false;
+      }
+    }
+  }
 }
-  
+
 void move() {
   //this mode tells the method to only work when not in chip selecting menu.
   if (MODE == 0) {
@@ -430,12 +455,14 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
         megaman.Spreader.currentFrame = 0;
         if (mettaur.getRow() == megaman.getRow()) {
-          for (int x = mettaur.getRow()-1; x < 3; x++){
-            for (int y = mettaur.getCol()-1; y < 6; y++){
-              try{
-               Grid[x][y].setDamage(40);
-               Grid[x][y].toggleDangerVirus();
-              }catch(ArrayIndexOutOfBoundsException e){}
+          for (int x = mettaur.getRow ()-1; x < 3; x++) {
+            for (int y = mettaur.getCol ()-1; y < 6; y++) {
+              try {
+                Grid[x][y].setDamage(40);
+                Grid[x][y].toggleDangerVirus();
+              }
+              catch(ArrayIndexOutOfBoundsException e) {
+              }
             }
           }
         }
@@ -478,10 +505,10 @@ void move() {
         Keys[11] = false;
       }
     }
-    if (megaman.invinsibleTimer > 74){
-      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(),1,0);
+    if (megaman.invinsibleTimer > 74) {
+      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);
     }
-    if (megaman.invinsibleTimer == 74){
+    if (megaman.invinsibleTimer == 74) {
       megaman.Hurt.currentFrame = 0;
     }
     //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
