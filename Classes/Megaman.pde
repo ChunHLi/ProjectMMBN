@@ -121,19 +121,19 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int mode, String chip){
     if (mode == 0){
       if (chip.equals("sword")){
-       Sword.display(xpos-7, ypos+4, invinsibleTimer); 
+       Sword.displayChips(xpos, ypos); 
       }
       if (chip.equals("widesword")){
-       WideSword.display(xpos-17, ypos+36, invinsibleTimer); 
+       WideSword.displayChips(xpos-20, ypos+33); 
       }
       if (chip.equals("longsword")){
-       LongSword.display(xpos-11, ypos+12, invinsibleTimer); 
+       LongSword.displayChips(xpos-11, ypos+5); 
       }
       if (chip.equals("lifesword")){
-       LifeSword.display(xpos-6, ypos+40, invinsibleTimer); 
+       LifeSword.displayChips(xpos-4, ypos+39); 
       }
       if (chip.equals("cannon")){
-       Cannon.display(xpos, ypos,invinsibleTimer);
+       Cannon.displayChips(xpos, ypos);
        if (Cannon.currentFrame == 4 || Cannon.currentFrame == 5){
         Blast.displayChips(xpos+85, ypos-27);
        } else if (Cannon.currentFrame == 6){
@@ -143,10 +143,10 @@ public class Megaman implements Killable {
        }
       }
       if (chip.equals("spreader")){
-       Spreader.display(xpos,ypos,invinsibleTimer); 
+       Spreader.displayChips(xpos,ypos); 
       }
       if (chip.equals("bomb")){
-       Throw.display(xpos,ypos,invinsibleTimer); 
+       Throw.displayChips(xpos,ypos); 
       }
     }
   }

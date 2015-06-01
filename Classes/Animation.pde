@@ -121,7 +121,7 @@ class Animation {
        image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
       }
     }
-    image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
+    //image(spriteFrames[currentFrame], xpos, ypos - spriteFrames[currentFrame].height + 5);
   }
 }
 
