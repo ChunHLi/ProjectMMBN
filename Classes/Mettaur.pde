@@ -43,6 +43,7 @@ public class Mettaur implements Killable {
 public void getHurt(Panel[][] Grid){
     if (Grid[panelRow][panelCol].isDangerVirus()){
       hurt(Grid[panelRow][panelCol].getDamage());
+      Grid[panelRow][panelCol].toggleDangerVirus();
     }
   }
 

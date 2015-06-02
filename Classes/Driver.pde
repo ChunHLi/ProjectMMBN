@@ -48,6 +48,7 @@ AudioPlayer virusBattleTheme;
 ArrayList<virusAttack> virusForce;
 ArrayList<Chip> tutorialFolder;
 PImage pause;
+chipAttack attacks;
 
 void setup() {
   size(360, 240);
@@ -78,6 +79,7 @@ void setup() {
   customBar = new Animation("../Sprites/textArt/text/custom", 5);
   OST = new playList();
   virusForce = new ArrayList<virusAttack>(0);
+  attacks = new chipAttack();
   //tutorialFolder
   Minim minim1 = new Minim(this);
   Minim minim2 = new Minim(this);
@@ -107,6 +109,7 @@ void draw() {
   processKeys();
   move();
   charge();
+  attacks.move(Grid);
   mettaurMove();
   checkMode();
   Chips.display(displayMenu);
@@ -470,6 +473,8 @@ void move() {
       } else if (megaman.Throw.currentFrame == FrameCount[11] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
+        attacks.setXY("bomb", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(),megaman.getCol(), megaman.getRow());
+        
         Keys[8] = false;
       }
     }
