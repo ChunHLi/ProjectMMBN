@@ -4,6 +4,8 @@ APCS Final Project Term 2;
 
 Megaman Battle Network Virus Battle Simulator;
 
+Working version as of 06-01-2015 is in branch called "06-01-2015"
+
 Change - Log
 =========================================================================================================================
 5/20/15 - Kah Soon Yap - Made the proposal and printed it out.
@@ -88,7 +90,25 @@ Change - Log
 
 5/31/15 - Kah Soon Yap - Spread does damage.
 
+5/31/15 - Kah Soon Yap - Bomb flies, but it's flight is linear not parabolic.
+
 5/31/15 - Shawn Li - display for customMenu.
+
+6/01/15 - Kah Soon Yap - Created branch for working version
+
+6/01/15 - Kah Soon Yap - Fixed bomb flight. It is now parabolic.
+
+6/01/15 - Kah Soon Yap - Bomb now does damage.
+
+6/02/15 - Kah Soon Yap - Cannon hit animations done
+
+6/02/15 - Kah Soon Yap - Bomb explosion done
+
+6/02/15 - Kah Soon Yap - Buster hit animations done
+
+6/02/15 - Kah Soon Yap - Spreader hit animation works (kinda)
+
+
 
 To do
 =========================================================================================================================
@@ -106,7 +126,7 @@ To do
 - For Anyone (due 5/29/15) - Delete unnecessary files.
 
 - Future Goals:
-  1. Choose standard chips to implement.
+ *1. Choose standard chips to implement.
   2. Finish Chip and ChipMenu class.
   3. Add methods to implement chip effects.
   4. Program protoman and bass AI.

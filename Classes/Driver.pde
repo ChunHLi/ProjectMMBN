@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword
+  false, false, false, false, false, false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot
 }; 
 int customCounter;
 PlayList OST;
@@ -28,8 +28,9 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10
+  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
+    //15 airshot
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -109,8 +110,8 @@ void draw() {
   processKeys();
   move();
   charge();
-  attacks.move(Grid);
   mettaurMove();
+  attacks.move(Grid);
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
@@ -189,16 +190,15 @@ void keyPressed() {
     modeChanged = true;
     customBar.customBarCount = 0;
     customBar.currentFrame = 0;
+    Chips.throwOutChips();
+    Chips.empty();
   }
   if (keyCode == 81 && MODE == 1) {
-    Collections.shuffle(Chips.chipFolder);
+    Chips.shuffleChips();
   }
   // Z (A on GBA)
   if (keyCode == 90 && MODE == 1) {
-    MODE = 0;
-    modeChanged = true;
-    displayMenu = false;
-    customBar.customBarCount = 0;
+    Chips.selectChips();
   }
   // X (B on GBA)
   if (keyCode == 88) {
@@ -207,6 +207,9 @@ void keyPressed() {
     }
     if (displayCrosses) {
       displayCrosses = !displayCrosses;
+    }
+    else if (MODE == 1){
+      Chips.deselectChips();
     }
   }
   // enter (start on GBA)
@@ -217,6 +220,12 @@ void keyPressed() {
     } else if (MODE == 2) {
       MODE = 0;
       modeChanged = !modeChanged;
+    }
+    else{
+      MODE = 0;
+      modeChanged = true;
+      displayMenu = false;
+      customBar.customBarCount = 0;
     }
   }
   if (keyCode == 32) {
@@ -256,6 +265,11 @@ void keyPressed() {
   if (keyCode == 66) {
     if (!currentlyMoving()) {
       Keys[8] = true;
+    }
+  }
+  if (keyCode == 71) {
+    if (!currentlyMoving()) {
+      Keys[12] = true;
     }
   }
   println(keyCode);
@@ -417,6 +431,7 @@ void move() {
         Keys[4] = false;
         if (mettaur.getRow() == megaman.getRow()) {
           mettaur.hurt(megaman.getBuster());
+          attacks.setXY("buster", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
         }
         if (chargeFrame > 18) {
           megaman.setBuster(megaman.getBuster()/10);
@@ -442,6 +457,7 @@ void move() {
         megaman.Blast.currentFrame = 0;
         if (mettaur.getRow() == megaman.getRow()) {
           mettaur.hurt(40);
+          attacks.setXY("cannon", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
         }
         Keys[6] = false;
       }
@@ -453,6 +469,7 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
         megaman.Spreader.currentFrame = 0;
         if (mettaur.getRow() == megaman.getRow()) {
+          attacks.setXY("spreader", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
           for (int x = mettaur.getRow ()-1; x < 3; x++) {
             for (int y = mettaur.getCol ()-1; y < 6; y++) {
               try {
@@ -474,7 +491,6 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
         attacks.setXY("bomb", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(),megaman.getCol(), megaman.getRow());
-        
         Keys[8] = false;
       }
     }
@@ -503,6 +519,21 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
         megaman.LifeSword.currentFrame = 0;
         Keys[11] = false;
+      }
+    }
+    if (Keys[12]) {
+      if (megaman.AirShot.currentFrame < FrameCount[15] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "airshot");
+      } else if (megaman.AirShot.currentFrame == FrameCount[15] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "airshot");
+        megaman.AirShot.currentFrame = 0;
+        if (mettaur.getRow() == megaman.getRow()) {
+          mettaur.hurt(10);
+          if (mettaur.getCol() < 5){
+            mettaur.setCol(mettaur.getCol()+1);
+          }
+        }
+        Keys[12] = false;
       }
     }
     if (megaman.invinsibleTimer > 74) {
@@ -656,15 +687,17 @@ void showHP(int translation) {
   }
   megaman.showStatus(translation);
   //Enemy
-  if (mettaur.getHP()%10!=1) {
-    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  } else {
-    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  }
-  if (mettaur.getHP()%100/10 != 1) {
-    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
-  } else {
-    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+  if (mettaur.getHP() > 0){
+    if (mettaur.getHP()%10!=1) {
+      image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    } else {
+      image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+37, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    }
+    if (mettaur.getHP()%100/10 != 1) {
+      image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+22, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    } else {
+      image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
+    }
   }
 }
 

@@ -24,6 +24,8 @@ public class Megaman implements Killable {
   Animation Spreader = new Animation("../Sprites/megaman/noCross/07", 8);
   //Bombs
   Animation Throw = new Animation("../Sprites/megaman/noCross/06", 6, 2);
+  //Airshot
+  Animation AirShot = new Animation("../Sprites/megaman/noCross/17", 5, 1);
 
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
@@ -168,6 +170,9 @@ public class Megaman implements Killable {
       }
       if (chip.equals("bomb")) {
         Throw.displayChips(xpos, ypos);
+      }
+      if (chip.equals("airshot")) {
+        AirShot.displayChips(xpos, ypos);
       }
     }
   }

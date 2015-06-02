@@ -5,6 +5,7 @@ class Chip {
   private PImage icon;
   private PImage chipArt;
   private PImage letterText;
+  private boolean isSelected;
 
   Chip() {
   }
@@ -18,6 +19,7 @@ class Chip {
   }
 
   Chip(int Damage, char Letter, String Name, int ChipID, int AttackType) {
+    chipID = ChipID;
     damage = Damage;
     letter = Letter;
     name = Name;
@@ -58,6 +60,44 @@ class Chip {
       thisChar.resize((int)(thisChar.width * 1.5),(int)(thisChar.height * 1.5));
       image(thisChar, 98 - (dmg.length() - 1 - counter) * 10, 112);
       counter -= 1;
+    }
+  }
+  
+  boolean isSelectable(ChipLinkedList sample){
+    if (isSelected == true){
+      return false;
+    }
+    if (sample.size() == 0){
+      return true;
+    }
+    if (sample.size() == 5){
+      return false;
+    }
+    if (letter == '!'){
+      return true;
+    }
+    if (letter == sample.get(0).letter){
+      return true;
+    }
+    if (letter != sample.get(0).letter && sample.get(0).letter != '!'){
+      int counter = 0;
+      while (counter < (sample.size())){
+        if (chipID != sample.get(counter).chipID){
+          return false;
+        }
+        counter += 1;
+      }
+      return true;
+    }
+    else{
+      int counter = 0;
+      while (counter < sample.size()){
+        if (sample.get(counter).letter != '!' && sample.get(counter).letter != letter){
+          return false;
+        }
+        counter += 1;
+      }
+      return true;
     }
   }
 }

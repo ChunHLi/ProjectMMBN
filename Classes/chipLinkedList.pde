@@ -1,13 +1,22 @@
 public class ChipLinkedList {
-  LinkedList<Chip> selected = new LinkedList<Chip>();
+  LinkedList<Chip> selected;
+  LinkedList<Integer> selectedPreviousIndex;
 
   ChipLinkedList() {
+    selected = new LinkedList<Chip>();
+    selectedPreviousIndex = new LinkedList<Integer>();
   }
 
   void display(int mode) {
     if (mode == 0){
+      
     }
     if (mode == 1){
+      int counter = 0;
+      while (counter < selected.size()){
+        image(selected.get(counter).icon, 147, 39 + (counter * 24));
+        counter += 1;
+      }
     }
   }
 
@@ -38,5 +47,28 @@ public class ChipLinkedList {
     if (selected.get(counter).name.equals("ColonelSP") && selected.get(counter + 1).chipID == 188 && selected.get(counter + 2).name.equals("Protomn")){
       //do animation, remove these chips and insert PA chip
     }
+  }
+  
+  int size(){
+    return selected.size();
+  }
+  
+  Chip get(int index){
+    return selected.get(index);
+  }
+  
+  void add(Chip chip,int index){
+    selected.add(chip);
+    selectedPreviousIndex.add(index);
+  }
+  
+  int remove(int index){
+    selected.remove(index);
+    return selectedPreviousIndex.remove(index);
+  }
+  
+  void empty(){
+    selected.clear();
+    selectedPreviousIndex.clear();
   }
 }
