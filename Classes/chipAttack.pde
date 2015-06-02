@@ -1,9 +1,13 @@
+import java.util.*;
+
 public class chipAttack{
  private PImage bomb = loadImage("../Sprites/battleChipAttack/0.png");
  private boolean[] chips = {
   false
   //0 bomb, 
  };
+ private int panRow, panCol;
+ private float oX, oY;
  private float xbomb, ybomb, bombTime;
  
  public chipAttack(){
@@ -13,29 +17,32 @@ public class chipAttack{
  
  public void move(Panel[][] grid){
    if (chips[0]){
-     if (xbomb < 300){
+     if (bombTime < 60){
       image(bomb, xbomb, ybomb);
-      if (bombTime > 30){
-       ybomb+=2; 
-      }else{
-       ybomb-=2; 
-      }
-      xbomb+=5;
+      xbomb = oX + 2.3 * bombTime;
+      ybomb = (float)(oY - 4.6 * Math.sqrt(3)/2.0 * bombTime + bombTime*bombTime*.072);
       bombTime++;
      }else{
+      bombTime = 0; 
       chips[0] = false;
-      bombTime=0;
+      if (!grid[panRow][panCol].isDangerVirus()){
+        grid[panRow][panCol].toggleDangerVirus();
+      }
+      grid[panRow][panCol].setDamage(10);
      }
    }
  }
- 
+
  public void change(int index){
   chips[index] = !chips[index]; 
  }
- public void setXY(String chip, float xpos, float ypos){
+ public void setXY(String chip, float xpos, float ypos, int row, int col){
    if (chip.equals("bomb")){
-     xbomb=xpos;
-     ybomb=ypos;
+     oX=xpos + 55;
+     oY=ypos - 35;
+     panRow=row;
+     panCol=col+3;
+     chips[0] = true;
    }
  }
  
