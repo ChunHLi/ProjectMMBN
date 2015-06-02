@@ -115,13 +115,13 @@ void draw() {
   }
   if (MODE == 1) {
     Chips.displayCursor();
-    if (displayCrosses){
+    if (displayCrosses) {
       Chips.displayCrossCursor();
     }
   }
   mettaurTimer++;
   if (MODE == 0) {
-    customBar.displayCustom(width/5, 16);
+    customBar.displayCustom(width/5, 20);
   }
   if (virusForce.size() > 0) {
     int counter = 0;
@@ -201,6 +201,9 @@ void keyPressed() {
   if (keyCode == 88) {
     if (!currentlyMoving()) {
       isX = true;
+    }
+    if (displayCrosses) {
+      displayCrosses = !displayCrosses;
     }
   }
   // enter (start on GBA)
@@ -293,43 +296,35 @@ boolean currentlyMoving() {
 //The keys basically store whether a key is pressed. 
 
 void moveCursor() {
-  if (displayMenu && displayCrosses){
-    if (Keys[2]){
+  if (displayMenu && displayCrosses) {
+    if (Keys[2]) {
       Chips.moveCrossCursorUp();
       Keys[2] = false;
     }
-    if (Keys[3]){
+    if (Keys[3]) {
       Chips.moveCrossCursorDown();
       Keys[3] = false;
     }
-  }
-  else if (displayMenu) {
+  } else if (displayMenu) {
     if (Keys[0]) {
-      if (Chips.cursorIndex != 0 && Chips.cursorIndex != 5) {
-        Chips.moveCursorLeft();
-        Keys[0] = false;
-      }
+      Chips.moveCursorLeft();
+      Keys[0] = false;
     }
     if (Keys[1]) {
-      if (Chips.cursorIndex != 4 && Chips.cursorIndex != 7) {
-        Chips.moveCursorRight();
-        Keys[1] = false;
-      }
+      Chips.moveCursorRight();
+      Keys[1] = false;
     }
     if (Keys[2]) {
       if (Chips.cursorIndex > 4) {
         Chips.moveCursorUp();
         Keys[2] = false;
-      }
-      else{
+      } else {
         displayCrosses = true;
       }
     }
     if (Keys[3]) {
-      if (Chips.cursorIndex < 3) {
-        Chips.moveCursorDown();
-        Keys[3] = false;
-      }
+      Chips.moveCursorDown();
+      Keys[3] = false;
     }
   }
 }
@@ -638,23 +633,23 @@ void showHP(int translation) {
   //Megaman's HP
   fill(56, 80, 104);
   stroke(255);
-  rect(0 + translation, 0, 45, 20);
+  rect(4 + translation, 4, 63, 20);
   if (megaman.getHP()%10!=1) {
-    image(numberText[megaman.getHP()%10], 32 + translation, 2);
+    image(numberText[megaman.getHP()%10], 55 + translation, 6);
   } else {
-    image(numberText[megaman.getHP()%10], 37 + translation, 2);
+    image(numberText[megaman.getHP()%10], 60 + translation, 6);
   }
   if (megaman.getHP()%100/10 != 1) {
-    image(numberText[megaman.getHP()%100/10], 22 + translation, 2);
+    image(numberText[megaman.getHP()%100/10], 43 + translation, 6);
   } else {
-    image(numberText[megaman.getHP()%100/10], 27 + translation, 2);
+    image(numberText[megaman.getHP()%100/10], 48 + translation, 6);
   }
   if (megaman.getHP()%1000/100 != 1) {
-    image(numberText[megaman.getHP()%1000/100], 12 + translation, 2);
+    image(numberText[megaman.getHP()%1000/100], 31 + translation, 6);
   } else {
-    image(numberText[megaman.getHP()%1000/100], 17 + translation, 2);
+    image(numberText[megaman.getHP()%1000/100], 36 + translation, 6);
   }
-
+  megaman.showStatus(translation);
   //Enemy
   if (mettaur.getHP()%10!=1) {
     image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);

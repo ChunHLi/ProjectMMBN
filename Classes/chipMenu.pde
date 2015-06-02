@@ -10,13 +10,19 @@ class ChipMenu {
   PImage chipInterface;
   Animation Cursor = new Animation("../Sprites/chipSelection/01", 2, 10);
   Animation CrossCursor = new Animation("../Sprites/chipSelection/crossSelection/01", 2, 10);
-  PImage crossSelect = loadImage("../
+  PImage crossSelect = loadImage("../Sprites/chipSelection/crossSelection/000.png");
+  PImage heat = loadImage("../Sprites/chipSelection/crossSelection/020.png");
+  PImage notHeat = loadImage("../Sprites/chipSelection/crossSelection/021.png");
+  PImage selectedHeat = loadImage("../Sprites/chipSelection/crossSelection/022.png");
+  PImage slash = loadImage("../Sprites/chipSelection/crossSelection/030.png");
+  PImage notSlash = loadImage("../Sprites/chipSelection/crossSelection/031.png");
+  PImage selectedSlash = loadImage("../Sprites/chipSelection/crossSelection/032.png");
   int cursorIndex;
   int crossCursorIndex;
   float cursorXPos = 10;
   float cursorYPos = 154;
-  float crossCursorXPos = 10;
-  float crossCursorYPos = 12;
+  float crossCursorXPos = 12;
+  float crossCursorYPos = 10;
 
   ChipMenu() {
     tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
@@ -52,12 +58,20 @@ class ChipMenu {
     chipFolder = tutorialFolder;
     chipInterface = loadImage("../Sprites/chipSelection/000.png");
     chipInterface.resize((int)(chipInterface.width*1.5), (int)(chipInterface.height*1.5));
+    crossSelect.resize((int)(crossSelect.width * 1.5),(int)(crossSelect.height * 1.5));
+    heat.resize((int)(heat.width * 1.5),(int)(heat.height * 1.5));
+    notHeat.resize((int)(notHeat.width * 1.5),(int)(notHeat.height * 1.5));
+    selectedHeat.resize((int)(selectedHeat.width * 1.5),(int)(selectedHeat.height * 1.5));
+    slash.resize((int)(slash.width * 1.5),(int)(slash.height * 1.5));
+    notSlash.resize((int)(notSlash.width * 1.5),(int)(notSlash.height * 1.5));
+    selectedSlash.resize((int)(selectedSlash.width * 1.5),(int)(selectedSlash.height * 1.5));
   }
 
   ChipMenu(ArrayList<Chip> folder) {
     chipFolder = folder;
     chipInterface = loadImage("../Sprites/chipSelection/000.png");
     chipInterface.resize((int)(chipInterface.width*1.5), (int)(chipInterface.height*1.5));
+    crossSelect.resize((int)(crossSelect.width * 1.5),(int)(crossSelect.height * 1.5));
   }
 
   void display(boolean doIt) {
@@ -85,37 +99,57 @@ class ChipMenu {
   }
   
   void displayCrossCursor(){
+    image(crossSelect,0,0);
+    if (crossCursorIndex == 0){
+      image(heat,12,12);
+      image(notSlash,12,36);
+    }
+    else{
+      image(notHeat,12,12);
+      image(slash,12,36);
+    }
     CrossCursor.displayCursor(crossCursorXPos, crossCursorYPos,1);
+    
   }
 
   void moveCursorLeft() {
-    cursorXPos -= 24;
-    cursorIndex -= 1;
+    if (cursorIndex != 0 && cursorIndex != 5){
+      cursorXPos -= 24;
+      cursorIndex -= 1;
+    }
   }
 
   void moveCursorRight() {
-    cursorXPos += 24;
-    cursorIndex += 1;
+    if (cursorIndex != 4 && cursorIndex != 7) {
+      cursorXPos += 24;
+      cursorIndex += 1;
+    }
   }
 
   void moveCursorUp() {
-    cursorYPos -= 36;
-    cursorIndex -= 5;
+      cursorYPos -= 36;
+      cursorIndex -= 5;
   }
 
   void moveCursorDown() {
-    cursorYPos += 36;
-    cursorIndex += 5;
+    if (cursorIndex < 3) {
+      cursorYPos += 36;
+      cursorIndex += 5;
+    }
   }
   
   void moveCrossCursorUp(){
-    crossCursorYPos -= 24;
-    crossCursorIndex -= 1;
+    if (crossCursorIndex == 1){
+      crossCursorYPos -= 24;
+      crossCursorIndex -= 1;
+    }
   }
   
   void moveCrossCursorDown(){
-    crossCursorYPos += 24;
-    crossCursorIndex += 1;
+    if (crossCursorIndex == 0){
+      crossCursorYPos += 24;
+      crossCursorIndex += 1;
+    }
   }
 }
 
