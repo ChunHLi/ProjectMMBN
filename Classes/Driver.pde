@@ -12,7 +12,7 @@ boolean[] Keys = {
     //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword
 }; 
 int customCounter;
-playList OST;
+PlayList OST;
 
 Panel[][] Grid = {
   {
@@ -45,10 +45,10 @@ int mettaurTimer;
 boolean mettaurMove;
 Animation customBar;
 AudioPlayer virusBattleTheme;
-ArrayList<virusAttack> virusForce;
+ArrayList<VirusAttack> virusForce;
 ArrayList<Chip> tutorialFolder;
 PImage pause;
-chipAttack attacks;
+ChipAttack attacks;
 
 void setup() {
   size(360, 240);
@@ -77,9 +77,9 @@ void setup() {
   chargeFrame = 0;
   mettaurTimer = 0;
   customBar = new Animation("../Sprites/textArt/text/custom", 5);
-  OST = new playList();
-  virusForce = new ArrayList<virusAttack>(0);
-  attacks = new chipAttack();
+  OST = new PlayList();
+  virusForce = new ArrayList<VirusAttack>(0);
+  attacks = new ChipAttack();
   //tutorialFolder
   Minim minim1 = new Minim(this);
   Minim minim2 = new Minim(this);

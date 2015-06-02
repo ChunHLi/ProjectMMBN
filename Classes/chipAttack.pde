@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class chipAttack{
+public class ChipAttack{
  private PImage bomb = loadImage("../Sprites/battleChipAttack/0.png");
  private boolean[] chips = {
   false
@@ -10,7 +10,7 @@ public class chipAttack{
  private float oX, oY;
  private float xbomb, ybomb, bombTime;
  
- public chipAttack(){
+ public ChipAttack(){
    
    bomb.resize((int)(bomb.width*1.5), (int)(bomb.height*1.5));
  }

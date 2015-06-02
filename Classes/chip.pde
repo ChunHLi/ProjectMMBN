@@ -1,31 +1,31 @@
 class Chip {
-  private int damage;
+  private int damage,chipID,attackType;
   private char letter;
   private String name;
   private PImage icon;
   private PImage chipArt;
   private PImage letterText;
-  private int attackType;
 
   Chip() {
   }
 
-  Chip(int chipID) {
-    icon = loadImage("../Sprites/battleChipIcons/" + chipID + ".png");
+  Chip(int ChipID) {
+    chipID = ChipID;
+    icon = loadImage("../Sprites/battleChipIcons/" + ChipID + ".png");
     icon.resize((int)(icon.width*1.15), (int)(icon.height*1.15));
-    chipArt = loadImage("../Sprites/battleChipArt/schip" + chipID + ".png");
+    chipArt = loadImage("../Sprites/battleChipArt/schip" + ChipID + ".png");
     chipArt.resize((int)(chipArt.width*1.5), (int)(chipArt.height*1.5));
   }
 
-  Chip(int Damage, char Letter, String Name, int chipID, int AttackType) {
+  Chip(int Damage, char Letter, String Name, int ChipID, int AttackType) {
     damage = Damage;
     letter = Letter;
     name = Name;
     letterText = loadImage("../Sprites/textArt/chipCodeText/" + letter + ".png");
     letterText.resize((int)(letterText.width), (int)(letterText.height*.75));
-    icon = loadImage("../Sprites/battleChipIcons/" + chipID + ".png");
+    icon = loadImage("../Sprites/battleChipIcons/" + ChipID + ".png");
     icon.resize((int)(icon.width*1.15), (int)(icon.height*1.15));
-    chipArt = loadImage("../Sprites/battleChipArt/schip" + chipID + ".png");
+    chipArt = loadImage("../Sprites/battleChipArt/schip" + ChipID + ".png");
     chipArt.resize((int)(chipArt.width*1.5), (int)(chipArt.height*1.5));
     attackType = AttackType;
   }

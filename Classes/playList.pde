@@ -1,12 +1,12 @@
 import ddf.minim.*;
 import java.util.*;
 
-class playList{
+class PlayList{
   ArrayList<AudioPlayer> PlayList;
   int currentSong;
   Random r;
   
-  playList(){
+  PlayList(){
     r = new Random();
     currentSong = -1;
     PlayList = new ArrayList<AudioPlayer>(0);

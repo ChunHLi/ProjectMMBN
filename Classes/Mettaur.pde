@@ -36,8 +36,8 @@ public class Mettaur implements Killable {
     }
   }
 
-  public void attack(ArrayList<virusAttack> VirusForce) {
-    VirusForce.add(new virusAttack(panelRow, panelCol - 1, 10, 0));
+  public void attack(ArrayList<VirusAttack> VirusForce) {
+    VirusForce.add(new VirusAttack(panelRow, panelCol - 1, 10, 0));
   }
 
 public void getHurt(Panel[][] Grid){
