@@ -28,6 +28,9 @@ public class Megaman implements Killable {
   Animation AirShot = new Animation("../Sprites/megaman/noCross/17", 5, 1);
   //Vulcan
   Animation Vulcan = new Animation("../Sprites/battleChipAttack/vulcan/00", 8, 2);
+  //Guard
+  Animation Guard = new Animation("../Sprites/battleChipAttack/guard/00", 7);
+  
 
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
@@ -178,6 +181,9 @@ public class Megaman implements Killable {
       }
       if (chip.equals("vulcan")) {
         Vulcan.display(xpos, ypos, invinsibleTimer);
+      }
+      if (chip.equals("guard")) {
+        Guard.display(xpos, ypos, invinsibleTimer);
       }
     }
   }

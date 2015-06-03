@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot, 13 vulcan
+  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot, 13 vulcan, 14 guard
 }; 
 int customCounter;
 PlayList OST;
@@ -28,9 +28,9 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5, 8
+  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5, 8, 7
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
-    //15 airshot, 16 vulcan
+    //15 airshot, 16 vulcan, 17 guard
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -275,6 +275,11 @@ void keyPressed() {
   if (keyCode == 69) {
     if (!currentlyMoving()) {
       Keys[13] = true;
+    }
+  }
+  if (keyCode == 16) {
+    if (!currentlyMoving()) {
+      Keys[14] = true;
     }
   }
   println(keyCode);
@@ -554,6 +559,20 @@ void move() {
         megaman.Vulcan.currentFrame = 0;
         Keys[13] = false;
       }
+    }
+    if (Keys[14]) {
+      if (megaman.Guard.currentFrame < FrameCount[17] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
+      } else if (megaman.Guard.currentFrame == FrameCount[17] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
+        megaman.Guard.currentFrame = 0;
+        if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()){
+         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
+         attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol()); 
+        }
+        Keys[14] = false;
+      }
+      attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol());
     }
     if (megaman.invinsibleTimer > 74) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);

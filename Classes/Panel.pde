@@ -54,7 +54,14 @@ public class Panel {
   public void toggleDangerVirus(){
     dangerForVirus = !dangerForVirus;
   }
-
+  
+  public void setDangerMM(boolean danger){
+   dangerForMM = danger; 
+  }
+  public void setDangerVirus(boolean danger){
+   dangerForVirus = danger; 
+  }
+  
   public boolean isDangerMM() {
     return dangerForMM;
   }

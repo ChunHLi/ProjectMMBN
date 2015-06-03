@@ -6,15 +6,17 @@ public class ChipAttack{
  Animation cEx = new Animation("../Sprites/battleChipAttack/cannon/02", 8);
  Animation bust = new Animation("../Sprites/BusterShot/00", 6);
  Animation spread = new Animation("../Sprites/battleChipAttack/spreader/00", 8);
+ Animation guard = new Animation("../Sprites/battleChipAttack/guard/01", 5);
+ 
  private boolean[] chips = {
-  false, false, false, false, false
-  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread
+  false, false, false, false, false, false
+  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard
  };
  private int[] frames = {
-   6, 8, 6, 8
-   //0 bEx, 1 cEx, 2 cBust, 3 spreader
+   6, 8, 6, 8, 5
+   //0 bEx, 1 cEx, 2 cBust, 3 spreader, guard
  };
- private int panRow, panCol;
+ private int bombRow, bombCol, guardRow, guardCol;
  private float oX, oY;
  private float xbomb, ybomb, bombTime;
  private float xcan, ycan;
@@ -37,10 +39,10 @@ public class ChipAttack{
      }else{
       bombTime = 0; 
       chips[0] = false;
-      if (!grid[panRow][panCol].isDangerVirus()){
-        grid[panRow][panCol].toggleDangerVirus();
+      if (!grid[bombRow][bombCol].isDangerVirus()){
+        grid[bombRow][bombCol].toggleDangerVirus();
       }
-      grid[panRow][panCol].setDamage(10);
+      grid[bombRow][bombCol].setDamage(10);
       chips[1] = true;
      }
    }
@@ -84,7 +86,17 @@ public class ChipAttack{
      chips[4] = false;
      spreadCount = 0; 
     }
-   }  
+   }
+   if (chips[5]){
+     if (guardCol < 6){
+       guard.displayChips(grid[guardRow][guardCol].getLocationX(), grid[guardRow][guardCol].getLocationY());
+       grid[guardRow][guardCol].setDamage(10);
+       grid[guardRow][guardCol].setDangerVirus(true);
+       if (guardCol < 5){
+         guardCol++;
+       }
+     }
+   }
  }
 
  public void change(int index){
@@ -94,8 +106,8 @@ public class ChipAttack{
    if (chip.equals("bomb")){
      oX=xpos + 55;
      oY=ypos - 35;
-     panRow=row;
-     panCol=col+3;
+     bombRow=row;
+     bombCol=col+3;
      chips[0] = true;
    }
    if (chip.equals("cannon")){
@@ -113,6 +125,10 @@ public class ChipAttack{
      yspread = ypos;
      chips[4] = true;
    }
+   if (chip.equals("guard")){
+     guardRow = row;
+     guardCol = col+1;
+     chips[5] = true;
+   }
  }
- 
 }
