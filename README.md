@@ -108,6 +108,10 @@ Change - Log
 
 6/02/15 - Kah Soon Yap - Spreader hit animation works (kinda)
 
+6/02/15 - Kah Soon Yap - Vulcan animation and damage works. Need to find hit animation.
+
+6/02/15 - Kah Soon Yap - Guard animation works. Need to time perfectly to counter. Wave is glitchy.
+
 
 
 To do
