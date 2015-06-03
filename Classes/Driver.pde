@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot
+  false, false, false, false, false, false, false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot, 13 vulcan
 }; 
 int customCounter;
 PlayList OST;
@@ -28,9 +28,9 @@ Panel[][] Grid = {
     }
   };
 int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5
+  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5, 8
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
-    //15 airshot
+    //15 airshot, 16 vulcan
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -270,6 +270,11 @@ void keyPressed() {
   if (keyCode == 71) {
     if (!currentlyMoving()) {
       Keys[12] = true;
+    }
+  }
+  if (keyCode == 69) {
+    if (!currentlyMoving()) {
+      Keys[13] = true;
     }
   }
   println(keyCode);
@@ -534,6 +539,20 @@ void move() {
           }
         }
         Keys[12] = false;
+      }
+    }
+    if (Keys[13]) {
+      if (megaman.Vulcan.currentFrame < FrameCount[16] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "vulcan");
+        if (megaman.Vulcan.currentFrame > 1 && megaman.Vulcan.currentFrame % 2 == 0){
+          if (mettaur.getRow() == megaman.getRow()){
+           mettaur.hurt(10); 
+          }
+        }
+      } else if (megaman.Vulcan.currentFrame == FrameCount[16] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "vulcan");
+        megaman.Vulcan.currentFrame = 0;
+        Keys[13] = false;
       }
     }
     if (megaman.invinsibleTimer > 74) {

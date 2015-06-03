@@ -26,6 +26,8 @@ public class Megaman implements Killable {
   Animation Throw = new Animation("../Sprites/megaman/noCross/06", 6, 2);
   //Airshot
   Animation AirShot = new Animation("../Sprites/megaman/noCross/17", 5, 1);
+  //Vulcan
+  Animation Vulcan = new Animation("../Sprites/battleChipAttack/vulcan/00", 8, 2);
 
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
@@ -144,19 +146,19 @@ public class Megaman implements Killable {
   public void display(float xpos, float ypos, int mode, String chip) {
     if (mode == 0) {
       if (chip.equals("sword")) {
-        Sword.displayChips(xpos, ypos);
+        Sword.display(xpos, ypos, invinsibleTimer);
       }
       if (chip.equals("widesword")) {
-        WideSword.displayChips(xpos-20, ypos+33);
+        WideSword.display(xpos-20, ypos+33, invinsibleTimer);
       }
       if (chip.equals("longsword")) {
-        LongSword.displayChips(xpos-11, ypos+5);
+        LongSword.display(xpos-11, ypos+5, invinsibleTimer);
       }
       if (chip.equals("lifesword")) {
-        LifeSword.displayChips(xpos-4, ypos+39);
+        LifeSword.display(xpos-4, ypos+39, invinsibleTimer);
       }
       if (chip.equals("cannon")) {
-        Cannon.displayChips(xpos, ypos);
+        Cannon.display(xpos, ypos, invinsibleTimer);
         if (Cannon.currentFrame == 4 || Cannon.currentFrame == 5) {
           Blast.displayChips(xpos+85, ypos-27);
         } else if (Cannon.currentFrame == 6) {
@@ -166,13 +168,16 @@ public class Megaman implements Killable {
         }
       }
       if (chip.equals("spreader")) {
-        Spreader.displayChips(xpos, ypos);
+        Spreader.display(xpos, ypos, invinsibleTimer);
       }
       if (chip.equals("bomb")) {
-        Throw.displayChips(xpos, ypos);
+        Throw.display(xpos, ypos, invinsibleTimer);
       }
       if (chip.equals("airshot")) {
-        AirShot.displayChips(xpos, ypos);
+        AirShot.display(xpos, ypos, invinsibleTimer);
+      }
+      if (chip.equals("vulcan")) {
+        Vulcan.display(xpos, ypos, invinsibleTimer);
       }
     }
   }
