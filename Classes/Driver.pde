@@ -132,7 +132,7 @@ void draw() {
   mettaurMove();
   attacks.move(Grid);
   mettaur.getHurt(Grid);
-  protoman.sequence(Grid,MODE);
+  protoman.sequence(Grid,MODE,megaman);
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
