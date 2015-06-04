@@ -125,23 +125,21 @@ Change - Log
 To do
 =========================================================================================================================
 
-- For Shawn (due 5/28/15) - Create flashing tiles.
+- For Shawn (due 6/4/15) - Make progress on Bass AI.
+- For Kah Soon (due 6/4/15) - Get most of the animations of the second folder's chips done.
+- For Kah Soon (due 6/4/15) - Fix animations for old chips.
+- For Shawn (due 6/4/15) - Program the program advance method.
 
-- For Shawn (due 5/28/15) - Create Megaman hurt methods and other stuff relating to it. 
+Future major goals (pre June 8th):
+1. Finish Bass AI.
+2. Finish All Chip Animations for Folder 2.
+3. Crosses (2).
+4. Add basic sound effects.
+5. Beautify the stuff.
 
-- For Kah Soon (due 5/28/15) - Iron out pause bug
-
-- For Anyone (due 5/28/15) - Decompose boss spritesheets.
-
-- For Anyone (due 5/29/15) - Start Protoman and Bass classes.
-
-- For Anyone (due 5/29/15) - Delete unnecessary files.
-
-- Future Goals:
- *1. Choose standard chips to implement.
-  2. Finish Chip and ChipMenu class.
-  3. Add methods to implement chip effects.
-  4. Program protoman and bass AI.
-  5. Program crosses.
-  6. Make transition between battles.
-  7. Beautification of code and game.
+Future major goals (pre June 15th):
+1. Finish 3rd folder.
+2. Finish Protoman AI.
+3. Finish rest of crosses.
+4. Add more sound effects.
+5. Beautify the stuff.
