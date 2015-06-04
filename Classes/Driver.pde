@@ -32,16 +32,16 @@ Panel[][] Grid = {
     }
   };
 boolean[] ChipKey = {
-  false, false, false, false, false, false, false, false, false, false, false, false, false, false
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade
+  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade, 14 stepsword
 };
 boolean[] holder = {
  false, false
  //0invis, 1barrier 
 };
 int[] chipCount = {
-  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade
+  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10, 8
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade, 14stepsword
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -335,7 +335,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      ChipKey[13] = true;
+      ChipKey[14] = true;
     }
   }
   
@@ -729,6 +729,31 @@ void move() {
         Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
         Grid[megaman.getRow()][megaman.getCol()+2].setDamage(80);
         ChipKey[13] = false;
+      }
+    }
+    if (ChipKey[14]) {
+      if (megaman.getCol() < 3){
+       megaman.setCol(megaman.getCol()+3); 
+      }
+      if (megaman.StepSword.currentFrame < chipCount[14] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "stepsword");
+      } else if (megaman.StepSword.currentFrame == chipCount[14] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "stepsword");
+        megaman.StepSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        try{
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        try{
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        if (megaman.getCol() > 2){
+       megaman.setCol(megaman.getCol()-3); 
+      }
+        ChipKey[14] = false;
       }
     }
     megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
