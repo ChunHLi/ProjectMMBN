@@ -132,10 +132,7 @@ void draw() {
   mettaurMove();
   attacks.move(Grid);
   mettaur.getHurt(Grid);
-<<<<<<< HEAD
   protoman.sequence(Grid,MODE);
-=======
->>>>>>> origin/HEAD
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
@@ -348,12 +345,9 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-<<<<<<< HEAD
       holder[2] = true;
-=======
       navi[0] = true;
       MODE = 3;
->>>>>>> origin/HEAD
     }
   }
   
