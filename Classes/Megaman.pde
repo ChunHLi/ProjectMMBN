@@ -1,7 +1,8 @@
 public class Megaman implements Killable {
-  int HP, buster, panelRow, panelCol, currentAnimation, invinsibleTimer, status, turns;
+  int HP, buster, panelRow, panelCol, currentAnimation, invinsibleTimer, status, turns, bar, bCount;
   String cross;
   boolean invis;
+  boolean barrier;
 
   Animation Standing = new Animation("../Sprites/megaman/noCross/01", 1);
   Animation Hurt = new Animation("../Sprites/megaman/noCross/02", 8);
@@ -12,7 +13,8 @@ public class Megaman implements Killable {
   Animation ChargeBlue = new Animation("../Sprites/chargingBuster/01", 7);
   Animation ChargePurp = new Animation("../Sprites/chargingBuster/02", 11);
 
-
+  //Barrier
+  Animation Barrier = new Animation("../Sprites/battleChipAttack/auras/", 4);
   //Swords
   Animation Sword = new Animation("../Sprites/battleChipAttack/slash/00", 7, 1);
   Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/04", 7, 1);
@@ -198,16 +200,30 @@ public class Megaman implements Killable {
    invinsibleTimer = 180;
    invis = true; 
   }
+  
+  public void barrier(float xpos, float ypos){
+   if (barrier){
+    Barrier.displayF(xpos-20, ypos+10, bCount % 4);
+    bCount++;
+   }
+  }
 
   public void getHurt(Panel[][] Grid) {
     if (Grid[panelRow][panelCol].isDangerMM() && invinsibleTimer == 0) {
-      hurt(Grid[panelRow][panelCol].getDamage());
-      invinsibleTimer = 90;
+      if (!barrier){
+        hurt(Grid[panelRow][panelCol].getDamage());
+        invinsibleTimer = 90;
+      } else {
+        bar-= Grid[panelRow][panelCol].getDamage(); 
+      }
     } else if (invinsibleTimer > 0) {
       invinsibleTimer -= 1;
     }
     if (invinsibleTimer == 0){
      invis = false; 
+    }
+    if (bar <= 0){
+     barrier = false; 
     }
   }
 

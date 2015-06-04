@@ -118,6 +118,10 @@ Change - Log
 
 6/02/15 - Shawn Li - Everything is coming along just fine, bugs being fixed, etc.
 
+6/03/15 - Kah Soon Yap - Recover is done. Heals.
+
+6/03/15 - Kah Soon Yap - Invisible is glitchy atm.
+
 6/03/15 - Shawn Li - Chips now display during battle as well.
 
 6/03/15 - Shawn Li - Chips now activate when A/Z is pressed.

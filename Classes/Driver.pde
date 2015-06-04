@@ -8,8 +8,8 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 recovery, 6 invisible
+  false, false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 recovery, 6 invisible, 7 barrier
 };
 int[] FrameCount = {
   1, 8, 4, 4, 5, 4, 7, 13, 6
@@ -324,7 +324,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      ChipKey[9] = true;
+      Keys[7] = true;
     }
   }
   
@@ -513,6 +513,12 @@ void move() {
       megaman.useInvis();
       Keys[6] = false;
     }
+    if (Keys[7]){
+      megaman.barrier = true;
+      megaman.bar = 50;
+      megaman.bCount = 0;
+      Keys[7] = false;
+    }
     if (ChipKey[0]) {
       if (megaman.Sword.currentFrame < chipCount[0] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
@@ -631,12 +637,14 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
         megaman.Guard.currentFrame = 0;
         if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()){
-         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();*/
+         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
          attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol()); 
         }
         ChipKey[9] = false;
       }
-    }/*
+    }
+    megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+    /*
     if (megaman.invis){
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
     }else{*/
@@ -651,6 +659,7 @@ void move() {
     if (!currentlyMoving()) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
     }
+    
   }
   //this tells megaman to freeze when mode is 1 which is when you are selecting your chips.
   if (MODE > 0) {
