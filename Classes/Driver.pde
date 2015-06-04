@@ -324,7 +324,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      Keys[6] = true;
+      ChipKey[9] = true;
     }
   }
   
@@ -631,23 +631,22 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
         megaman.Guard.currentFrame = 0;
         if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()){
-         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
+         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();*/
          attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol()); 
         }
         ChipKey[9] = false;
       }
-      attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol());
-    }
+    }/*
     if (megaman.invis){
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
-    }else{
+    }else{*/
       if (megaman.invinsibleTimer > 74) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);
       }
       if (megaman.invinsibleTimer == 74) {
         megaman.Hurt.currentFrame = 0;
       }
-    }
+    //}
     //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     if (!currentlyMoving()) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);

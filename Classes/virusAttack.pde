@@ -25,7 +25,7 @@ public class VirusAttack{
           mettaurAttack.currentFrame = 1;
           panelCol -= 1;
         }
-        mettaurAttack.displayMettaurAttack(grid[panelRow][panelCol].getLocationX(),grid[panelRow][panelCol].getLocationY());
+        mettaurAttack.displayMettaurAttack(grid[panelRow][panelCol].getLocationX(),grid[panelRow][panelCol].getLocationY(), -60);
       }
       else if (panelCol >= -2){
         image(mettaurAttack.spriteFrames[mettaurAttack.currentFrame + 2],grid[panelRow][0].getLocationX(),grid[panelRow][0].getLocationY() - mettaurAttack.spriteFrames[mettaurAttack.currentFrame + 2].height + 5);

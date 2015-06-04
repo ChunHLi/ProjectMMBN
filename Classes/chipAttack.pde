@@ -89,13 +89,20 @@ public class ChipAttack{
     }
    }
    if (chips[5]){
-     if (guardCol < 6){
-       guard.displayChips(grid[guardRow][guardCol].getLocationX(), grid[guardRow][guardCol].getLocationY());
+     if (guardCol < 5){
        grid[guardRow][guardCol].setDamage(10);
        grid[guardRow][guardCol].setDangerVirus(true);
-       if (guardCol < 5){
+       if (guard.currentFrame == guard.spriteCount){
+         guard.currentFrame = 1;
          guardCol++;
        }
+       guard.displayMettaurAttack(grid[guardRow][guardCol].getLocationX(), grid[guardRow][guardCol].getLocationY(), 60);
+     } else if(guardCol<=8){
+      image(guard.spriteFrames[guard.currentFrame + 2],grid[guardRow][5].getLocationX(),grid[guardRow][5].getLocationY() - guard.spriteFrames[guard.currentFrame + 2].height + 5);
+      grid[guardRow][5].toggleDangerVirus();
+      guardCol++;
+     } else if (guardCol == 6){
+      chips[5] = false;
      }
    }
  }

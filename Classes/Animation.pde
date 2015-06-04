@@ -99,10 +99,10 @@ class Animation {
     
   }
   
-  void displayMettaurAttack(float xpos, float ypos){
+  void displayMettaurAttack(float xpos, float ypos, int val){
     if (currentFrame == spriteCount - 1){
       image(spriteFrames[currentFrame],xpos,ypos - spriteFrames[currentFrame].height + 5);
-      image(spriteFrames[0],xpos - 60,ypos - spriteFrames[0].height + 5);
+      image(spriteFrames[0],xpos + val,ypos - spriteFrames[0].height + 5);
       currentFrame += 1;
     }
     else if (currentFrame == 0){
