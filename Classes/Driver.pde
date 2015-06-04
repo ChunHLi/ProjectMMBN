@@ -113,7 +113,6 @@ void draw() {
   image(panels, width/2 - panels.width/2, height/2);
   showPanelDanger();
   megaman.getHurt(Grid);
-  mettaur.getHurt(Grid);
   if (MODE == 0) {
     showHP(0);
   }
@@ -123,6 +122,7 @@ void draw() {
   charge();
   mettaurMove();
   attacks.move(Grid);
+  mettaur.getHurt(Grid);
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
@@ -149,6 +149,7 @@ void draw() {
     }
   }
   OST.playTheList();
+  reset();
 }
 
 void mousePressed() {
@@ -334,7 +335,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      holder[0] = true;
+      ChipKey[5] = true;
     }
   }
   
@@ -535,6 +536,8 @@ void move() {
       } else if (megaman.Sword.currentFrame == chipCount[0] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
         megaman.Sword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(60);
         ChipKey[0] = false;
       }
     }
@@ -544,6 +547,16 @@ void move() {
       } else if (megaman.WideSword.currentFrame == chipCount[1] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
         megaman.WideSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        try{
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        try{
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
         ChipKey[1] = false;
       }
     }
@@ -553,6 +566,10 @@ void move() {
       } else if (megaman.LongSword.currentFrame == chipCount[2] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
         megaman.LongSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDamage(80);
         ChipKey[2] = false;
       }
     }
@@ -562,6 +579,22 @@ void move() {
       } else if (megaman.LifeSword.currentFrame == chipCount[3] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
         megaman.LifeSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(600);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDamage(600);
+        try{
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(600);
+        Grid[megaman.getRow()+1][megaman.getCol()+2].setDangerVirus(true);
+        Grid[megaman.getRow()+1][megaman.getCol()+2].setDamage(600);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        try{
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(600);
+        Grid[megaman.getRow()-1][megaman.getCol()+2].setDangerVirus(true);
+        Grid[megaman.getRow()-1][megaman.getCol()+2].setDamage(600);
+        } catch (ArrayIndexOutOfBoundsException e){}
         ChipKey[3] = false;
       }
     }
@@ -591,7 +624,7 @@ void move() {
             for (int y = mettaur.getCol ()-1; y < 6; y++) {
               try {
                 Grid[x][y].setDamage(40);
-                Grid[x][y].toggleDangerVirus();
+                Grid[x][y].setDangerVirus(true);
               }
               catch(ArrayIndexOutOfBoundsException e) {
               }
@@ -836,5 +869,14 @@ void showHP(int translation) {
       image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
     }
   }
+}
+
+void reset(){
+ for (int i = 0; i < 3; i++){
+  for (int j = 3; j < 6; j++){
+   Grid[i][j].setDangerVirus(false);
+   Grid[i][j].setDamage(0);
+  }
+ } 
 }
 
