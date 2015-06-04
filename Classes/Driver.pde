@@ -32,16 +32,16 @@ Panel[][] Grid = {
     }
   };
 boolean[] ChipKey = {
-  false, false, false, false, false, false, false, false, false, false, false, false
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3
+  false, false, false, false, false, false, false, false, false, false, false, false, false, false
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade
 };
 boolean[] holder = {
  false, false
  //0invis, 1barrier 
 };
 int[] chipCount = {
-  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3
+  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -335,7 +335,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      ChipKey[5] = true;
+      ChipKey[13] = true;
     }
   }
   
@@ -548,14 +548,14 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
         megaman.WideSword.currentFrame = 0;
         Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
-        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(60);
         try{
         Grid[megaman.getRow()+1][megaman.getCol()+1].setDangerVirus(true);
-        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(60);
         } catch (ArrayIndexOutOfBoundsException e){}
         try{
         Grid[megaman.getRow()-1][megaman.getCol()+1].setDangerVirus(true);
-        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(60);
         } catch (ArrayIndexOutOfBoundsException e){}
         ChipKey[1] = false;
       }
@@ -567,9 +567,9 @@ void move() {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
         megaman.LongSword.currentFrame = 0;
         Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
-        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(60);
         Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
-        Grid[megaman.getRow()][megaman.getCol()+2].setDamage(80);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDamage(60);
         ChipKey[2] = false;
       }
     }
@@ -697,6 +697,38 @@ void move() {
          attacks.setXY("guard3", 0, 0, megaman.getRow(), megaman.getCol()); 
         }
         ChipKey[11] = false;
+      }
+    }
+    if (ChipKey[12]) {
+      if (megaman.WideSword.currentFrame < chipCount[12] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
+      } else if (megaman.WideSword.currentFrame == chipCount[12] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
+        megaman.WideSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        try{
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()+1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        try{
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()-1][megaman.getCol()+1].setDamage(80);
+        } catch (ArrayIndexOutOfBoundsException e){}
+        ChipKey[12] = false;
+      }
+    }
+    if (ChipKey[13]) {
+      if (megaman.LongSword.currentFrame < chipCount[13] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+      } else if (megaman.LongSword.currentFrame == chipCount[13] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.LongSword.currentFrame = 0;
+        Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+1].setDamage(80);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
+        Grid[megaman.getRow()][megaman.getCol()+2].setDamage(80);
+        ChipKey[13] = false;
       }
     }
     megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
@@ -873,9 +905,11 @@ void showHP(int translation) {
 
 void reset(){
  for (int i = 0; i < 3; i++){
-  for (int j = 3; j < 6; j++){
+  for (int j = 0; j < 6; j++){
    Grid[i][j].setDangerVirus(false);
-   Grid[i][j].setDamage(0);
+   if (j > 2){
+     Grid[i][j].setDamage(0);
+   }
   }
  } 
 }
