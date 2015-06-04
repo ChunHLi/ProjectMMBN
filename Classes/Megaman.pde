@@ -37,7 +37,12 @@ public class Megaman implements Killable {
   Animation Guard3 = new Animation("../Sprites/battleChipAttack/guard/02", 7);
   //Recover
   Animation Recover = new Animation("../Sprites/battleChipAttack/recovery/00", 6);
-
+  //Protoman
+  Animation Protoman1 = new Animation("../Sprites/battleChipAttack/navi/Protoman/00", 10);
+  Animation Protoman2 = new Animation("../Sprites/battleChipAttack/navi/Protoman/01", 3);
+  Animation Protoman3 = new Animation("../Sprites/battleChipAttack/navi/Protoman/02", 11);
+  Animation Protoman4 = new Animation("../Sprites/battleChipAttack/navi/Protoman/03", 3);
+  
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
   PImage heatNormal = loadImage("../Sprites/megaman/heatNormal.png");
