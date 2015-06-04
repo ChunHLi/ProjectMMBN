@@ -8,14 +8,23 @@ public class ChipLinkedList {
   }
 
   void display(int mode) {
-    if (mode == 0){
-      
-    }
     if (mode == 1){
       int counter = 0;
       while (counter < selected.size()){
         image(selected.get(counter).icon, 147, 39 + (counter * 24));
         counter += 1;
+      }
+    }
+  }
+  
+  void displayBattle(int mode, float xpos, float ypos){
+    if (mode == 0){
+      int counter = selected.size() - 1;
+      while (counter >= 0){
+        PImage clone = selected.get(counter).icon.get();
+        clone.resize((int)(clone.width * 1.25), (int)(clone.height * 1.25));
+        image(clone, xpos - (counter * 2) + 25 , ypos - (counter * 2) - 85);
+        counter -= 1;
       }
     }
   }

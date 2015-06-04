@@ -133,6 +133,9 @@ void draw() {
   mettaurTimer++;
   if (MODE == 0) {
     customBar.displayCustom(width/5, 20);
+    //if (!currentlyMoving()){
+      Chips.selected.displayBattle(MODE,Grid[megaman.getRow()][megaman.getCol()].getLocationX(),Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+    //}
   }
   if (virusForce.size() > 0) {
     int counter = 0;
@@ -197,15 +200,48 @@ void keyPressed() {
     modeChanged = true;
     customBar.customBarCount = 0;
     customBar.currentFrame = 0;
-    Chips.throwOutChips();
     Chips.empty();
   }
   if (keyCode == 81 && MODE == 1) {
     Chips.shuffleChips();
   }
   // Z (A on GBA)
-  if (keyCode == 90 && MODE == 1) {
-    Chips.selectChips();
+  if (keyCode == 90) {
+    if (MODE == 1){
+      Chips.selectChips();
+    }
+    if (MODE == 0){
+      if (Chips.selected.size() > 0){
+        if (Chips.selected.get(0).chipID == 70){
+          ChipKey[0] = true;
+        }
+        if (Chips.selected.get(0).chipID == 71){
+          ChipKey[1] = true;
+        }
+        if (Chips.selected.get(0).chipID == 72){
+          ChipKey[2] = true;
+        }
+        if (Chips.selected.get(0).chipID == 1){
+          ChipKey[4] = true;
+        }
+        if (Chips.selected.get(0).chipID == 9){
+          ChipKey[5] = true;
+        }
+        if (Chips.selected.get(0).chipID == 58){
+          ChipKey[6] = true;
+        }
+        if (Chips.selected.get(0).chipID == 4){
+          ChipKey[7] = true;
+        }
+        if (Chips.selected.get(0).chipID == 91){
+          ChipKey[9] = true;
+        }
+        if (Chips.selected.get(0).chipID == 5){
+          ChipKey[8] = true;
+        }
+        Chips.selected.remove(0);
+      }
+    }
   }
   // X (B on GBA)
   if (keyCode == 88) {
@@ -233,6 +269,7 @@ void keyPressed() {
       modeChanged = true;
       displayMenu = false;
       customBar.customBarCount = 0;
+      Chips.throwOutChips();
     }
   }
   if (keyCode == 32) {
@@ -321,6 +358,11 @@ boolean currentlyMoving() {
   }
   for (int i = 0; i < Keys.length; i++) {
     if (Keys[i]) {
+      return true;
+    }
+  }
+  for (int i = 0; i < ChipKey.length; i++){
+    if (ChipKey[i]) {
       return true;
     }
   }
