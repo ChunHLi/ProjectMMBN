@@ -100,6 +100,10 @@ Change - Log
 
 6/01/15 - Kah Soon Yap - Bomb now does damage.
 
+6/01/15 - Shawn Li - Chips can now be selected.
+
+6/01/15 - Shawn Li - Chips now display correctly according to Chip selection system.
+
 6/02/15 - Kah Soon Yap - Cannon hit animations done
 
 6/02/15 - Kah Soon Yap - Bomb explosion done
@@ -112,7 +116,11 @@ Change - Log
 
 6/02/15 - Kah Soon Yap - Guard animation works. Need to time perfectly to counter. Wave is glitchy.
 
+6/02/15 - Shawn Li - Everything is coming along just fine, bugs being fixed, etc.
 
+6/03/15 - Shawn Li - Chips now display during battle as well.
+
+6/03/15 - Shawn Li - Chips now activate when A/Z is pressed.
 
 To do
 =========================================================================================================================
