@@ -44,6 +44,12 @@ int[] chipCount = {
   7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10, 8
   //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade, 14stepsword
 };
+
+boolean[] navi = {
+  false
+  //0 proto
+};
+
 PImage[] numberText = new PImage[10];
 boolean moved;
 boolean modeChanged;
@@ -126,7 +132,10 @@ void draw() {
   mettaurMove();
   attacks.move(Grid);
   mettaur.getHurt(Grid);
+<<<<<<< HEAD
   protoman.sequence(Grid,MODE);
+=======
+>>>>>>> origin/HEAD
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
@@ -339,7 +348,12 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
+<<<<<<< HEAD
       holder[2] = true;
+=======
+      navi[0] = true;
+      MODE = 3;
+>>>>>>> origin/HEAD
     }
   }
   
@@ -792,6 +806,43 @@ void move() {
   //this tells megaman to freeze when mode is 1 which is when you are selecting your chips.
   if (MODE > 0) {
     megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), megaman.currentAnimation, 1);
+    if (navi[0]){
+      if (megaman.Protoman1.currentFrame < 10){
+        megaman.Protoman1.displayChips(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+        if (megaman.Protoman1.currentFrame == 9){
+          if (megaman.Protoman2.currentFrame < 3){
+            megaman.Protoman2.displayChips(Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationY());
+          }
+          if (megaman.Protoman2.currentFrame == 2){
+            if (megaman.Protoman3.currentFrame < 11){
+              megaman.Protoman3.displayChips(Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationY());
+            }
+            if (megaman.Protoman3.currentFrame == 10){
+             Grid[mettaur.getRow()][mettaur.getCol()].setDangerVirus(true);
+             Grid[mettaur.getRow()][mettaur.getCol()].setDamage(100);
+             try{
+               Grid[mettaur.getRow()-1][mettaur.getCol()].setDangerVirus(true);
+               Grid[mettaur.getRow()-1][mettaur.getCol()].setDamage(100);
+             } catch (ArrayIndexOutOfBoundsException e){}
+             try{
+               Grid[mettaur.getRow()+1][mettaur.getCol()].setDangerVirus(true);
+               Grid[mettaur.getRow()+1][mettaur.getCol()].setDamage(100);
+             } catch (ArrayIndexOutOfBoundsException e){}
+             if  (megaman.Protoman4.currentFrame < 3){
+               megaman.Protoman4.displayChips(Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationY());
+             }
+             if (megaman.Protoman4.currentFrame == 2){
+              megaman.Protoman1.currentFrame = 0;
+              megaman.Protoman2.currentFrame = 0;
+              megaman.Protoman3.currentFrame = 0;
+              megaman.Protoman4.currentFrame = 0;
+              MODE = 0;
+             }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
