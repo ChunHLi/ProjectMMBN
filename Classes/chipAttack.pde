@@ -7,14 +7,15 @@ public class ChipAttack{
  Animation bust = new Animation("../Sprites/BusterShot/00", 6);
  Animation spread = new Animation("../Sprites/battleChipAttack/spreader/00", 8);
  Animation guard = new Animation("../Sprites/battleChipAttack/guard/01", 5);
+ Animation firehit = new Animation ("../Sprites/battleChipAttack/firehit/00", 4);
  
  private boolean[] chips = {
-  false, false, false, false, false, false
-  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard
+  false, false, false, false, false, false, false
+  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard, 6 firehit
  };
  private int[] frames = {
-   6, 8, 6, 8, 5
-   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard
+   6, 8, 6, 8, 5, 4
+   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard, 5 firehit
  };
  private int bombRow, bombCol, guardRow, guardCol;
  private float oX, oY;
@@ -25,6 +26,7 @@ public class ChipAttack{
  private int spreadCount;
  private float xrec, yrec;
  private int guardDMG;
+ private float xfire, yfire;
  
  public ChipAttack(){
    
@@ -106,6 +108,14 @@ public class ChipAttack{
       chips[5] = false;
      }
    }
+   if (chips[6]){
+     if (firehit.currentFrame < frames[5]-1){
+       firehit.displayChips(xfire-15,yfire);
+     } else{
+       chips[6] = false;
+       firehit.currentFrame = 0;
+     }
+   }
  }
 
  public void change(int index){
@@ -145,6 +155,11 @@ public class ChipAttack{
      guardCol = col+1;
      chips[5] = true;
      guardDMG = 50;
+   }
+   if (chip.equals("firehit")){
+     xfire = xpos;
+     yfire = ypos;
+     chips[6] = true;
    }
  }
 }

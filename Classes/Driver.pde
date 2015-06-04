@@ -36,8 +36,8 @@ boolean[] ChipKey = {
   //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade, 14 stepsword
 };
 boolean[] holder = {
- false, false
- //0invis, 1barrier 
+ false, false, false
+ //0invis, 1barrier, 2firehit
 };
 int[] chipCount = {
   7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10, 8
@@ -61,6 +61,7 @@ ArrayList<VirusAttack> virusForce;
 ArrayList<Chip> tutorialFolder;
 PImage pause;
 ChipAttack attacks;
+boolean targetFound;
 
 void setup() {
   size(360, 240);
@@ -335,7 +336,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      ChipKey[14] = true;
+      holder[2] = true;
     }
   }
   
@@ -755,6 +756,17 @@ void move() {
       }
         ChipKey[14] = false;
       }
+    }
+    if (holder[2]){
+      for (int i = 0; i < 3; i ++){
+       for (int j = 3; j < 6; j++){
+         if (mettaur.getCol() == j && mettaur.getRow() == i){
+          attacks.setXY("firehit", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0); 
+         }
+       }
+      }
+      mettaur.hurt(40);
+      holder[2] = false; 
     }
     megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
     /*
