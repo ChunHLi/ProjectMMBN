@@ -126,6 +126,8 @@ Change - Log
 
 6/03/15 - Shawn Li - Chips now activate when A/Z is pressed.
 
+6/03/15 - Kah Soon Yap - Barrier works
+
 To do
 =========================================================================================================================
 
