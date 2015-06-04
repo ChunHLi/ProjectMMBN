@@ -32,12 +32,16 @@ Panel[][] Grid = {
     }
   };
 boolean[] ChipKey = {
-  false, false, false, false, false, false, false, false, false, false, false, false, false
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 12 invisible, 11 barrier
+  false, false, false, false, false, false, false, false, false, false, false, false
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3
+};
+boolean[] holder = {
+ false, false
+ //0invis, 1barrier 
 };
 int[] chipCount = {
-  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6
-  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery
+  7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -330,7 +334,7 @@ void keyPressed() {
   }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      Keys[7] = true;
+      holder[0] = true;
     }
   }
   
@@ -515,15 +519,15 @@ void move() {
         ChipKey[10] = false;
       }
     }
-    if (ChipKey[12]){
+    if (holder[1]){
       megaman.useInvis();
-      ChipKey[12] = false;
+      holder[1] = false;
     }
-    if (ChipKey[11]){
+    if (holder[0]){
       megaman.barrier = true;
       megaman.bar = 50;
       megaman.bCount = 0;
-      ChipKey[11] = false;
+      holder[0] = false;
     }
     if (ChipKey[0]) {
       if (megaman.Sword.currentFrame < chipCount[0] - 1) {
@@ -647,6 +651,19 @@ void move() {
          attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol()); 
         }
         ChipKey[9] = false;
+      }
+    }
+    if (ChipKey[11]) {
+      if (megaman.Guard3.currentFrame < chipCount[11] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard3");
+      } else if (megaman.Guard3.currentFrame == chipCount[11] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard3");
+        megaman.Guard3.currentFrame = 0;
+        if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()){
+         Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
+         attacks.setXY("guard3", 0, 0, megaman.getRow(), megaman.getCol()); 
+        }
+        ChipKey[11] = false;
       }
     }
     megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());

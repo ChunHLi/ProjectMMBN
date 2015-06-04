@@ -24,6 +24,7 @@ public class ChipAttack{
  private float xspread, yspread;
  private int spreadCount;
  private float xrec, yrec;
+ private int guardDMG;
  
  public ChipAttack(){
    
@@ -90,7 +91,7 @@ public class ChipAttack{
    }
    if (chips[5]){
      if (guardCol < 5){
-       grid[guardRow][guardCol].setDamage(10);
+       grid[guardRow][guardCol].setDamage(guardDMG);
        grid[guardRow][guardCol].setDangerVirus(true);
        if (guard.currentFrame == guard.spriteCount){
          guard.currentFrame = 1;
@@ -137,6 +138,13 @@ public class ChipAttack{
      guardRow = row;
      guardCol = col+1;
      chips[5] = true;
+     guardDMG = 10;
+   }
+   if (chip.equals("guard3")){
+     guardRow = row;
+     guardCol = col+1;
+     chips[5] = true;
+     guardDMG = 50;
    }
  }
 }

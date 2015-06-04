@@ -33,6 +33,7 @@ public class Megaman implements Killable {
   Animation Vulcan = new Animation("../Sprites/battleChipAttack/vulcan/00", 8, 2);
   //Guard
   Animation Guard = new Animation("../Sprites/battleChipAttack/guard/00", 7);
+  Animation Guard3 = new Animation("../Sprites/battleChipAttack/guard/02", 7);
   //Recover
   Animation Recover = new Animation("../Sprites/battleChipAttack/recovery/00", 6);
 
@@ -188,6 +189,9 @@ public class Megaman implements Killable {
       }
       if (chip.equals("guard")) {
         Guard.display(xpos, ypos, invinsibleTimer);
+      }
+      if (chip.equals("guard3")) {
+        Guard3.display(xpos, ypos, invinsibleTimer);
       }
       if (chip.equals("recover")){
         Standing.display(xpos, ypos, invinsibleTimer);
