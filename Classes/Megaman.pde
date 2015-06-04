@@ -20,6 +20,7 @@ public class Megaman implements Killable {
   Animation WideSword = new Animation("../Sprites/battleChipAttack/slash/04", 7, 1);
   Animation LongSword = new Animation("../Sprites/battleChipAttack/slash/01", 10, 1);
   Animation LifeSword = new Animation("../Sprites/battleChipAttack/slash/03", 10, 1);
+  Animation StepSword = new Animation("../Sprites/battleChipAttack/slash/05", 8, 1);
   //Cannon
   Animation Cannon = new Animation("../Sprites/battleChipAttack/cannon/00", 10, 1);
   Animation Blast = new Animation("../Sprites/battleChipAttack/cannon/01", 4, 1);
@@ -158,6 +159,9 @@ public class Megaman implements Killable {
       }
       if (chip.equals("widesword")) {
         WideSword.display(xpos-20, ypos+33, invinsibleTimer);
+      }
+      if (chip.equals("stepsword")) {
+        StepSword.display(xpos-20, ypos+33, invinsibleTimer);
       }
       if (chip.equals("longsword")) {
         LongSword.display(xpos-11, ypos+5, invinsibleTimer);
