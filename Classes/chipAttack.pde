@@ -14,7 +14,7 @@ public class ChipAttack{
  };
  private int[] frames = {
    6, 8, 6, 8, 5
-   //0 bEx, 1 cEx, 2 cBust, 3 spreader, guard
+   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard
  };
  private int bombRow, bombCol, guardRow, guardCol;
  private float oX, oY;
@@ -23,6 +23,7 @@ public class ChipAttack{
  private float xbust, ybust;
  private float xspread, yspread;
  private int spreadCount;
+ private float xrec, yrec;
  
  public ChipAttack(){
    

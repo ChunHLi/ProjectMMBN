@@ -8,9 +8,13 @@ PImage enteringChipMenu;
 float xpos;
 float ypos;
 boolean[] Keys = {
-  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
-    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 widesword, 6 cannon, 7 spreader, 8 bomb, 9 sword, 10 longsword, 11 lifesword, 12 airshot, 13 vulcan, 14 guard
-}; 
+  false, false, false, false, false, false, false
+    //0 left, 1 right, 2 up, 3 down, 4 buster, 5 recovery, 6 invisible
+};
+int[] FrameCount = {
+  1, 8, 4, 4, 5, 4, 7, 13, 6
+    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 recover
+};
 int customCounter;
 PlayList OST;
 
@@ -27,10 +31,13 @@ Panel[][] Grid = {
     new Panel(4, 216), new Panel(64, 216), new Panel(124, 216), new Panel(184, 216), new Panel(244, 216), new Panel(304, 216)
     }
   };
-int[] FrameCount = {
-  1, 8, 4, 4, 5, 4, 7, 13, 7, 10, 8, 6, 8, 10, 10, 5, 8, 7
-    //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 widesword, 9 cannon. 10 spreader, 11 bomb, 12 sword, 13 longsword, 14 lifesword
-    //15 airshot, 16 vulcan, 17 guard
+boolean[] ChipKey = {
+  false, false, false, false, false, false, false, false, false, false
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard
+};
+int[] chipCount = {
+  7, 7, 10, 10, 10, 8, 6, 5, 8, 7
+  //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard
 };
 PImage[] numberText = new PImage[10];
 boolean moved;
@@ -232,6 +239,7 @@ void keyPressed() {
     OST.nextSong();
   }
   //chip tests
+  /*
   if (keyCode == 86) {
     if (!currentlyMoving()) {
       Keys[5] = true;
@@ -276,12 +284,13 @@ void keyPressed() {
     if (!currentlyMoving()) {
       Keys[13] = true;
     }
-  }
+  }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      Keys[14] = true;
+      Keys[6] = true;
     }
   }
+  
   println(keyCode);
 }
 
@@ -449,19 +458,59 @@ void move() {
         chargeFrame = 0;
       }
     }
-    if (Keys[5]) {
-      if (megaman.WideSword.currentFrame < FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
-      } else if (megaman.WideSword.currentFrame == FrameCount[8] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
-        megaman.WideSword.currentFrame = 0;
+    if (Keys[5]){
+      if (megaman.Recover.currentFrame < FrameCount[8] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "recover");
+      } else if (megaman.Recover.currentFrame == FrameCount[8] - 1) {
+        megaman.heal(30);
+        megaman.Recover.currentFrame = 0;
         Keys[5] = false;
       }
     }
-    if (Keys[6]) {
-      if (megaman.Cannon.currentFrame < FrameCount[9] - 1) {
+    if (Keys[6]){
+      megaman.useInvis();
+      Keys[6] = false;
+    }
+    if (ChipKey[0]) {
+      if (megaman.Sword.currentFrame < chipCount[0] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+      } else if (megaman.Sword.currentFrame == chipCount[0] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
+        megaman.Sword.currentFrame = 0;
+        ChipKey[0] = false;
+      }
+    }
+    if (ChipKey[1]) {
+      if (megaman.WideSword.currentFrame < chipCount[1] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
+      } else if (megaman.WideSword.currentFrame == chipCount[1] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "widesword");
+        megaman.WideSword.currentFrame = 0;
+        ChipKey[1] = false;
+      }
+    }
+    if (ChipKey[2]) {
+      if (megaman.LongSword.currentFrame < chipCount[2] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+      } else if (megaman.LongSword.currentFrame == chipCount[2] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
+        megaman.LongSword.currentFrame = 0;
+        ChipKey[2] = false;
+      }
+    }
+    if (ChipKey[3]) {
+      if (megaman.LifeSword.currentFrame < chipCount[3] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+      } else if (megaman.LifeSword.currentFrame == chipCount[3] - 1) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
+        megaman.LifeSword.currentFrame = 0;
+        ChipKey[3] = false;
+      }
+    }
+    if (ChipKey[4]) {
+      if (megaman.Cannon.currentFrame < chipCount[4] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "cannon");
-      } else if (megaman.Cannon.currentFrame == FrameCount[9] - 1) {
+      } else if (megaman.Cannon.currentFrame == chipCount[4] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "cannon");
         megaman.Cannon.currentFrame = 0;
         megaman.Blast.currentFrame = 0;
@@ -469,13 +518,13 @@ void move() {
           mettaur.hurt(40);
           attacks.setXY("cannon", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
         }
-        Keys[6] = false;
+        ChipKey[4] = false;
       }
     }
-    if (Keys[7]) {
-      if (megaman.Spreader.currentFrame < FrameCount[10] - 1) {
+    if (ChipKey[5]) {
+      if (megaman.Spreader.currentFrame < chipCount[5] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
-      } else if (megaman.Spreader.currentFrame == FrameCount[10] - 1) {
+      } else if (megaman.Spreader.currentFrame == chipCount[5] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "spreader");
         megaman.Spreader.currentFrame = 0;
         if (mettaur.getRow() == megaman.getRow()) {
@@ -491,50 +540,23 @@ void move() {
             }
           }
         }
-        Keys[7] = false;
+        ChipKey[5] = false;
       }
     }
-    if (Keys[8]) {
-      if (megaman.Throw.currentFrame < FrameCount[11] - 1) {
+    if (ChipKey[6]) {
+      if (megaman.Throw.currentFrame < chipCount[6] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
-      } else if (megaman.Throw.currentFrame == FrameCount[11] - 1) {
+      } else if (megaman.Throw.currentFrame == chipCount[6] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "bomb");
         megaman.Throw.currentFrame = 0;
         attacks.setXY("bomb", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(),megaman.getCol(), megaman.getRow());
-        Keys[8] = false;
+        ChipKey[6] = false;
       }
     }
-    if (Keys[9]) {
-      if (megaman.Sword.currentFrame < FrameCount[12] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
-      } else if (megaman.Sword.currentFrame == FrameCount[12] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "sword");
-        megaman.Sword.currentFrame = 0;
-        Keys[9] = false;
-      }
-    }
-    if (Keys[10]) {
-      if (megaman.LongSword.currentFrame < FrameCount[13] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
-      } else if (megaman.LongSword.currentFrame == FrameCount[13] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "longsword");
-        megaman.LongSword.currentFrame = 0;
-        Keys[10] = false;
-      }
-    }
-    if (Keys[11]) {
-      if (megaman.LifeSword.currentFrame < FrameCount[14] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
-      } else if (megaman.LifeSword.currentFrame == FrameCount[14] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
-        megaman.LifeSword.currentFrame = 0;
-        Keys[11] = false;
-      }
-    }
-    if (Keys[12]) {
-      if (megaman.AirShot.currentFrame < FrameCount[15] - 1) {
+    if (ChipKey[7]) {
+      if (megaman.AirShot.currentFrame < chipCount[7] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "airshot");
-      } else if (megaman.AirShot.currentFrame == FrameCount[15] - 1) {
+      } else if (megaman.AirShot.currentFrame == chipCount[7] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "airshot");
         megaman.AirShot.currentFrame = 0;
         if (mettaur.getRow() == megaman.getRow()) {
@@ -543,42 +565,46 @@ void move() {
             mettaur.setCol(mettaur.getCol()+1);
           }
         }
-        Keys[12] = false;
+        ChipKey[7] = false;
       }
     }
-    if (Keys[13]) {
-      if (megaman.Vulcan.currentFrame < FrameCount[16] - 1) {
+    if (ChipKey[8]) {
+      if (megaman.Vulcan.currentFrame < chipCount[8] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "vulcan");
         if (megaman.Vulcan.currentFrame > 1 && megaman.Vulcan.currentFrame % 2 == 0){
           if (mettaur.getRow() == megaman.getRow()){
            mettaur.hurt(10); 
           }
         }
-      } else if (megaman.Vulcan.currentFrame == FrameCount[16] - 1) {
+      } else if (megaman.Vulcan.currentFrame == chipCount[8] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "vulcan");
         megaman.Vulcan.currentFrame = 0;
-        Keys[13] = false;
+        ChipKey[8] = false;
       }
     }
-    if (Keys[14]) {
-      if (megaman.Guard.currentFrame < FrameCount[17] - 1) {
+    if (ChipKey[9]) {
+      if (megaman.Guard.currentFrame < chipCount[9] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
-      } else if (megaman.Guard.currentFrame == FrameCount[17] - 1) {
+      } else if (megaman.Guard.currentFrame == chipCount[9] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
         megaman.Guard.currentFrame = 0;
         if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()){
          Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
          attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol()); 
         }
-        Keys[14] = false;
+        ChipKey[9] = false;
       }
       attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol());
     }
-    if (megaman.invinsibleTimer > 74) {
-      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);
-    }
-    if (megaman.invinsibleTimer == 74) {
-      megaman.Hurt.currentFrame = 0;
+    if (megaman.invis){
+      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
+    }else{
+      if (megaman.invinsibleTimer > 74) {
+        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);
+      }
+      if (megaman.invinsibleTimer == 74) {
+        megaman.Hurt.currentFrame = 0;
+      }
     }
     //this basically asks if megaman isn't doing anything. If he isn't, display his standing position.
     if (!currentlyMoving()) {

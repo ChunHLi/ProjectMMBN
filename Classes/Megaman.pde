@@ -1,6 +1,7 @@
 public class Megaman implements Killable {
   int HP, buster, panelRow, panelCol, currentAnimation, invinsibleTimer, status, turns;
   String cross;
+  boolean invis;
 
   Animation Standing = new Animation("../Sprites/megaman/noCross/01", 1);
   Animation Hurt = new Animation("../Sprites/megaman/noCross/02", 8);
@@ -30,7 +31,8 @@ public class Megaman implements Killable {
   Animation Vulcan = new Animation("../Sprites/battleChipAttack/vulcan/00", 8, 2);
   //Guard
   Animation Guard = new Animation("../Sprites/battleChipAttack/guard/00", 7);
-  
+  //Recover
+  Animation Recover = new Animation("../Sprites/battleChipAttack/recovery/00", 6);
 
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
@@ -185,7 +187,16 @@ public class Megaman implements Killable {
       if (chip.equals("guard")) {
         Guard.display(xpos, ypos, invinsibleTimer);
       }
+      if (chip.equals("recover")){
+        Standing.display(xpos, ypos, invinsibleTimer);
+        Recover.display(xpos, ypos, invinsibleTimer);
+      }
     }
+  }
+  
+  public void useInvis(){
+   invinsibleTimer = 180;
+   invis = true; 
   }
 
   public void getHurt(Panel[][] Grid) {
@@ -194,6 +205,9 @@ public class Megaman implements Killable {
       invinsibleTimer = 90;
     } else if (invinsibleTimer > 0) {
       invinsibleTimer -= 1;
+    }
+    if (invinsibleTimer == 0){
+     invis = false; 
     }
   }
 
