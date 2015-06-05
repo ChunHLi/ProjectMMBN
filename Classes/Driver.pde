@@ -859,6 +859,9 @@ void move() {
         if (megaman.Colonel1.currentFrame == 8) {
           if (megaman.Colonel2.currentFrame < 7) {
             megaman.Colonel2.displayChips(Grid[1][1].getLocationX()-30, Grid[1][1].getLocationY());
+            if (megaman.Colonel2.currentFrame > 0 && megaman.Colonel2.currentFrame < 6){
+              megaman.Colonel3.displayF(170, 210, megaman.Colonel2.currentFrame - 1);
+            }
           }
           if (megaman.Colonel2.currentFrame == 6) {
             Grid[0][3].setDangerVirus(true);
@@ -877,6 +880,7 @@ void move() {
             Grid[2][5].setDamage(100);
             megaman.Colonel1.currentFrame = 0;
             megaman.Colonel2.currentFrame = 0;
+            megaman.Colonel2.currentFrame = 0;           
             navi[1] = false;
             MODE = 0;
           }

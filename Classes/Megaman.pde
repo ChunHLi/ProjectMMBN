@@ -45,6 +45,7 @@ public class Megaman implements Killable {
   //Colonel
   Animation Colonel1 = new Animation("../Sprites/battleChipAttack/navi/Colonel/00", 9);
   Animation Colonel2 = new Animation("../Sprites/battleChipAttack/navi/Colonel/01", 7);
+  Animation Colonel3 = new Animation("../Sprites/battleChipAttack/navi/Colonel/02", 5);
   
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");
