@@ -147,11 +147,21 @@ To do
 - For Shawn (due 6/4/15) - Program the program advance method.
 
 Future major goals (pre June 8th):
-1. Finish Bass AI.
-2. Finish All Chip Animations for Folder 2.
-3. Crosses (2).
-4. Add basic sound effects.
-5. Beautify the stuff.
+1. Shawn:
+  a. Show danger for Protoman's slashes. (due Friday)
+  b. Damage Protoman. (due Friday)
+  c. Protoman's special attack. (due Saturday)
+  d. Program Advances. (due Saturday)
+  e. transition. (due Sunday)
+  f. beautification.
+
+2. Kah Soon:
+  a. Protoman's slash frames. (due Friday)
+  b. Chip animations. (due Saturday)
+  c. Protoman's HP. (due Friday)
+  d. Battle Start. (due Saturday)
+  e. beautification.
+  f. Crosses. (optional).
 
 Future major goals (pre June 15th):
 1. Finish 3rd folder.
