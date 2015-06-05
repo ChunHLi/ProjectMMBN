@@ -343,7 +343,7 @@ void keyPressed() {
    }*/
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      navi[1] = true;
+      navi[0] = true;
       MODE = 3;
     }
   }
@@ -821,7 +821,7 @@ void move() {
           }
           if (megaman.Protoman2.currentFrame == 2) {
             if (megaman.Protoman3.currentFrame < 11) {
-              megaman.Protoman3.displayChips(Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationY());
+              megaman.Protoman3.displayChips(Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationX()-18, Grid[mettaur.getRow()][mettaur.getCol()-1].getLocationY()+32);
             }
             if (megaman.Protoman3.currentFrame == 10) {
               Grid[mettaur.getRow()][mettaur.getCol()].setDangerVirus(true);
