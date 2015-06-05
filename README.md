@@ -128,6 +128,16 @@ Change - Log
 
 6/03/15 - Kah Soon Yap - Barrier works
 
+6/04/15 - Kah Soon Yap - Stepsword done
+
+6/04/15 - Kah Soon Yap - Firehit done
+
+6/04/15 - Kah Soon Yap - Protoman chip done
+
+6/04/15 - Kah Soon Yap - Colonel chip done
+
+6/04/15 - Kah Soon Yap - Danger properly resets now
+
 To do
 =========================================================================================================================
 
