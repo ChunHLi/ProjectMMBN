@@ -128,6 +128,8 @@ Change - Log
 
 6/03/15 - Kah Soon Yap - Barrier works
 
+6/03/15 - Shawn Li - Protoman sprites have been fixed.
+
 6/04/15 - Kah Soon Yap - Stepsword done
 
 6/04/15 - Kah Soon Yap - Firehit done
@@ -138,6 +140,11 @@ Change - Log
 
 6/04/15 - Kah Soon Yap - Danger properly resets now
 
+6/04/15 - Shawn Li - Protoman now moves at the right timing.
+
+6/04/15 - Shawn Li - Protoman's sequence has been completed.
+
+6/05/15 - Shawn Li - Protoman's attacks now display correctly.
 To do
 =========================================================================================================================
 
