@@ -52,10 +52,10 @@ boolean[] navi = {
 
 PImage[] numberText = new PImage[10];
 boolean moved;
-boolean modeChanged;
+boolean modeChanged = true;
 boolean displayMenu;
 boolean displayCrosses;
-int MODE;
+int MODE = 1;
 int changeMenuCounter;
 ChipMenu Chips;
 boolean isX, isXReleased;
@@ -120,7 +120,7 @@ void draw() {
   background(0);
   backGround.display(0, height/2, 0);
   image(panels, width/2 - panels.width/2, height/2);
-  showPanelDanger();
+  //showPanelDanger();
   megaman.getHurt(Grid);
   if (MODE == 0) {
     showHP(0);
@@ -133,6 +133,7 @@ void draw() {
   attacks.move(Grid);
   mettaur.getHurt(Grid);
   protoman.sequence(Grid, MODE, megaman);
+  protoman.hurt(Grid);
   checkMode();
   Chips.display(displayMenu);
   if (displayMenu) {
@@ -147,9 +148,9 @@ void draw() {
   mettaurTimer++;
   if (MODE == 0) {
     customBar.displayCustom(width/5, 20);
-    //if (!currentlyMoving()){
-    Chips.selected.displayBattle(MODE, Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
-    //}
+    if (!currentlyMoving()) {
+      Chips.selected.displayBattle(MODE, Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+    }
   }
   if (virusForce.size() > 0) {
     int counter = 0;
@@ -226,41 +227,43 @@ void keyPressed() {
       Chips.selectChips();
     }
     if (MODE == 0) {
-      if (Chips.selected.size() > 0) {
-        if (Chips.selected.get(0).chipID == 70) {
-          ChipKey[0] = true;
+      if (!currentlyMoving()) {
+        if (Chips.selected.size() > 0) {
+          if (Chips.selected.get(0).chipID == 70) {
+            ChipKey[0] = true;
+          }
+          if (Chips.selected.get(0).chipID == 71) {
+            ChipKey[1] = true;
+          }
+          if (Chips.selected.get(0).chipID == 72) {
+            ChipKey[2] = true;
+          }
+          if (Chips.selected.get(0).chipID == 1) {
+            ChipKey[4] = true;
+          }
+          if (Chips.selected.get(0).chipID == 9) {
+            ChipKey[5] = true;
+          }
+          if (Chips.selected.get(0).chipID == 58) {
+            ChipKey[6] = true;
+          }
+          if (Chips.selected.get(0).chipID == 4) {
+            ChipKey[7] = true;
+          }
+          if (Chips.selected.get(0).chipID == 91) {
+            ChipKey[9] = true;
+          }
+          if (Chips.selected.get(0).chipID == 5) {
+            ChipKey[8] = true;
+          }
+          if (Chips.selected.get(0).chipID == 180) {
+            ChipKey[11] = true;
+          }
+          if (Chips.selected.get(0).chipID == 179) {
+            ChipKey[12] = true;
+          }
+          Chips.selected.remove(0);
         }
-        if (Chips.selected.get(0).chipID == 71) {
-          ChipKey[1] = true;
-        }
-        if (Chips.selected.get(0).chipID == 72) {
-          ChipKey[2] = true;
-        }
-        if (Chips.selected.get(0).chipID == 1) {
-          ChipKey[4] = true;
-        }
-        if (Chips.selected.get(0).chipID == 9) {
-          ChipKey[5] = true;
-        }
-        if (Chips.selected.get(0).chipID == 58) {
-          ChipKey[6] = true;
-        }
-        if (Chips.selected.get(0).chipID == 4) {
-          ChipKey[7] = true;
-        }
-        if (Chips.selected.get(0).chipID == 91) {
-          ChipKey[9] = true;
-        }
-        if (Chips.selected.get(0).chipID == 5) {
-          ChipKey[8] = true;
-        }
-        if (Chips.selected.get(0).chipID == 180) {
-          ChipKey[11] = true;
-        }
-        if (Chips.selected.get(0).chipID == 179) {
-          ChipKey[12] = true;
-        }
-        Chips.selected.remove(0);
       }
     }
   }
@@ -429,7 +432,7 @@ void moveCursor() {
 
 void move() {
   //this mode tells the method to only work when not in chip selecting menu.
-  if (MODE == 0) {
+  if (MODE == 0 ) {
     //this basically causes megaman to do his leaving panel animation, then moves him, and finally does his arriving panel animation.
     if (Keys[0]) {
       if (megaman.LeavePanel.currentFrame < FrameCount[3] - 1) {  
@@ -859,7 +862,7 @@ void move() {
         if (megaman.Colonel1.currentFrame == 8) {
           if (megaman.Colonel2.currentFrame < 7) {
             megaman.Colonel2.displayChips(Grid[1][1].getLocationX()-30, Grid[1][1].getLocationY());
-            if (megaman.Colonel2.currentFrame > 0 && megaman.Colonel2.currentFrame < 6){
+            if (megaman.Colonel2.currentFrame > 0 && megaman.Colonel2.currentFrame < 6) {
               megaman.Colonel3.displayF(170, 210, megaman.Colonel2.currentFrame - 1);
             }
           }
