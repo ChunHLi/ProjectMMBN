@@ -1,6 +1,8 @@
 public class ChipLinkedList {
   LinkedList<Chip> selected;
   LinkedList<Integer> selectedPreviousIndex;
+  int PAStartIndex;
+  boolean PAExists, lifeSword, spreader, gigaCannon, twinLeaders, doubleHero;
 
   ChipLinkedList() {
     selected = new LinkedList<Chip>();
@@ -42,21 +44,28 @@ public class ChipLinkedList {
   void checkPAHelper(int counter) {
     if ((selected.get(counter).chipID == 70 && selected.get(counter + 1).chipID == 71 && selected.get(counter + 2).chipID == 72) ||
       (selected.get(counter).chipID == 70 && selected.get(counter + 1).chipID == 73 && selected.get(counter + 2).chipID == 74)) {
-       //do animation, remove these chips and insert PA chip
+      PAExists = true;
+      lifeSword = true;
     }
     if (selected.get(counter).letter == 'J' && selected.get(counter + 1).letter == 'K' && selected.get(counter + 2).letter == 'L') {
-      //do animation, remove these chips and insert PA chip
+      PAExists = true;
+      spreader = true;
     }
     if (selected.get(counter).letter == 'A' && selected.get(counter + 1).letter == 'B' && selected.get(counter + 2).letter == 'C') {
-      //do animation, remove these chips and insert PA chip
+      PAExists = true;
+      gigaCannon = true;
     }
     if (selected.get(counter).chipID == 73 && selected.get(counter + 1).chipID == 74 && selected.get(counter + 2).name.equals("ProtomnSP")) {
-      //do animation, remove these chips and insert PA chip
+      PAExists = true;
+      doubleHero = true;
     }
     if (selected.get(counter).name.equals("ColonelSP") && selected.get(counter + 1).chipID == 188 && selected.get(counter + 2).name.equals("Protomn")){
-      //do animation, remove these chips and insert PA chip
+      PAExists = true;
+      twinLeaders = true;
     }
   }
+  
+  
   
   int size(){
     return selected.size();
