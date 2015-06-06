@@ -9,10 +9,10 @@ class Protoman {
   Animation hurt = new Animation("../Sprites/bosses/Protoman/01", 4, 4);
   Animation leavePanel = new Animation("../Sprites/bosses/Protoman/02", 2);
   Animation arrivePanel = new Animation("../Sprites/bosses/Protoman/03", 2);
-  Animation attack1 = new Animation("../Sprites/bosses/Protoman/04", 11);
   Animation widesword = new Animation("../Sprites/bosses/Protoman/04", 11);
   Animation longsword = new Animation("../Sprites/bosses/Protoman/05", 11);
   Animation Bwidesword = new Animation("../Sprites/bosses/Protoman/09", 11);
+  Animation cross = new Animation("../Sprites/bosses/Protoman/10", 11);
   Animation shieldUp = new Animation("../Sprites/bosses/Protoman/07", 7);
   Animation shieldDown = new Animation("../Sprites/bosses/Protoman/08", 7);
   PImage stand = loadImage("../Sprites/bosses/Protoman/000.png");
