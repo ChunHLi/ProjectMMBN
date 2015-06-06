@@ -84,7 +84,7 @@ class Protoman {
           attack(longsword,attackType, megaman, Grid);
         }
         if (attackType == 2){
-          attack(attack1,attackType, megaman, Grid);
+          attack(cross,attackType, megaman, Grid);
         }
         currentlyMoving = true;
       }
@@ -273,7 +273,7 @@ class Protoman {
       if (currentlyMoving){
         widesword.currentFrame = 0;
         longsword.currentFrame = 0;
-        attack1.currentFrame = 0;
+        cross.currentFrame = 0;
         attackStartDelay = 12;
         attackEndDelay = 18;
         actionDelay = 0;
@@ -315,6 +315,16 @@ class Protoman {
     }
     panelRow = newPanelRow;
     panelCol = newPanelCol;
+  }
+
+  int getHP(){
+   return HP; 
+  }
+  int getRow(){
+   return panelRow; 
+  }
+  int getCol(){
+   return panelCol; 
   }
 }
 

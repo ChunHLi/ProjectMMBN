@@ -1043,6 +1043,28 @@ void showHP(int translation) {
       image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
     }
   }*/
+  if (protoman.getHP() > 0) {
+    if (protoman.getHP()%10!=1) {
+      image(numberText[protoman.getHP()%10], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+37, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    } else {
+      image(numberText[protoman.getHP()%10], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+42, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    }
+    if (protoman.getHP()%100/10 != 1) {
+      image(numberText[protoman.getHP()%100/10], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+27, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    } else {
+      image(numberText[protoman.getHP()%100/10], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+32, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    }
+    if (protoman.getHP()%1000/10 != 1) {
+      image(numberText[protoman.getHP()%1000/100], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+17, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    } else {
+      image(numberText[protoman.getHP()%1000/100], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+22, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    }
+    if (protoman.getHP()%10000/10 != 1) {
+      image(numberText[protoman.getHP()%10000/1000], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+7, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    } else {
+      image(numberText[protoman.getHP()%10000/1000], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+12, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
+    }
+  }
 }
 
 void reset() {
