@@ -90,13 +90,13 @@ void setup() {
   //of the sequence of frames you want to see. Replace the second parameter
   //with the amount of frames in the sequence.
   megaman = new Megaman();
-  mettaur = new Mettaur();
+  //mettaur = new Mettaur();
   protoman = new Protoman();
   backGround = new Animation("../Sprites/backgrounds/00", 8);
   Chips = new ChipMenu();
   isXReleased = true;
   chargeFrame = 0;
-  mettaurTimer = 0;
+  //mettaurTimer = 0;
   customBar = new Animation("../Sprites/textArt/text/custom", 5);
   OST = new PlayList();
   virusForce = new ArrayList<VirusAttack>(0);
@@ -129,9 +129,9 @@ void draw() {
   processKeys();
   move();
   charge();
-  mettaurMove();
+  //mettaurMove();
   attacks.move(Grid);
-  mettaur.getHurt(Grid);
+  //mettaur.getHurt(Grid);
   protoman.sequence(Grid, MODE, megaman);
   protoman.hurt(Grid);
   checkMode();
@@ -145,7 +145,7 @@ void draw() {
       Chips.displayCrossCursor();
     }
   }
-  mettaurTimer++;
+  //mettaurTimer++;
   if (MODE == 0) {
     customBar.displayCustom(width/5, 20);
     if (!currentlyMoving()) {
@@ -1025,7 +1025,7 @@ void showHP(int translation) {
   } else {
     image(numberText[megaman.getHP()%1000/100], 36 + translation, 6);
   }
-  megaman.showStatus(translation);
+  /*megaman.showStatus(translation);
   //Enemy
   if (mettaur.getHP() > 0) {
     if (mettaur.getHP()%10!=1) {
@@ -1038,7 +1038,7 @@ void showHP(int translation) {
     } else {
       image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
     }
-  }
+  }*/
 }
 
 void reset() {
