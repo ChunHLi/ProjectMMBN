@@ -2,7 +2,7 @@ import java.util.*;
 
 class Protoman {
   int HP, panelRow, panelCol, currentAnimation, state, invincTimer, numMove, attackType, actionDelay, shieldDelay, attackStartDelay, attackEndDelay, moveCap;
-  boolean currentlyMoving, raiseGuard, lowerGuard, invinc, moved, megamanLocated, inhurtAnimation;
+  boolean currentlyMoving, raiseGuard, lowerGuard, invinc, moved, megamanLocated, inhurtAnimation,shield,shieldHit;
 
   Random r;
 
@@ -36,59 +36,59 @@ class Protoman {
   }
 
   void move(Panel[][] Grid, Megaman megaman) {
-      if (numMove > 0) {
-        if (actionDelay == 0 ) {
-          currentlyMoving = true;
-          if (leavePanel.currentFrame < leavePanel.spriteCount - 1 && !moved) {
-            leavePanel.display(Grid[panelRow][panelCol].getLocationX() - leavePanel.spriteFrames[leavePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
-          } else if (leavePanel.currentFrame == leavePanel.spriteCount - 1 && !moved) {
-            leavePanel.display(Grid[panelRow][panelCol].getLocationX() - leavePanel.spriteFrames[leavePanel.currentFrame].width + 52, Grid[panelRow][panelRow].getLocationY(), invincTimer);
-            randomizeLocation();
-            moved = true;
-          } else if (arrivePanel.currentFrame < arrivePanel.spriteCount - 1 && moved) {
-            arrivePanel.display(Grid[panelRow][panelCol].getLocationX() - arrivePanel.spriteFrames[arrivePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
-          } else if (arrivePanel.currentFrame == arrivePanel.spriteCount - 1 && moved) {
-            arrivePanel.display(Grid[panelRow][panelCol].getLocationX() - arrivePanel.spriteFrames[arrivePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
-            moved = false;
-            if (r.nextInt(3) == 0) {
-              raiseGuard = true;
-              actionDelay = 28;
-            } else {
-              actionDelay = 8;
-            }
-            currentlyMoving = false;
-            numMove -= 1;
-          }
-        }
-      } else {
-        if (!megamanLocated) {
-          attackType = r.nextInt(3);
-          if (attackType == 0) {
-            panelRow = megaman.getRow();
-            panelCol = megaman.getCol() + 1;
-          }
-          if (attackType == 1) {
-            panelRow = megaman.getRow();
-            panelCol = 3;
-          }
-          if (attackType == 2) {
-            panelRow = 1;
-            panelCol = 3;
-          }
-          megamanLocated = true;
-        }
-        if (attackType == 0){
-          attack(widesword,attackType, megaman, Grid);
-        }
-        if (attackType == 1){
-          attack(longsword,attackType, megaman, Grid);
-        }
-        if (attackType == 2){
-          attack(cross,attackType, megaman, Grid);
-        }
+    if (numMove > 0) {
+      if (actionDelay == 0 ) {
         currentlyMoving = true;
+        if (leavePanel.currentFrame < leavePanel.spriteCount - 1 && !moved) {
+          leavePanel.display(Grid[panelRow][panelCol].getLocationX() - leavePanel.spriteFrames[leavePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
+        } else if (leavePanel.currentFrame == leavePanel.spriteCount - 1 && !moved) {
+          leavePanel.display(Grid[panelRow][panelCol].getLocationX() - leavePanel.spriteFrames[leavePanel.currentFrame].width + 52, Grid[panelRow][panelRow].getLocationY(), invincTimer);
+          randomizeLocation();
+          moved = true;
+        } else if (arrivePanel.currentFrame < arrivePanel.spriteCount - 1 && moved) {
+          arrivePanel.display(Grid[panelRow][panelCol].getLocationX() - arrivePanel.spriteFrames[arrivePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
+        } else if (arrivePanel.currentFrame == arrivePanel.spriteCount - 1 && moved) {
+          arrivePanel.display(Grid[panelRow][panelCol].getLocationX() - arrivePanel.spriteFrames[arrivePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
+          moved = false;
+          if (r.nextInt(1) == 0) {
+            raiseGuard = true;
+            actionDelay = 28;
+          } else {
+            actionDelay = 8;
+          }
+          currentlyMoving = false;
+          numMove -= 1;
+        }
       }
+    } else {
+      if (!megamanLocated) {
+        attackType = r.nextInt(3);
+        if (attackType == 0) {
+          panelRow = megaman.getRow();
+          panelCol = megaman.getCol() + 1;
+        }
+        if (attackType == 1) {
+          panelRow = megaman.getRow();
+          panelCol = 3;
+        }
+        if (attackType == 2) {
+          panelRow = 1;
+          panelCol = 3;
+        }
+        megamanLocated = true;
+      }
+      if (attackType == 0) {
+        attack(widesword, attackType, megaman, Grid);
+      }
+      if (attackType == 1) {
+        attack(longsword, attackType, megaman, Grid);
+      }
+      if (attackType == 2) {
+        attack(cross, attackType, megaman, Grid);
+      }
+      currentlyMoving = true;
     }
+  }
 
   void stand(Panel[][] Grid) {
     if (!currentlyMoving) {
@@ -97,8 +97,17 @@ class Protoman {
     }
   }
 
-  void guard(Panel[][]Grid) {
+  void guard(Panel[][]Grid,Megaman megaman) {
+    if (shieldHit){
+      currentlyMoving = true;
+      if (widesword.currentFrame == 0){
+        panelRow = megaman.getRow();
+        panelCol = megaman.getCol() + 1;
+      }
+      attack(widesword, 0, megaman, Grid);
+    }
     if (raiseGuard) {
+      shield = true;
       if (shieldUp.currentFrame < shieldUp.spriteCount - 1) {
         shieldUp.display(Grid[panelRow][panelCol].getLocationX() - 24, Grid[panelRow][panelCol].getLocationY(), invincTimer);
       } else if (shieldUp.currentFrame == shieldUp.spriteCount - 1) {
@@ -119,6 +128,7 @@ class Protoman {
         shieldDown.display(Grid[panelRow][panelCol].getLocationX() - 24, Grid[panelRow][panelRow].getLocationY(), invincTimer);
         lowerGuard = false;
         currentlyMoving = false;
+        shield = false;
       }
     }
   }
@@ -129,41 +139,41 @@ class Protoman {
         move(Grid, megaman);
       } else {
         stand(Grid);
-        guard(Grid);
+        guard(Grid,megaman);
       }
-    } else if (!inhurtAnimation){
+    } else if (!inhurtAnimation) {
       image(stand, Grid[panelRow][panelCol].getLocationX() - 20, Grid[panelRow][panelCol].getLocationY() - stand.height + 5);
     }
   }
 
-  void attack(Animation attack,int type, Megaman megaman, Panel[][] Grid) {
+  void attack(Animation attack, int type, Megaman megaman, Panel[][] Grid) {
     if (currentlyMoving) {
       if (type == 0 || type == 1 || type == 2) {
         if (attack.currentFrame < attack.spriteCount - 1) {
           if (attackStartDelay > 0) {
             warnDanger(Grid, attackStartDelay, type);
-            if (type == 0){
+            if (type == 0) {
               image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() - 100);
             }
-            if (type == 1){
+            if (type == 1) {
               image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() - 94);
             }
-            if (type == 2){
-              image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() - 100);
+            if (type == 2) {
+              image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() - 100);
             }
             attackStartDelay -= 1;
           } else {
             if (attack.currentFrame == 0) {
               becomeDanger(Grid, type, true);
             }
-            if (type == 0){
+            if (type == 0) {
               attack.display(Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
             }
-            if (type == 1){
+            if (type == 1) {
               attack.display(Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY(), invincTimer);
             }
-            if (type == 2){
-              attack.display(Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
+            if (type == 2) {
+              attack.display(Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
             }
           }
         } else if (attack.currentFrame == attack.spriteCount - 1) {
@@ -171,31 +181,32 @@ class Protoman {
             becomeDanger(Grid, type, false);
           }
           if (attackEndDelay > 0) {
-            if (type == 0){
+            if (type == 0) {
               image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() - 100);
             }
-            if (type == 1){
+            if (type == 1) {
               image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() - 94);
             }
-            if (type == 2){
-              image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() - 100);
+            if (type == 2) {
+              image(attack.spriteFrames[attack.currentFrame], Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() - 100);
             }
             attackEndDelay -= 1;
           } else {
-            if (type == 0){
+            if (type == 0) {
               attack.display(Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
             }
-            if (type == 1){
+            if (type == 1) {
               attack.display(Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY(), invincTimer);
             }
-            if (type == 2){
-              attack.display(Grid[panelRow][panelCol].getLocationX() - 55, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
+            if (type == 2) {
+              attack.display(Grid[panelRow][panelCol].getLocationX() - 140, Grid[panelRow][panelCol].getLocationY() + 30, invincTimer);
             }
             currentlyMoving = false;
             attackStartDelay = 12;
             attackEndDelay = 18;
             numMove = r.nextInt(moveCap - 2) + 2;
             megamanLocated = false;
+            shieldHit = false;
           }
         }
       }
@@ -267,41 +278,48 @@ class Protoman {
     }
   }
 
-  void hurt(Panel[][] Grid) {
-    if (Grid[panelRow][panelCol].isDangerVirus() && invincTimer == 0) {
-      inhurtAnimation = true;
-      if (currentlyMoving){
-        widesword.currentFrame = 0;
-        longsword.currentFrame = 0;
-        cross.currentFrame = 0;
-        attackStartDelay = 12;
-        attackEndDelay = 18;
-        actionDelay = 0;
-        currentlyMoving = false;
-        numMove = r.nextInt(moveCap - 2) + 2;
-        int row = 0;
-        int col = 0;
-        while (row < Grid.length){
-          while (col < Grid[0].length){
-            Grid[row][col].setDangerMM(false);
-            col += 1;
+  void hurt(Panel[][] Grid, int mode,Megaman megaman) {
+    if (mode == 0) {
+      if (Grid[panelRow][panelCol].isDangerVirus() && shield){
+        currentlyMoving = true;
+        shieldHit = true;
+      }
+      else if (Grid[panelRow][panelCol].isDangerVirus() && invincTimer == 0) {
+        inhurtAnimation = true;
+        if (currentlyMoving) {
+          widesword.currentFrame = 0;
+          longsword.currentFrame = 0;
+          cross.currentFrame = 0;
+          attackStartDelay = 12;
+          attackEndDelay = 18;
+          actionDelay = 0;
+          currentlyMoving = false;
+          numMove = r.nextInt(moveCap - 2) + 2;
+          int row = 0;
+          int col = 0;
+          while (row < Grid.length) {
+            while (col < Grid[0].length) {
+              Grid[row][col].setDangerMM(false);
+              col += 1;
+            }
+            col = 0;
+            row += 1;
           }
-          col = 0;
-          row += 1;
-        }
-      }  
-      HP -= Grid[panelRow][panelCol].getDamage();
-      invincTimer = 44;
-    } else if (invincTimer > 36) {
-      hurt.display(Grid[panelRow][panelCol].getLocationX() - 20, Grid[panelRow][panelCol].getLocationY(), invincTimer);
-    }
-    if (hurt.currentFrame >= hurt.spriteCount - 1) {
-      hurt.display(Grid[panelRow][panelCol].getLocationX() - 20, Grid[panelRow][panelCol].getLocationY(), invincTimer);
-      currentlyMoving = false;
-      inhurtAnimation = false;
-    }
-    if (invincTimer > 0) {
-      invincTimer -= 1;
+          megamanLocated = false;
+        }  
+        HP -= Grid[panelRow][panelCol].getDamage();
+        invincTimer = 44;
+      } else if (invincTimer > 36) {
+        hurt.display(Grid[panelRow][panelCol].getLocationX() - 20, Grid[panelRow][panelCol].getLocationY(), invincTimer);
+      }
+      if (hurt.currentFrame >= hurt.spriteCount - 1) {
+        hurt.display(Grid[panelRow][panelCol].getLocationX() - 20, Grid[panelRow][panelCol].getLocationY(), invincTimer);
+        currentlyMoving = false;
+        inhurtAnimation = false;
+      }
+      if (invincTimer > 0) {
+        invincTimer -= 1;
+      }
     }
   }
 
@@ -317,14 +335,14 @@ class Protoman {
     panelCol = newPanelCol;
   }
 
-  int getHP(){
-   return HP; 
+  int getHP() {
+    return HP;
   }
-  int getRow(){
-   return panelRow; 
+  int getRow() {
+    return panelRow;
   }
-  int getCol(){
-   return panelCol; 
+  int getCol() {
+    return panelCol;
   }
 }
 
