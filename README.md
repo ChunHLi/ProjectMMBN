@@ -155,8 +155,8 @@ To do
 
 Future major goals (pre June 8th):
 1. Shawn:
-  a. Show danger for Protoman's slashes. (due Friday)
-  b. Damage Protoman. (due Friday)
+  a. Show danger for Protoman's slashes. (due Friday) (COMPLETED)
+  b. Damage Protoman. (due Friday) (COMPLETED)
   c. Protoman's special attack. (due Saturday)
   d. Program Advances. (due Saturday)
   e. transition. (due Sunday)
