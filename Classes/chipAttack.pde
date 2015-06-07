@@ -7,23 +7,24 @@ public class ChipAttack{
  Animation bust = new Animation("../Sprites/BusterShot/00", 6);
  Animation spread = new Animation("../Sprites/battleChipAttack/spreader/00", 8);
  Animation guard = new Animation("../Sprites/battleChipAttack/guard/01", 5);
- Animation firehit = new Animation ("../Sprites/battleChipAttack/firehit/00", 4);
+ Animation firehit = new Animation("../Sprites/battleChipAttack/firehit/00", 4);
+ Animation boomer = new Animation("../Sprites/battleChipAttack/boomer/00", 4);
  
  private boolean[] chips = {
-  false, false, false, false, false, false, false
+  false, false, false, false, false, false, false, false
   //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard, 6 firehit
  };
  private int[] frames = {
-   6, 8, 6, 8, 5, 4
-   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard, 5 firehit
+   6, 8, 6, 8, 5, 4, 4
+   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard, 5 firehit, 6 boomer
  };
- private int bombRow, bombCol, guardRow, guardCol;
+ private int bombRow, bombCol, guardRow, guardCol, boomRow, boomCol;
  private float oX, oY;
  private float xbomb, ybomb, bombTime;
  private float xcan, ycan;
  private float xbust, ybust;
  private float xspread, yspread;
- private int spreadCount;
+ private int spreadCount, boomerCount;
  private float xrec, yrec;
  private int guardDMG;
  private float xfire, yfire;
@@ -116,6 +117,35 @@ public class ChipAttack{
        firehit.currentFrame = 0;
      }
    }
+   if (chips[7]){
+     if (boomerCount < 20){
+       boomer.displayF(grid[boomRow][boomCol].getLocationX()+10*(boomerCount%4), grid[boomRow][boomCol].getLocationY(), boomerCount%4);
+       if (boomerCount%4 == 0 && boomerCount != 0){
+        boomCol++; 
+       }
+     } else if (boomerCount == 20){
+      boomCol++; 
+     } else if (boomerCount < 28){
+       boomer.displayF(grid[boomRow][boomCol].getLocationX(), grid[boomRow][boomCol].getLocationY()-5*(boomerCount%4), boomerCount%4);
+       if (boomerCount%4 == 0 && boomerCount != 20){
+        boomRow--; 
+       }
+     } else if (boomerCount == 28){
+       boomRow--;
+     } else if (boomerCount < 52){
+        boomer.displayF(grid[boomRow][boomCol].getLocationX()-10*(boomerCount%4), grid[boomRow][boomCol].getLocationY(), boomerCount%4);
+        if (boomerCount%4 == 0 && boomerCount != 28){
+        boomCol--;
+       }
+     }
+     boomerCount++;
+     grid[boomRow][boomCol].setDangerVirus(true);
+     grid[boomRow][boomCol].setDamage(100);
+     if (boomerCount == 52){
+       chips[7] = false;
+      boomerCount = 0; 
+     }
+   }
  }
 
  public void change(int index){
@@ -160,6 +190,13 @@ public class ChipAttack{
      xfire = xpos;
      yfire = ypos;
      chips[6] = true;
+   }
+   if (chip.equals("boomer")){
+     if (boomRow == 0 && boomCol == 0){
+       boomRow = row;
+       boomCol = col;
+       chips[7] = true;
+     }
    }
  }
 }

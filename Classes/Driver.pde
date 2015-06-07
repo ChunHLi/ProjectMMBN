@@ -39,8 +39,8 @@ boolean[] ChipKey = {
     //15 recover80
 };
 boolean[] holder = {
-  false, false, false
-    //0invis, 1barrier, 2firehit
+  false, false, false, false
+    //0invis, 1barrier, 2firehit, 3boomer
 };
 int[] chipCount = {
   7, 7, 10, 10, 10, 8, 6, 5, 8, 7, 6, 7, 7, 10, 8, 6
@@ -235,8 +235,6 @@ void keyPressed() {
     if (MODE == 1) {
       Chips.selectChips();
     }
-    //0 sword, 1 widesword, 2 longsword, 3 lifesword, 4 cannon, 5 spreader, 6 bomb, 7 airshot, 8 vulcan, 9 guard, 10 recovery, 11 guard3, 12 wideblade, 13 longblade, 14 stepsword
-    //0invis, 1barrier, 2firehit
     if (MODE == 0) {
       if (!currentlyMoving()) {
         if (Chips.selected.size() > 0) {
@@ -329,14 +327,15 @@ void keyPressed() {
   if (keyCode == 32) {
     OST.nextSong();
   }
-/*
+
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      navi[0] = true;
-      MODE = 3;
+      //navi[0] = true;
+      //MODE = 3;
+      holder[3] = true;
     }
   }
-*/
+
   println(keyCode);
 }
 
@@ -855,6 +854,10 @@ void move() {
       }
       mettaur.hurt(40);
       holder[2] = false;
+    }
+    if (holder[3]){
+     attacks.setXY("boomer", Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 2, 0);
+     holder[3] = false;
     }
     megaman.barrier(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
     /*
