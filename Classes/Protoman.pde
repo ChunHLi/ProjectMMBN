@@ -344,5 +344,11 @@ class Protoman {
   int getCol() {
     return panelCol;
   }
+  void setRow(int row){
+   panelRow = row; 
+  }
+  void setCol(int col){
+   panelCol = col; 
+  }
 }
 
