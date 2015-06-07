@@ -107,7 +107,7 @@ void setup() {
   //mettaur = new Mettaur();
   protoman = new Protoman();
   backGround = new Animation("../Sprites/backgrounds/00", 8);
-  Chips = new ChipMenu();
+  Chips = new ChipMenu("tut");
   isXReleased = true;
   chargeFrame = 0;
   //mettaurTimer = 0;
@@ -307,6 +307,9 @@ void keyPressed() {
           }
           if (Chips.selected.get(0).chipID == 105) {
             holder[2] = true;
+          }
+          if (Chips.selected.get(0).chipID == 121) {
+            holder[3] = true;
           }
           if (Chips.selected.get(0).name.equals("LifeSwrd")){
             ChipKey[3] = true;

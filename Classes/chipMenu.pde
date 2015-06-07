@@ -23,7 +23,7 @@ class ChipMenu {
   float crossCursorXPos = 12;
   float crossCursorYPos = 10;
 
-  ChipMenu() {
+  ChipMenu(String fileName) {
     tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
     tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
     tutorialFolder.add(new Chip(80, 'S', "Sword", 70, 0));
@@ -54,7 +54,42 @@ class ChipMenu {
     tutorialFolder.add(new Chip(50, 'B', "MiniBomb", 58, 0));
     tutorialFolder.add(new Chip(0, 'B', "Brrier10", 180, 0));
     tutorialFolder.add(new Chip(0, 'B', "Brrier10", 180, 0));
-    chipFolder = tutorialFolder;
+    
+    swordFolder.add(new Chip(80, '!', "Sword", 70, 0));
+    swordFolder.add(new Chip(80, '!', "Sword", 70, 0));
+    swordFolder.add(new Chip(80, '!', "Sword", 70, 0));
+    swordFolder.add(new Chip(150, 'B', "WideBlade", 73, 0));
+    swordFolder.add(new Chip(150, 'B', "WideBlade", 73, 0));
+    swordFolder.add(new Chip(150, 'B', "WideBalde", 73, 0));
+    swordFolder.add(new Chip(150, 'B', "LongBlade", 74, 0));
+    swordFolder.add(new Chip(150, 'B', "LongBlade", 74, 0));
+    swordFolder.add(new Chip(150, 'B', "LongBalde", 74, 0));
+    swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
+    swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
+    swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
+    swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
+    swordFolder.add(new Chip(200, '!', "Rflectr3", 93, 0));
+    swordFolder.add(new Chip(200, '!', "Rflectr3", 93, 0));
+    swordFolder.add(new Chip(200, '!', "Rflectr3", 93, 0));
+    swordFolder.add(new Chip(120, 'B', "hiBoomer", 121, 0));
+    swordFolder.add(new Chip(120, 'B', "hiBoomer", 121, 0));
+    swordFolder.add(new Chip(120, 'B', "hiBoomer", 121, 0));
+    swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
+    swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
+    swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
+    swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
+    swordFolder.add(new Chip(150, '!', "Protoman", 193, 0));
+    swordFolder.add(new Chip(290, 'B', "ProtomanSP", 193, 0));
+    swordFolder.add(new Chip(300, '!', "ColonelSp", 193, 0));
+    swordFolder.add(new Chip(80, '!', "Recover80", 159, 0));
+    swordFolder.add(new Chip(80, '!', "Recover80", 159, 0));
+    swordFolder.add(new Chip(80, '!', "Recover80", 159, 0));
+    
+    if (fileName.equals("tut")){
+      chipFolder = tutorialFolder;
+    } else if (fileName.equals("sword")){
+      chipFolder = swordFolder; 
+    }
     chipInterface = loadImage("../Sprites/chipSelection/000.png");
     chipInterface.resize((int)(chipInterface.width*1.5), (int)(chipInterface.height*1.5));
     crossSelect.resize((int)(crossSelect.width * 1.5), (int)(crossSelect.height * 1.5));
