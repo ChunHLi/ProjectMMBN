@@ -166,7 +166,15 @@ void draw() {
     }
   }
   Chips.selected.PA();
-  if (Chips.selected.animationSequence == 145){
+  if (Chips.selected.animationSequence < 151 && Chips.selected.animationSequence > 144){
+    if (start.currentFrame < 6){
+      start.displayChips(100 ,100);
+    }
+    else{
+      start.currentFrame = 0;
+    }
+  }
+  if (Chips.selected.animationSequence == 151){
     MODE = 0;
   }
   OST.playTheList();
@@ -998,19 +1006,21 @@ void checkMode() {
   }
   if (modeChanged && MODE == 4){
     displayMenu = false;
-    if (start.currentFrame < 5){
-      start.displayChips(100 ,100);
-    } else {
-      start.currentFrame = 0;
-      Chips.selected.checkPA();
-      if (Chips.selected.PAExists){
-        MODE = 5;
-        Chips.throwOutChips();
-      } else{
-        MODE = 0;
-        modeChanged = false;
-        customBar.customBarCount = 0;
-        Chips.throwOutChips();
+    Chips.selected.checkPA();
+    if (Chips.selected.PAExists){
+      MODE = 5;
+      Chips.throwOutChips();
+      
+    } else{
+      MODE = 0;
+      modeChanged = false;
+      customBar.customBarCount = 0;
+      Chips.throwOutChips();
+      if (start.currentFrame < 6){
+        start.displayChips(100 ,100);
+      }
+      else{
+        start.currentFrame = 0;
       }
     }
   }

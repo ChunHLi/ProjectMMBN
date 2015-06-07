@@ -80,26 +80,26 @@ public class ChipLinkedList {
       } else if (animationSequence < selected.size() * 15 + 5) {
         image(appearPA.spriteFrames[4], 24, 41);
         if (animationSequence > 4) {
-          selected.get(0).displayName(24, 101,true);
+          selected.get(0).displayName(24, 101, true);
         }
         if (animationSequence > 19) {
-          selected.get(1).displayName(24, 125,true);
+          selected.get(1).displayName(24, 125, true);
         }
         if (animationSequence > 34) {
-          selected.get(2).displayName(24, 149,true);
+          selected.get(2).displayName(24, 149, true);
         }
         if (animationSequence > 49 && selected.size() > 3) {
-          selected.get(3).displayName(24, 173,true);
+          selected.get(3).displayName(24, 173, true);
         }
         if (animationSequence > 64 && selected.size() > 4) {
-          selected.get(4).displayName(24, 197,true);
+          selected.get(4).displayName(24, 197, true);
         }
       } else if (animationSequence < 140) {
         image(appearPA.spriteFrames[4], 24, 41);
         int counter = 0;
         while (counter < selected.size ()) {
           if (counter < PAStartIndex || counter > PAStartIndex + 2) {
-            selected.get(counter).displayName(24, 101 + counter * 24,true);
+            selected.get(counter).displayName(24, 101 + counter * 24, true);
           }
           if (lifeSword) {
             selected.set(PAStartIndex, LifeSword);
@@ -112,13 +112,14 @@ public class ChipLinkedList {
           }
           if (doubleHero) {
           }
-          if (animationSequence % 4 != 0){
-            selected.get(PAStartIndex).displayName(24, 101 + PAStartIndex * 24,true);
+          if (animationSequence % 4 != 0) {
+            selected.get(PAStartIndex).displayName(24, 101 + PAStartIndex * 24, true);
           }
           counter += 1;
         }
       } else if (animationSequence < 145) {
         disappearPA.display(24, 60, 0);
+      } else if (animationSequence < 151) {
       } else {
         selected.remove(PAStartIndex + 1);
         selected.remove(PAStartIndex + 1);
