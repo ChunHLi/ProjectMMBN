@@ -11,23 +11,24 @@ public class ChipAttack{
  Animation boomer = new Animation("../Sprites/battleChipAttack/boomer/00", 4);
  
  private boolean[] chips = {
-  false, false, false, false, false, false, false, false
-  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard, 6 firehit
+  false, false, false, false, false, false, false, false, false, false
+  //0 bomb, 1 bexplosion, 2 cEx, 3 bust, 4 spread, 5 guard, 6 firehit, 7 boomer, 8 gigacannon, 9 hispread
  };
  private int[] frames = {
-   6, 8, 6, 8, 5, 4, 4
-   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard, 5 firehit, 6 boomer
+   6, 8, 6, 8, 5, 4, 4, 8, 60
+   //0 bEx, 1 cEx, 2 cBust, 3 spreader, 4 guard, 5 firehit, 6 boomer, 7 gigacannon, 8 hispread
  };
  private int bombRow, bombCol, guardRow, guardCol, boomRow, boomCol;
  private float oX, oY;
  private float xbomb, ybomb, bombTime;
  private float xcan, ycan;
  private float xbust, ybust;
- private float xspread, yspread;
- private int spreadCount, boomerCount;
+ private float xspread, yspread, xhispread, yhispread;
+ private int spreadCount, hispreadCount, boomerCount, gigaCount;
  private float xrec, yrec;
  private int guardDMG;
  private float xfire, yfire;
+ private float xgiga, ygiga;
  
  public ChipAttack(){
    
@@ -47,7 +48,7 @@ public class ChipAttack{
       if (!grid[bombRow][bombCol].isDangerVirus()){
         grid[bombRow][bombCol].toggleDangerVirus();
       }
-      grid[bombRow][bombCol].setDamage(10);
+      grid[bombRow][bombCol].setDamage(50);
       chips[1] = true;
      }
    }
@@ -128,7 +129,7 @@ public class ChipAttack{
      } else if (boomerCount < 28){
        boomer.displayF(grid[boomRow][boomCol].getLocationX(), grid[boomRow][boomCol].getLocationY()-5*(boomerCount%4), boomerCount%4);
        if (boomerCount%4 == 0 && boomerCount != 20){
-        boomRow--; 
+        boomRow--;
        }
      } else if (boomerCount == 28){
        boomRow--;
@@ -145,6 +146,40 @@ public class ChipAttack{
        chips[7] = false;
       boomerCount = 0; 
      }
+   }
+   if (chips[8]){
+    if (gigaCount < frames[7]-1){
+     try{cEx.displayF(xspread-10, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread-10, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread-10, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread+50, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread+50, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread+50, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread-70, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread-70, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xspread-70, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     gigaCount++;
+    } else{
+     chips[8] = false;
+     gigaCount = 0; 
+    }
+   }
+   if (chips[9]){
+    if (spreadCount < frames[8]-1){
+     try{spread.displayF(xspread-10, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread-10, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread-10, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread+50, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread+50, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread+50, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread-70, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread-70, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xspread-70, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+     hispreadCount++;
+    } else{
+     chips[9] = false;
+     hispreadCount = 0; 
+    }
    }
  }
 
@@ -178,13 +213,13 @@ public class ChipAttack{
      guardRow = row;
      guardCol = col+1;
      chips[5] = true;
-     guardDMG = 10;
+     guardDMG = 50;
    }
    if (chip.equals("guard3")){
      guardRow = row;
      guardCol = col+1;
      chips[5] = true;
-     guardDMG = 50;
+     guardDMG = 200;
    }
    if (chip.equals("firehit")){
      xfire = xpos;
@@ -197,6 +232,16 @@ public class ChipAttack{
        boomCol = col;
        chips[7] = true;
      }
+   }
+   if (chip.equals("gigacannon")){
+     xgiga = xpos;
+     ygiga = ypos;
+     chips[8] = true;
+   }
+   if (chip.equals("hispread")){
+     xhispread = xpos;
+     yhispread = ypos;
+     chips[4] = true;
    }
  }
 }
