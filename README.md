@@ -144,7 +144,17 @@ Change - Log
 
 6/04/15 - Shawn Li - Protoman's sequence has been completed.
 
+6/05/15 - Kah Soon Yap - Fixed up Protoman animation
+
 6/05/15 - Shawn Li - Protoman's attacks now display correctly.
+
+6/05/15 - Kah Soon Yap - Protoman's HP shows
+
+6/06/15 - Kah Soon Yap - Battle start animation done
+
+6/06/15 - Kah Soon Yap - Boomer done
+
+
 To do
 =========================================================================================================================
 
