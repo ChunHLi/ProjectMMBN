@@ -104,7 +104,7 @@ class ChipMenu {
         counter += 1;
       }
       image(chipFolder.get(cursorIndex).chipArt, 23, 35);
-      chipFolder.get(cursorIndex).displayName();
+      chipFolder.get(cursorIndex).displayName(24,32,false);
       chipFolder.get(cursorIndex).displayDamage();
       selected.display(1);
     }

@@ -8,6 +8,7 @@ PImage panels;
 PImage enteringChipMenu;
 float xpos;
 float ypos;
+boolean delay;
 boolean[] Keys = {
   false, false, false, false, false
     //0 left, 1 right, 2 up, 3 down, 4 buster
@@ -56,6 +57,7 @@ boolean modeChanged = true;
 boolean displayMenu;
 boolean displayCrosses;
 int MODE = 1;
+int Delay;
 int changeMenuCounter;
 ChipMenu Chips;
 boolean isX, isXReleased;
@@ -159,6 +161,10 @@ void draw() {
       counter += 1;
     }
   }
+  Chips.selected.PA();
+  if (Chips.selected.animationSequence == 145){
+    MODE = 0;
+  }
   OST.playTheList();
 }
 
@@ -261,6 +267,9 @@ void keyPressed() {
           if (Chips.selected.get(0).chipID == 179) {
             ChipKey[12] = true;
           }
+          if (Chips.selected.get(0).name.equals("LifeSwrd")){
+            ChipKey[3] = true;
+          }
           Chips.selected.remove(0);
         }
       }
@@ -286,11 +295,20 @@ void keyPressed() {
       MODE = 0;
       modeChanged = !modeChanged;
     } else {
-      MODE = 0;
-      modeChanged = true;
-      displayMenu = false;
-      customBar.customBarCount = 0;
-      Chips.throwOutChips();
+      Chips.selected.checkPA();
+      if (Chips.selected.PAExists){
+        MODE = 5;
+        //modeChanged = true;
+        displayMenu = false;
+        Chips.throwOutChips();
+      }
+      else{
+        MODE = 0;
+        modeChanged = true;
+        displayMenu = false;
+        customBar.customBarCount = 0;
+        Chips.throwOutChips();
+      }
     }
   }
   if (keyCode == 32) {
@@ -600,7 +618,7 @@ void move() {
     if (ChipKey[3]) {
       if (megaman.LifeSword.currentFrame < chipCount[3] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "lifesword");
-      } else if (megaman.LifeSword.currentFrame == 4) {
+      } if (megaman.LifeSword.currentFrame == 4) {
         Grid[megaman.getRow()][megaman.getCol()+1].setDangerVirus(true);
         Grid[megaman.getRow()][megaman.getCol()+1].setDamage(600);
         Grid[megaman.getRow()][megaman.getCol()+2].setDangerVirus(true);
@@ -1043,8 +1061,8 @@ void showHP(int translation) {
   } else {
     image(numberText[megaman.getHP()%1000/100], 36 + translation, 6);
   }
-  /*megaman.showStatus(translation);
-   //Enemy
+  megaman.showStatus(translation);
+   /*//Enemy
    if (mettaur.getHP() > 0) {
    if (mettaur.getHP()%10!=1) {
    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);

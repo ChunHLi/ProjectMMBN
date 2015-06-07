@@ -32,24 +32,25 @@ class Chip {
     attackType = AttackType;
   }
 
-  void displayName() {
+  void displayName(float xpos, float ypos,boolean PA) {
     int counter = 0;
     while (counter < name.length ()) {
       if (Character.isLowerCase(name.charAt(counter))) {
         PImage thisChar = loadImage("../Sprites/textArt/chipNameText/" + Character.toUpperCase(name.charAt(counter)) + 1 + ".png");
         thisChar.resize((int)(thisChar.width * 1.5),(int)(thisChar.height * 1.5));
-        image(thisChar, 24 + 11 * counter, 32 - thisChar.height);
+        image(thisChar, xpos + 11 * counter, ypos - thisChar.height);
       } else {
         PImage thisChar = loadImage("../Sprites/textArt/chipNameText/" + name.charAt(counter) + ".png");
         thisChar.resize((int)(thisChar.width * 1.5),(int)(thisChar.height * 1.5));
-        image(thisChar, 24 + 11 * counter, 32 - thisChar.height);
+        image(thisChar, xpos + 11 * counter, ypos - thisChar.height);
       }
       counter += 1;
     }
-    
-    PImage Code = loadImage("../Sprites/textArt/chipCodeText/" + letter + ".png");
-    Code.resize((int)(Code.width * 1.5),(int)(Code.height * 1.5));
-    image(Code, 24, 112);
+    if (!PA){
+      PImage Code = loadImage("../Sprites/textArt/chipCodeText/" + letter + ".png");
+      Code.resize((int)(Code.width * 1.5),(int)(Code.height * 1.5));
+      image(Code, 24, 112);
+    }
   }
   
   void displayDamage(){
