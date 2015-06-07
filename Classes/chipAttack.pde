@@ -149,15 +149,15 @@ public class ChipAttack{
    }
    if (chips[8]){
     if (gigaCount < frames[7]-1){
-     try{cEx.displayF(xspread-10, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread-10, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread-10, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread+50, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread+50, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread+50, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread-70, yspread, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread-70, yspread-40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{cEx.displayF(xspread-70, yspread+40, spreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-10, ygiga, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-10, ygiga-40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-10, ygiga+40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga+50, ygiga, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga+50, ygiga-40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga+50, ygiga+40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-70, ygiga, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-70, ygiga-40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{cEx.displayF(xgiga-70, ygiga+40, gigaCount);}catch(ArrayIndexOutOfBoundsException e) {}
      gigaCount++;
     } else{
      chips[8] = false;
@@ -165,16 +165,16 @@ public class ChipAttack{
     }
    }
    if (chips[9]){
-    if (spreadCount < frames[8]-1){
-     try{spread.displayF(xspread-10, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread-10, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread-10, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread+50, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread+50, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread+50, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread-70, yspread, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread-70, yspread-40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
-     try{spread.displayF(xspread-70, yspread+40, spreadCount%6);}catch(ArrayIndexOutOfBoundsException e) {}
+    if (hispreadCount < frames[8]-1){
+     try{spread.displayF(xhispread-10, yhispread, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread-10, yhispread-40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread-10, yhispread+40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread+50, yhispread, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread+50, yhispread-40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread+50, yhispread+40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread-70, yhispread, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread-70, yhispread-40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
+     try{spread.displayF(xhispread-70, yhispread+40, hispreadCount);}catch(ArrayIndexOutOfBoundsException e) {}
      hispreadCount++;
     } else{
      chips[9] = false;
@@ -241,7 +241,7 @@ public class ChipAttack{
    if (chip.equals("hispread")){
      xhispread = xpos;
      yhispread = ypos;
-     chips[4] = true;
+     chips[9] = true;
    }
  }
 }

@@ -311,11 +311,11 @@ void keyPressed() {
           if (Chips.selected.get(0).name.equals("LifeSwrd")){
             ChipKey[3] = true;
           }
-          if (Chips.selected.get(0).name.equals("LifeSwrd")){
-            ChipKey[3] = true;
+          if (Chips.selected.get(0).name.equals("GigaCannon")){
+            PA[0] = true;
           }
-          if (Chips.selected.get(0).name.equals("LifeSwrd")){
-            ChipKey[3] = true;
+          if (Chips.selected.get(0).name.equals("HiSpread")){
+            PA[1] = true;
           }
           Chips.selected.remove(0);
         }

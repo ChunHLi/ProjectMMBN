@@ -6,6 +6,8 @@ public class ChipLinkedList {
   Animation appearPA = new Animation("../Sprites/textArt/text/PA/00", 5);
   Animation disappearPA = new Animation("../Sprites/textArt/text/PA/01", 5);
   Chip LifeSword = new Chip(400, '!', "LifeSwrd", 194, 0);
+  Chip GigaCannon = new Chip(300, '!', "GigaCannon", 194, 0);
+  Chip HiSpread = new Chip(60, '!', "HiSpread", 194, 0);
 
   ChipLinkedList() {
     selected = new LinkedList<Chip>();
@@ -105,8 +107,10 @@ public class ChipLinkedList {
             selected.set(PAStartIndex, LifeSword);
           }
           if (gigaCannon) {
+            selected.set(PAStartIndex, GigaCannon);
           }
           if (spreader) {
+            selected.set(PAStartIndex, HiSpread);
           }
           if (twinLeaders) {
           }
