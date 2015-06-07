@@ -71,6 +71,7 @@ ArrayList<Chip> tutorialFolder;
 PImage pause;
 ChipAttack attacks;
 boolean targetFound;
+Animation start;
 
 void setup() {
   size(360, 240);
@@ -85,6 +86,7 @@ void setup() {
     numberText[y] = loadImage(txtDirectory);
     numberText[y].resize((int)(numberText[y].width*1.5), (int)(numberText[y].height*1.5));
   }
+  start = new Animation("../Sprites/textArt/start/00", 6, 1);
   pause = loadImage("../Sprites/textArt/text/Pause.png");
   pause.resize((int)(pause.width*1.5), (int)(pause.height*1.5));
   //parameter1 gives the directory, parameter2 is the amount of frames
@@ -295,79 +297,21 @@ void keyPressed() {
       MODE = 0;
       modeChanged = !modeChanged;
     } else {
-      Chips.selected.checkPA();
-      if (Chips.selected.PAExists){
-        MODE = 5;
-        //modeChanged = true;
-        displayMenu = false;
-        Chips.throwOutChips();
-      }
-      else{
-        MODE = 0;
-        modeChanged = true;
-        displayMenu = false;
-        customBar.customBarCount = 0;
-        Chips.throwOutChips();
-      }
+      MODE = 4;
+      modeChanged = !modeChanged;
     }
   }
   if (keyCode == 32) {
     OST.nextSong();
   }
-  //chip tests
-  /*
-  if (keyCode == 86) {
-   if (!currentlyMoving()) {
-   Keys[5] = true;
-   }
-   }
-   if (keyCode == 73) {
-   if (!currentlyMoving()) {
-   Keys[9] = true;
-   }
-   }
-   if (keyCode == 79) {
-   if (!currentlyMoving()) {
-   Keys[10] = true;
-   }
-   }
-   if (keyCode == 80) {
-   if (!currentlyMoving()) {
-   Keys[11] = true;
-   }
-   }
-   if (keyCode == 70) {
-   if (!currentlyMoving()) {
-   Keys[6] = true;
-   }
-   }
-   if (keyCode == 68) {
-   if (!currentlyMoving()) {
-   Keys[7] = true;
-   }
-   }
-   if (keyCode == 66) {
-   if (!currentlyMoving()) {
-   Keys[8] = true;
-   }
-   }
-   if (keyCode == 71) {
-   if (!currentlyMoving()) {
-   Keys[12] = true;
-   }
-   }
-   if (keyCode == 69) {
-   if (!currentlyMoving()) {
-   Keys[13] = true;
-   }
-   }*/
+/*
   if (keyCode == 16) {
     if (!currentlyMoving()) {
       navi[0] = true;
       MODE = 3;
     }
   }
-
+*/
   println(keyCode);
 }
 
@@ -934,10 +878,28 @@ void checkMode() {
     changeMenu();
   }
   if (modeChanged && MODE == 0) {
-    changeBattle();
+    //changeBattle();
   }
   if (modeChanged && MODE == 2) {
     pause();
+  }
+  if (modeChanged && MODE == 4){
+    displayMenu = false;
+    if (start.currentFrame < 5){
+      start.displayChips(100 ,100);
+    } else {
+      start.currentFrame = 0;
+      Chips.selected.checkPA();
+      if (Chips.selected.PAExists){
+        MODE = 5;
+        Chips.throwOutChips();
+      } else{
+        MODE = 0;
+        modeChanged = false;
+        customBar.customBarCount = 0;
+        Chips.throwOutChips();
+      }
+    }
   }
 }
 
@@ -1109,4 +1071,3 @@ void reset() {
     }
   }
 }
-
