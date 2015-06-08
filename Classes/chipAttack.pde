@@ -243,5 +243,6 @@ public class ChipAttack{
      yhispread = ypos;
      chips[9] = true;
    }
+   
  }
 }
