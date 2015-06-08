@@ -154,6 +154,10 @@ Change - Log
 
 6/06/15 - Kah Soon Yap - Boomer done
 
+6/06/15 - Shawn Li - Program Advances work correctly.
+
+6/07/15 - Shawn Li - Battle start animation works.
+
 6/07/15 - Kah Soon Yap - Gigacannon and Hispread PAs done
 
 6/07/15 - Kah Soon Yap - Adjusted number on chips
