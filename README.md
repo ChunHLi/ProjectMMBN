@@ -154,6 +154,13 @@ Change - Log
 
 6/06/15 - Kah Soon Yap - Boomer done
 
+6/07/15 - Kah Soon Yap - Gigacannon and Hispread PAs done
+
+6/07/15 - Kah Soon Yap - Adjusted number on chips
+
+6/07/15 - Kah Soon Yap - Sword folder implemented
+
+
 
 To do
 =========================================================================================================================
