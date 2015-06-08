@@ -50,7 +50,7 @@ class Protoman {
         } else if (arrivePanel.currentFrame == arrivePanel.spriteCount - 1 && moved) {
           arrivePanel.display(Grid[panelRow][panelCol].getLocationX() - arrivePanel.spriteFrames[arrivePanel.currentFrame].width + 52, Grid[panelRow][panelCol].getLocationY(), invincTimer);
           moved = false;
-          if (r.nextInt(1) == 0) {
+          if (r.nextInt(3) == 0) {
             raiseGuard = true;
             actionDelay = 28;
           } else {
