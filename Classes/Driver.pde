@@ -1,4 +1,5 @@
 import java.util.*;
+import ddf.minim.*;
 
 Megaman megaman;
 Mettaur mettaur;
@@ -6,18 +7,32 @@ Protoman protoman;
 Animation backGround;
 PImage panels;
 PImage enteringChipMenu;
+PImage menu;
+PImage name;
+PImage mouseEmblem;
+PImage menuTutorial;
+PImage Protoman;
+PImage logo;
 float xpos;
 float ypos;
+float tint;
+int rotateSpeed = 45;
+boolean speedUP;
 boolean delay;
+boolean darken;
+AudioPlayer Intro;
 boolean[] Keys = {
   false, false, false, false, false
     //0 left, 1 right, 2 up, 3 down, 4 buster
 };
+boolean isTutorial;
 int[] FrameCount = {
   1, 8, 4, 4, 5, 4, 7, 13
     //0 , 1 , 2 ArrivePanel, 3 LeavePanel, 4 Buster, 5 BlueCharge, 6 PurpleCharge, 7 mettaur, 8 recover
 };
 int customCounter;
+int rotateCounter;
+float nameCounter;
 PlayList OST;
 
 Panel[][] Grid = {
@@ -66,9 +81,11 @@ boolean moved;
 boolean modeChanged = true;
 boolean displayMenu;
 boolean displayCrosses;
-int MODE = 1;
+int MODE = -1;
 int Delay;
 int changeMenuCounter;
+int opacityCounter = 127;
+boolean shift;
 ChipMenu Chips;
 boolean isX, isXReleased;
 int chargeFrame;
@@ -91,6 +108,17 @@ void setup() {
   panels.resize((int)(panels.width*1.5), (int)(panels.height*1.5));
   enteringChipMenu = loadImage("../Sprites/chipSelection/000.png");
   enteringChipMenu.resize((int)(enteringChipMenu.width*1.5), (int)(enteringChipMenu.height*1.5));
+  menu = loadImage("../Sprites/backgrounds/backGround1.png");
+  name = loadImage("../Sprites/backgrounds/name.png");
+  name.resize(150,40);
+  mouseEmblem = loadImage("../Sprites/backgrounds/emblem.gif");
+  mouseEmblem.resize(18,18);
+  logo = loadImage("../Sprites/backgrounds/logo.png");
+  Protoman = loadImage("../Sprites/backgrounds/protoman.png");
+  Protoman.resize(160,18);
+  
+  menuTutorial = loadImage("../Sprites/backgrounds/menuTutorial.png");
+  menuTutorial.resize(150,18);
   for (int y = 0; y < 10; y++) {
     String txtDirectory = "../Sprites/textArt/text/" + y + ".png";
     numberText[y] = loadImage(txtDirectory);
@@ -105,9 +133,7 @@ void setup() {
   //with the amount of frames in the sequence.
   megaman = new Megaman();
   //mettaur = new Mettaur();
-  protoman = new Protoman();
   backGround = new Animation("../Sprites/backgrounds/00", 8);
-  Chips = new ChipMenu("sword");
   isXReleased = true;
   chargeFrame = 0;
   //mettaurTimer = 0;
@@ -122,74 +148,159 @@ void setup() {
   Minim minim4 = new Minim(this);
   Minim minim5 = new Minim(this);
   Minim minim6 = new Minim(this);
+  Minim intro = new Minim(this);
+  Intro = intro.loadFile("../Music/intro.mp3");
+  Intro.setGain(-15);
   OST.add("../Music/01.mp3", minim1, 5000);
   OST.add("../Music/02.mp3", minim2);
   OST.add("../Music/03.mp3", minim3);
   OST.add("../Music/04.mp3", minim4, 5000);
   OST.add("../Music/05.mp3", minim5, 21000);
   OST.add("../Music/06.mp3", minim6);
+  noCursor();
 }
 
 void draw() {
   background(0);
-  backGround.display(0, height/2, 0);
-  image(panels, width/2 - panels.width/2, height/2);
-  //showPanelDanger();
-  megaman.getHurt(Grid);
-  if (MODE == 0) {
-    showHP(0);
-  }
-  moveCursor();
-  processKeys();
-  move();
-  charge();
-  //mettaurMove();
-  attacks.move(Grid);
-  //mettaur.getHurt(Grid);
-  protoman.hurt(Grid, MODE, megaman);
-  protoman.sequence(Grid, MODE, megaman);
-  checkMode();
-  Chips.display(displayMenu);
-  if (displayMenu) {
-    showHP(180);
-  }
-  if (MODE == 1) {
-    Chips.displayCursor();
-    if (displayCrosses) {
-      Chips.displayCrossCursor();
+  if (MODE == -1) {
+    Intro.play();
+    tint(tint);
+    tint += 1;
+    image(menu,0,12);
+    if (opacityCounter == 255){
+      shift = true;
     }
-  }
-  //mettaurTimer++;
-  if (MODE == 0) {
-    customBar.displayCustom(width/5, 20);
-    if (!currentlyMoving()) {
-      Chips.selected.displayBattle(MODE, Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+    if (opacityCounter == 64){
+      shift = false;
     }
-  }
-  if (virusForce.size() > 0) {
-    int counter = 0;
-    while (counter < virusForce.size ()) {
-      virusForce.get(counter).move(Grid);
-      counter += 1;
+    if (shift){
+      opacityCounter -= 1;
     }
-  }
-  Chips.selected.PA();
-  if (Chips.selected.animationSequence < 151 && Chips.selected.animationSequence > 144) {
-    if (start.currentFrame < 6) {
-      start.displayChips(100, 100);
-    } else {
-      start.currentFrame = 0;
+    else{
+      opacityCounter += 1;
     }
+    tint(tint,opacityCounter);
+    image(logo,20,0);
+    tint(tint);
+    if (nameCounter > -30){
+      if (nameCounter < 0){
+        image(name,width - 150,height - 40 + nameCounter/5.0);
+      }
+      else{
+        image(name,width - 150,height - 40 - nameCounter/5.0);
+      }
+      nameCounter -= 1;
+    }
+    else{
+      nameCounter = 30;
+      image(name,width - 150,height - 40 - nameCounter/5.0);
+    }
+    if ((mouseX > 107 && mouseX < 257) && (mouseY > 140 && mouseY < 158)){
+      menuTutorial.filter(INVERT);
+    }
+    if ((mouseX > 100 && mouseX < 250) && (mouseY > 170 && mouseY < 188)){
+      Protoman.filter(INVERT);
+    }
+    image(menuTutorial, 107, 140);
+    image(Protoman, 100, 170);
+  } else {
+    tint(255);
+    background(0);
+    backGround.display(0, height/2, 0);
+    image(panels, width/2 - panels.width/2, height/2);
+    //showPanelDanger();
+    megaman.getHurt(Grid);
+    if (MODE == 0) {
+      showHP(0);
+    }
+    moveCursor();
+    processKeys();
+    move();
+    charge();
+    if (isTutorial){
+      mettaurMove();
+      mettaur.getHurt(Grid);
+      mettaurTimer++;
+    }
+    else{
+      protoman.hurt(Grid, MODE, megaman);
+      protoman.sequence(Grid, MODE, megaman);
+    }
+    attacks.move(Grid);
+    checkMode();
+    Chips.display(displayMenu);
+    if (displayMenu) {
+      showHP(180);
+    }
+    if (MODE == 1) {
+      Chips.displayCursor();
+      if (displayCrosses) {
+        Chips.displayCrossCursor();
+      }
+    }
+    if (MODE == 0) {
+      customBar.displayCustom(width/5, 20);
+      if (!currentlyMoving()) {
+        Chips.selected.displayBattle(MODE, Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY());
+      }
+    }
+    if (virusForce.size() > 0) {
+      int counter = 0;
+      while (counter < virusForce.size ()) {
+        virusForce.get(counter).move(Grid);
+        counter += 1;
+      }
+    }
+    Chips.selected.PA();
+    if (Chips.selected.animationSequence < 151 && Chips.selected.animationSequence > 144) {
+      if (start.currentFrame < 6) {
+        start.displayChips(100, 100);
+      } else {
+        start.currentFrame = 0;
+      }
+    }
+    if (Chips.selected.animationSequence == 151) {
+      MODE = 0;
+    }
+    reset();
+    OST.playTheList();
   }
-  if (Chips.selected.animationSequence == 151) {
-    MODE = 0;
+  pushMatrix();
+  imageMode(CENTER);
+  translate(mouseX,mouseY);
+  rotate(rotateCounter*TWO_PI/rotateSpeed);
+  image(mouseEmblem, 0, 0);
+  imageMode(CORNER);
+  popMatrix();
+  if (speedUP){
+    rotateCounter += 3;
   }
-  reset();
-  OST.playTheList();
+  else{
+    rotateCounter += 1;
+  }
 }
 
 void mousePressed() {
   print(mouseX + " " + mouseY + "\n");
+  speedUP = true;
+  if (MODE == -1){
+    if ((mouseX > 107 && mouseX < 257) && (mouseY > 140 && mouseY < 158)){
+      mettaur = new Mettaur();
+      Chips = new ChipMenu("tut");
+      isTutorial = true;
+      Intro.pause();
+    }
+    if ((mouseX > 100 && mouseX < 250) && (mouseY > 170 && mouseY < 188)){
+      protoman = new Protoman();
+      Chips = new ChipMenu("sword");
+      Intro.pause();
+    }
+    MODE = 1;
+  }
+}
+
+void mouseReleased(){
+  speedUP = false;
 }
 
 //!currentlyMoving is important in order for megaman to not be able to move in the middle of his animation!
@@ -915,20 +1026,24 @@ void move() {
     if (holder[2]) {
       for (int i = 0; i < 3; i ++) {
         for (int j = 3; j < 6; j++) {
-          try{
+          try {
             if (mettaur.getCol() == j && mettaur.getRow() == i) {
               attacks.setXY("firehit", Grid[mettaur.getRow()][mettaur.getCol()].getLocationX(), Grid[mettaur.getRow()][mettaur.getCol()].getLocationY(), 0, 0);
               Grid[mettaur.getRow()][mettaur.getCol()].setDamage(180);
               Grid[mettaur.getRow()][mettaur.getCol()].setDangerVirus(true);
             }
-          }catch(NullPointerException e){}
-          try{
+          }
+          catch(NullPointerException e) {
+          }
+          try {
             if (protoman.getCol() == j && protoman.getRow() == i) {
               attacks.setXY("firehit", Grid[protoman.getRow()][protoman.getCol()].getLocationX(), Grid[protoman.getRow()][protoman.getCol()].getLocationY(), 0, 0);
               Grid[protoman.getRow()][protoman.getCol()].setDamage(180);
               Grid[protoman.getRow()][protoman.getCol()].setDangerVirus(true);
             }
-          }catch(NullPointerException e){}
+          }
+          catch(NullPointerException e) {
+          }
         }
       }
       holder[2] = false;
@@ -1418,8 +1533,8 @@ void showHP(int translation) {
     image(numberText[megaman.getHP()%1000/100], 36 + translation, 6);
   }
   megaman.showStatus(translation);
-  /*//Enemy
-   if (mettaur.getHP() > 0) {
+  //Enemy
+   if (isTutorial && mettaur.getHP() > 0) {
    if (mettaur.getHP()%10!=1) {
    image(numberText[mettaur.getHP()%10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+32, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
    } else {
@@ -1430,8 +1545,8 @@ void showHP(int translation) {
    } else {
    image(numberText[mettaur.getHP()%100/10], Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()+27, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY()+5);
    }
-   }*/
-  if (protoman.getHP() > 0) {
+   }
+  if (!isTutorial && protoman.getHP() > 0) {
     if (protoman.getHP()%10!=1) {
       image(numberText[protoman.getHP()%10], Grid[protoman.getRow()][protoman.getCol()].getLocationX()+37, Grid[protoman.getRow()][protoman.getCol()].getLocationY()+7);
     } else {
