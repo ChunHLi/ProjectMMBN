@@ -12,10 +12,13 @@ PImage name;
 PImage mouseEmblem;
 PImage menuTutorial;
 PImage Protoman;
+PImage Mettaur;
+PImage Proto;
 PImage logo;
 float xpos;
 float ypos;
 float tint;
+float transitionXPos = 360;
 int rotateSpeed = 45;
 boolean speedUP;
 boolean delay;
@@ -81,6 +84,8 @@ boolean moved;
 boolean modeChanged = true;
 boolean displayMenu;
 boolean displayCrosses;
+boolean displayMettaurTransition;
+boolean displayProtoTransition;
 int MODE = -1;
 int Delay;
 int changeMenuCounter;
@@ -116,7 +121,8 @@ void setup() {
   logo = loadImage("../Sprites/backgrounds/logo.png");
   Protoman = loadImage("../Sprites/backgrounds/protoman.png");
   Protoman.resize(160,18);
-  
+  Mettaur = loadImage("../Sprites/backgrounds/mettaur.png");
+  Proto = loadImage("../Sprites/backgrounds/proto.png");
   menuTutorial = loadImage("../Sprites/backgrounds/menuTutorial.png");
   menuTutorial.resize(150,18);
   for (int y = 0; y < 10; y++) {
@@ -150,6 +156,7 @@ void setup() {
   Minim minim6 = new Minim(this);
   Minim intro = new Minim(this);
   Intro = intro.loadFile("../Music/intro.mp3");
+  Intro.skip(14400);
   Intro.setGain(-15);
   OST.add("../Music/01.mp3", minim1, 5000);
   OST.add("../Music/02.mp3", minim2);
@@ -165,19 +172,19 @@ void draw() {
   if (MODE == -1) {
     Intro.play();
     tint(tint);
-    tint += 1;
+    tint += 5;
     image(menu,0,12);
-    if (opacityCounter == 255){
+    if (opacityCounter >= 255){
       shift = true;
     }
-    if (opacityCounter == 64){
+    if (opacityCounter <= 64){
       shift = false;
     }
     if (shift){
-      opacityCounter -= 1;
+      opacityCounter -= 5;
     }
     else{
-      opacityCounter += 1;
+      opacityCounter += 5;
     }
     tint(tint,opacityCounter);
     image(logo,20,0);
@@ -203,6 +210,7 @@ void draw() {
     }
     image(menuTutorial, 107, 140);
     image(Protoman, 100, 170);
+    displayTransition();
   } else {
     tint(255);
     background(0);
@@ -285,22 +293,62 @@ void mousePressed() {
   speedUP = true;
   if (MODE == -1){
     if ((mouseX > 107 && mouseX < 257) && (mouseY > 140 && mouseY < 158)){
-      mettaur = new Mettaur();
-      Chips = new ChipMenu("tut");
-      isTutorial = true;
-      Intro.pause();
+      displayMettaurTransition = true;
     }
     if ((mouseX > 100 && mouseX < 250) && (mouseY > 170 && mouseY < 188)){
-      protoman = new Protoman();
-      Chips = new ChipMenu("sword");
-      Intro.pause();
+      displayProtoTransition = true;
     }
-    MODE = 1;
   }
 }
 
 void mouseReleased(){
   speedUP = false;
+}
+
+void displayTransition(){
+  if (displayMettaurTransition){
+    image(Mettaur,transitionXPos,12);
+    if (transitionXPos < -390){
+      displayMettaurTransition = false;
+      mettaur = new Mettaur();
+      Chips = new ChipMenu("tut");
+      isTutorial = true;
+      Intro.pause();
+      MODE = 1;    
+    }
+    else if (transitionXPos < -360){
+      background(10 * (-1 * transitionXPos - 360)); 
+      transitionXPos -= 1;
+      Intro.setGain(Intro.getGain() - 1);
+    }
+    else if (transitionXPos > 40 || transitionXPos <= 0){
+      transitionXPos -= 30;
+    }
+    else if (transitionXPos > 0){
+      transitionXPos -= 4.0/9.0;
+    }
+  }
+  if (displayProtoTransition){
+    image(Proto,transitionXPos,12);
+    if (transitionXPos < -390){
+      protoman = new Protoman();
+      Chips = new ChipMenu("sword");
+      Intro.pause();
+      MODE = 1;
+      
+    }
+    if (transitionXPos < -360){
+      background(10 * (-1 * transitionXPos - 360));
+      transitionXPos -= 1;
+      Intro.setGain(Intro.getGain() - 1);
+    }
+    else if (transitionXPos > 40 || transitionXPos <= 0){
+      transitionXPos -= 30;
+    }
+    else if (transitionXPos > 0){
+      transitionXPos -= 4.0/9.0;
+    }
+  }
 }
 
 //!currentlyMoving is important in order for megaman to not be able to move in the middle of his animation!
