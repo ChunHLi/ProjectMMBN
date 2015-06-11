@@ -8,7 +8,7 @@ public class ChipAttack{
  Animation spread = new Animation("../Sprites/battleChipAttack/spreader/00", 8);
  Animation guard = new Animation("../Sprites/battleChipAttack/guard/01", 5);
  Animation firehit = new Animation("../Sprites/battleChipAttack/firehit/00", 4);
- Animation boomer = new Animation("../Sprites/battleChipAttack/boomer/00", 4);
+ Animation boomer = new Animation("../Sprites/battleChipAttack/Boomer/00", 4);
  
  private boolean[] chips = {
   false, false, false, false, false, false, false, false, false, false

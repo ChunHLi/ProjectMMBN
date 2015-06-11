@@ -31,7 +31,7 @@ public class Megaman implements Killable {
   //Airshot
   Animation AirShot = new Animation("../Sprites/megaman/noCross/17", 5, 1);
   //Vulcan
-  Animation Vulcan = new Animation("../Sprites/battleChipAttack/vulcan/00", 8, 2);
+  Animation Vulcan = new Animation("../Sprites/battleChipAttack/Vulcan/00", 8, 2);
   //Guard
   Animation Guard = new Animation("../Sprites/battleChipAttack/guard/00", 7);
   Animation Guard3 = new Animation("../Sprites/battleChipAttack/guard/02", 7);
@@ -46,6 +46,8 @@ public class Megaman implements Killable {
   Animation Colonel1 = new Animation("../Sprites/battleChipAttack/navi/Colonel/00", 9);
   Animation Colonel2 = new Animation("../Sprites/battleChipAttack/navi/Colonel/01", 7);
   Animation Colonel3 = new Animation("../Sprites/battleChipAttack/navi/Colonel/02", 5);
+  //dblHero
+  Animation dblHero = new Animation("../Sprites/battleChipAttack/dblHero/00", 33);
   
   PImage normal = loadImage("../Sprites/megaman/normal.png");
   PImage synchro = loadImage("../Sprites/megaman/synchro.png");

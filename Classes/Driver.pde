@@ -64,8 +64,8 @@ int[] chipCount = {
 };
 
 boolean[] navi = {
-  false, false, false
-    //0 proto, 1 colonel, 2 protoSP
+  false, false, false, false
+    //0 proto, 1 colonel, 2 protoSP, 3 dblHero
 };
 boolean[] PA = {
   false, false, false
@@ -443,6 +443,10 @@ void keyPressed() {
           if (Chips.selected.get(0).name.equals("HiSpread")) {
             PA[1] = true;
           }
+          if (Chips.selected.get(0).name.equals("dnlHero")) {
+            navi[3] = true;
+            MODE = 3;
+          }
           Chips.selected.remove(0);
         }
       }
@@ -478,9 +482,8 @@ void keyPressed() {
 
   if (keyCode == 16) {
     if (!currentlyMoving()) {
-      //navi[0] = true;
-      //MODE = 3;
-      holder[3] = true;
+      navi[3] = true;
+      MODE = 3;
     }
   }
 
@@ -1379,6 +1382,23 @@ void move() {
         }
       }
     }
+    if (navi[3]){
+      if (megaman.dblHero.currentFrame < 33){
+        megaman.dblHero.displayChips(Grid[1][1].getLocationX()-50, Grid[1][1].getLocationY()+45);
+      }
+      if (megaman.dblHero.currentFrame == 32){
+        megaman.dblHero.currentFrame = 0;
+        for (int i=0; i<3; i++){
+         for (int j=3; j<6; j++){
+          Grid[i][j].setDangerVirus(true);
+          Grid[i][j].setDamage(600);
+         } 
+        }
+        navi[3] = false;
+        MODE = 0;
+      }
+    }
+    
   }
 }
 

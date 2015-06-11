@@ -8,6 +8,7 @@ public class ChipLinkedList {
   Chip LifeSword = new Chip(400, '!', "LifeSwrd", 194, 0);
   Chip GigaCannon = new Chip(300, '!', "GigaCannon", 194, 0);
   Chip HiSpread = new Chip(60, '!', "HiSpread", 194, 0);
+  Chip dblHero = new Chip(60, '!', "dblHero", 194, 0);
 
   ChipLinkedList() {
     selected = new LinkedList<Chip>();
@@ -115,6 +116,7 @@ public class ChipLinkedList {
           if (twinLeaders) {
           }
           if (doubleHero) {
+            selected.set(PAStartIndex, dblHero);
           }
           if (animationSequence % 4 != 0) {
             selected.get(PAStartIndex).displayName(24, 101 + PAStartIndex * 24, true);

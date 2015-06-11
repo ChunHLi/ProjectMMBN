@@ -164,6 +164,10 @@ Change - Log
 
 6/07/15 - Kah Soon Yap - Sword folder implemented
 
+6/08/15 - Shawn Li & Kah Soon Yap - Mental health day, burned out.
+
+6/09/15 - Shawn Li - Created the menu, can choose between two types of battles.
+
 
 
 To do
