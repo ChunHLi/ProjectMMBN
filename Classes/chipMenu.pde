@@ -78,8 +78,8 @@ class ChipMenu {
     swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
     swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
     swordFolder.add(new Chip(180, 'B', "FirePunch3", 107, 0));
-    swordFolder.add(new Chip(150, '!', "Protoman", 193, 0));
-    swordFolder.add(new Chip(290, 'B', "ProtomanSP", 193, 0));
+    swordFolder.add(new Chip(150, '!', "Protomn", 193, 0));
+    swordFolder.add(new Chip(290, 'B', "ProtomnSP", 193, 0));
     swordFolder.add(new Chip(300, '!', "ColonelSP", 193, 0));
     swordFolder.add(new Chip(80, '!', "Recover80", 159, 0));
     swordFolder.add(new Chip(80, '!', "Recover80", 159, 0));

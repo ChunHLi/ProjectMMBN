@@ -483,8 +483,12 @@ void keyPressed() {
             if (Chips.selected.get(0).name.equals("HiSpread")) {
               PA[1] = true;
             }
-            if (Chips.selected.get(0).name.equals("dnlHero")) {
+            if (Chips.selected.get(0).name.equals("dblHero")) {
               navi[3] = true;
+              MODE = 3;
+            }
+            if (Chips.selected.get(0).name.equals("TwinLeader")) {
+              navi[4] = true;
               MODE = 3;
             }
             Chips.selected.remove(0);
