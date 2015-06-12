@@ -18,6 +18,7 @@ PImage logo;
 float xpos;
 float ypos;
 float tint;
+
 float transitionXPos = 360;
 int rotateSpeed = 45;
 boolean speedUP;
@@ -222,6 +223,7 @@ void draw() {
     processKeys();
     move();
     charge();
+    attacks.move(Grid);
     if (isTutorial) {
       mettaurMove();
       mettaur.getHurt(Grid);
@@ -230,7 +232,6 @@ void draw() {
       protoman.hurt(Grid, MODE, megaman);
       protoman.sequence(Grid, MODE, megaman);
     }
-    attacks.move(Grid);
     checkMode();
     Chips.display(displayMenu);
     if (displayMenu) {
@@ -520,9 +521,11 @@ void keyPressed() {
     }
 
     if (keyCode == 16) {
-      if (!currentlyMoving()) {
+      if (!currentlyMoving()) {/*
         navi[3] = true;
         MODE = 3;
+        */
+        ChipKey[9] = true;
       }
     }
 
@@ -969,14 +972,19 @@ void move() {
     if (ChipKey[9]) {
       if (megaman.Guard.currentFrame < chipCount[9] - 1) {
         megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
-      } else if (megaman.Guard.currentFrame == chipCount[9] - 1) {
-        megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
-        megaman.Guard.currentFrame = 0;
+        megaman.invinsibleTimer = 1;
+      }
+      if (megaman.Guard.currentFrame > 3){
         if (Grid[megaman.getRow()][megaman.getCol()].isDangerMM()) {
-          Grid[megaman.getRow()][megaman.getCol()].toggleDangerMM();
-          attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol());
+            Grid[megaman.getRow()][megaman.getCol()].setDangerMM(false);
+            attacks.setXY("guard", 0, 0, megaman.getRow(), megaman.getCol());
         }
-        ChipKey[9] = false;
+        if (megaman.Guard.currentFrame == chipCount[9] - 1) {
+          megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, "guard");
+          megaman.Guard.currentFrame = 0;
+          ChipKey[9] = false;
+          megaman.invinsibleTimer = 0;
+        }
       }
     }
     if (ChipKey[11]) {

@@ -104,7 +104,7 @@ public class ChipAttack{
        guard.displayMettaurAttack(grid[guardRow][guardCol].getLocationX(), grid[guardRow][guardCol].getLocationY(), 60);
      } else if(guardCol<=8){
       image(guard.spriteFrames[guard.currentFrame + 2],grid[guardRow][5].getLocationX(),grid[guardRow][5].getLocationY() - guard.spriteFrames[guard.currentFrame + 2].height + 5);
-      grid[guardRow][5].toggleDangerVirus();
+      grid[guardRow][5].setDangerVirus(true);
       guardCol++;
      } else if (guardCol == 6){
       chips[5] = false;
@@ -213,7 +213,7 @@ public class ChipAttack{
      guardRow = row;
      guardCol = col+1;
      chips[5] = true;
-     guardDMG = 50;
+     guardDMG = 12;
    }
    if (chip.equals("guard3")){
      guardRow = row;
