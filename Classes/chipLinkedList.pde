@@ -9,6 +9,7 @@ public class ChipLinkedList {
   Chip GigaCannon = new Chip(300, '!', "GigaCannon", 194, 0);
   Chip HiSpread = new Chip(60, '!', "HiSpread", 194, 0);
   Chip dblHero = new Chip(60, '!', "dblHero", 194, 0);
+  Chip TwinLeader = new Chip(400, '!', "TwinLeader", 194, 0);
 
   ChipLinkedList() {
     selected = new LinkedList<Chip>();
@@ -114,6 +115,7 @@ public class ChipLinkedList {
             selected.set(PAStartIndex, HiSpread);
           }
           if (twinLeaders) {
+            selected.set(PAStartIndex, TwinLeader);
           }
           if (doubleHero) {
             selected.set(PAStartIndex, dblHero);

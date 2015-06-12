@@ -68,8 +68,8 @@ int[] chipCount = {
 };
 
 boolean[] navi = {
-  false, false, false, false
-    //0 proto, 1 colonel, 2 protoSP, 3 dblHero
+  false, false, false, false, false
+    //0 proto, 1 colonel, 2 protoSP, 3 dblHero, 4 TwinLeader
 };
 boolean[] PA = {
   false, false, false
@@ -521,11 +521,10 @@ void keyPressed() {
     }
 
     if (keyCode == 16) {
-      if (!currentlyMoving()) {/*
-        navi[3] = true;
+      if (!currentlyMoving()) {
+        navi[4] = true;
         MODE = 3;
-        */
-        ChipKey[9] = true;
+        
       }
     }
 
@@ -1443,6 +1442,22 @@ void move() {
           }
         }
         navi[3] = false;
+        MODE = 0;
+      }
+    }
+    if (navi[4]) {
+      if (megaman.TwinLeader.currentFrame < 32) {
+        megaman.TwinLeader.displayChips(Grid[1][1].getLocationX()-50, Grid[1][1].getLocationY()+45);
+      }
+      if (megaman.TwinLeader.currentFrame == 31) {
+        megaman.TwinLeader.currentFrame = 0;
+        for (int i=0; i<3; i++) {
+          for (int j=3; j<6; j++) {
+            Grid[i][j].setDangerVirus(true);
+            Grid[i][j].setDamage(800);
+          }
+        }
+        navi[4] = false;
         MODE = 0;
       }
     }
