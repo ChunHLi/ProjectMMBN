@@ -5,6 +5,51 @@ APCS Final Project Term 2;
 Megaman Battle Network Virus Battle Simulator;
 
 Working version as of 06-01-2015 is in branch called "06-01-2015"
+Working version as of 06-08-2015 is in branch called "06-08-2015"
+
+How to Use
+=========================================================================================================================
+After running the game, you will be promted to choose between "Tutorial" and "Protoman". Use your mouse to select one. 
+Tutorial will be a battle against the virus Mettaur. You will have a relatively weak folder.
+Protoman will be a battle against the navi Protoman. You will have a strong folder.
+
+Controls
+
+In battle
+- Arrow keys to move around
+- 'x' to use buster
+  - hold 'x' to charge buster, when it turns purple, buster does 10x damage
+- 'z' to use your next battle chip
+- 'a' or 's' to open up custom menu to select new chips when custom bar is full
+- 'enter' to pause the game
+
+In Custom Menu
+- Arrow keys to navigate around
+- 'q' to shuffle the chips you can choose from
+- 'z' to select a chip
+- 'x' to deselect a chip
+- 'enter' to resume battle
+
+Mechanics
+- Megaman can only be on the red panels.
+- Custom menu can only be accessed when the custom bar is full.
+- In custom menu, you can only select chips that are the same or have the same letter. '*' can go with any letter.
+- If you have not used all selected chips during battle, and you select new chips in the custom menu, the old chips will
+  be gone. However, if you open the custom menu, but do not select any new chips, the old ones will remain.
+- Chips in battle are in a queue. The first chip selected is the first chip used.
+- Some combinations of three chips will give you a Program Advance (PA).
+  - PAs are essentially super-mega-OP chips.
+  - The chips MUST be in the correct order to work.
+  - The three chips will be removed and replaced with the PA.
+
+Program Advances
+Sword -> Wide Sword -> Long Sword = Life Sword
+Cannon -> Cannon -> Cannon = Giga Cannon
+Spreader J -> Spreader K -> Spreader L = HiSpreader
+Sword -> Wide Blade -> Long Blade = Life Sword
+Wide Blade -> Long Blade -> ProtomanSP = Double Hero
+Protoman -> Anti Navi -> ColonelSP = Twin Leaders
+
 
 Change - Log
 =========================================================================================================================
@@ -167,6 +212,16 @@ Change - Log
 6/08/15 - Shawn Li & Kah Soon Yap - Mental health day, burned out.
 
 6/09/15 - Shawn Li - Created the menu, can choose between two types of battles.
+
+6/09/15 - Kah Soon Yap - Double hero PA created and bound
+
+6/10/15 - Shawn Li & Kah Soon Yap - Fixed guard bug and increased reflecting frames
+
+6/11/15 - Kah Soon Yap - Twin leader PA created and bound.
+
+6/12/15 - Shawn Li & Kah Soon Yap - Fixed invisible bug
+
+
 
 
 
