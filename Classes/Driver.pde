@@ -24,6 +24,7 @@ int rotateSpeed = 45;
 boolean speedUP;
 boolean delay;
 boolean darken;
+boolean chipInvis;
 AudioPlayer Intro;
 boolean[] Keys = {
   false, false, false, false, false
@@ -288,10 +289,10 @@ void mousePressed() {
   print(mouseX + " " + mouseY + "\n");
   speedUP = true;
   if (MODE == -1) {
-    if ((mouseX > 107 && mouseX < 257) && (mouseY > 140 && mouseY < 158)) {
+    if (((mouseX > 107 && mouseX < 257) && (mouseY > 140 && mouseY < 158)) && (displayProtoTransition == false)) {
       displayMettaurTransition = true;
     }
-    if ((mouseX > 100 && mouseX < 250) && (mouseY > 170 && mouseY < 188)) {
+    if (((mouseX > 100 && mouseX < 250) && (mouseY > 170 && mouseY < 188)) && (displayMettaurTransition == false)) {
       displayProtoTransition = true;
     }
   }
@@ -451,10 +452,10 @@ void keyPressed() {
               ChipKey[15] = true;
             }
             if (Chips.selected.get(0).chipID == 179) {
-              holder[0] = true;
+              holder[1] = true;
             }
             if (Chips.selected.get(0).chipID == 180) {
-              holder[1] = true;
+              holder[0] = true;
             }
             if (Chips.selected.get(0).chipID == 107) {
               holder[2] = true;
@@ -462,7 +463,7 @@ void keyPressed() {
             if (Chips.selected.get(0).chipID == 121) {
               holder[3] = true;
             }
-            if (Chips.selected.get(0).name.equals("Protoman")) {
+            if (Chips.selected.get(0).name.equals("Protomn")) {
               navi[0] = true;
               MODE = 3;
             }
@@ -470,7 +471,7 @@ void keyPressed() {
               navi[1] = true;
               MODE = 3;
             }
-            if (Chips.selected.get(0).name.equals("ProtomanSP")) {
+            if (Chips.selected.get(0).name.equals("ProtomnSP")) {
               navi[2] = true;
               MODE = 3;
             }
@@ -558,6 +559,9 @@ void processKeys() {
 //this is important.
 //it returns true if megaman is in the middle of an animation.
 boolean currentlyMoving() {
+  if (megaman.chipInvis){
+    return false;
+  }
   if (megaman.invinsibleTimer > 74) {
     return true;
   }
@@ -1198,7 +1202,7 @@ void move() {
     if (megaman.invis){
      megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 0, 0);
      }else{*/
-    if (megaman.invinsibleTimer > 74) {
+    if (megaman.invinsibleTimer > 74 && !megaman.chipInvis) {
       megaman.display(Grid[megaman.getRow()][megaman.getCol()].getLocationX(), Grid[megaman.getRow()][megaman.getCol()].getLocationY(), 1, 0);
     }
     if (megaman.invinsibleTimer == 74) {

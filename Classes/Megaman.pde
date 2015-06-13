@@ -3,6 +3,7 @@ public class Megaman implements Killable {
   String cross;
   boolean invis;
   boolean barrier;
+  boolean chipInvis;
 
   Animation Standing = new Animation("../Sprites/megaman/noCross/01", 1);
   Animation Hurt = new Animation("../Sprites/megaman/noCross/02", 8);
@@ -95,9 +96,8 @@ public class Megaman implements Killable {
         //}
       }
       if (animation == 1) {
-        //for (int i = 0; i < Hurt.spriteCount; i++){
-        Hurt.display(xpos, ypos, invinsibleTimer);
-        //}
+        //for (int i = 0; i < Hurt.spriteCount; i++)
+          Hurt.display(xpos, ypos, invinsibleTimer);
       }
       if (animation == 2) {
         //for (int i = 0; i < ArrivePanel.spriteCount; i++){
@@ -219,7 +219,7 @@ public class Megaman implements Killable {
   
   public void useInvis(){
    invinsibleTimer = 180;
-   invis = true; 
+   chipInvis = true; 
   }
   
   public void barrier(float xpos, float ypos){

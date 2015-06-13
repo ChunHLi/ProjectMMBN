@@ -60,10 +60,10 @@ class ChipMenu {
     swordFolder.add(new Chip(80, '!', "Sword", 70, 0));
     swordFolder.add(new Chip(150, 'B', "WideBlade", 73, 0));
     swordFolder.add(new Chip(150, 'B', "WideBlade", 73, 0));
-    swordFolder.add(new Chip(150, 'B', "WideBalde", 73, 0));
+    swordFolder.add(new Chip(150, 'B', "WideBlade", 73, 0));
     swordFolder.add(new Chip(150, 'B', "LongBlade", 74, 0));
     swordFolder.add(new Chip(150, 'B', "LongBlade", 74, 0));
-    swordFolder.add(new Chip(150, 'B', "LongBalde", 74, 0));
+    swordFolder.add(new Chip(150, 'B', "LongBlade", 74, 0));
     swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
     swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
     swordFolder.add(new Chip(160, 'B', "StepSword", 80, 0));
