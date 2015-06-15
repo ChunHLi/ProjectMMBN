@@ -231,7 +231,15 @@ void draw() {
       mettaurTimer++;
     } else {
       protoman.hurt(Grid, MODE, megaman);
-      protoman.sequence(Grid, MODE, megaman);
+      if (protoman.HP < 1){
+        if (protoman.death.currentFrame < 27){
+          protoman.death.displayChips(Grid[protoman.getRow()][protoman.getCol()].getLocationX(), Grid[protoman.getRow()][protoman.getCol()].getLocationY());
+        } else {
+          exit(); 
+        }
+      } else{
+        protoman.sequence(Grid, MODE, megaman);
+      }
     }
     checkMode();
     Chips.display(displayMenu);
@@ -527,9 +535,7 @@ void keyPressed() {
 
     if (keyCode == 16) {
       if (!currentlyMoving()) {
-        navi[4] = true;
-        MODE = 3;
-        
+        protoman.HP = 0;
       }
     }
 

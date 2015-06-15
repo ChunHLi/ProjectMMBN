@@ -16,6 +16,7 @@ class Protoman {
   Animation shieldUp = new Animation("../Sprites/bosses/Protoman/07", 7);
   Animation shieldDown = new Animation("../Sprites/bosses/Protoman/08", 7);
   PImage stand = loadImage("../Sprites/bosses/Protoman/000.png");
+  Animation death = new Animation("../Sprites/bosses/Protoman/11", 28);
 
   Protoman() {
     this(2800, 1, 4);
