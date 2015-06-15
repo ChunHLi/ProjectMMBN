@@ -49,7 +49,7 @@ Cannon -> Cannon -> Cannon = Giga Cannon
 Spreader J -> Spreader K -> Spreader L = HiSpreader
 Sword -> Wide Blade -> Long Blade = Life Sword
 Wide Blade -> Long Blade -> ProtomanSP = Double Hero
-Protoman -> Anti Navi -> ColonelSP = Twin Leaders
+Protoman -> Sword -> ColonelSP = Twin Leaders
 
 
 Change - Log
