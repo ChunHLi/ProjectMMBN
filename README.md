@@ -41,6 +41,7 @@ Mechanics
   - PAs are essentially super-mega-OP chips.
   - The chips MUST be in the correct order to work.
   - The three chips will be removed and replaced with the PA.
+- After beating the enemy, the game will close. To play again you will need to re-run the program.
 
 Program Advances
 Sword -> Wide Sword -> Long Sword = Life Sword
@@ -221,6 +222,10 @@ Change - Log
 
 6/12/15 - Shawn Li & Kah Soon Yap - Fixed invisible bug
 
+6/13/15 - Kah Soon Yap - Updated read me for instructions
+
+6/14/15 - Kah Soon Yap - Death animations for Protoman and mettaur
+
 
 
 
@@ -228,25 +233,25 @@ Change - Log
 To do
 =========================================================================================================================
 
-- For Shawn (due 6/4/15) - Make progress on Bass AI.
-- For Kah Soon (due 6/4/15) - Get most of the animations of the second folder's chips done.
-- For Kah Soon (due 6/4/15) - Fix animations for old chips.
-- For Shawn (due 6/4/15) - Program the program advance method.
+- For Shawn (due 6/4/15) - Make progress on Bass AI. 
+- For Kah Soon (due 6/4/15) - Get most of the animations of the second folder's chips done. (COMPLETED)
+- For Kah Soon (due 6/4/15) - Fix animations for old chips. (COMPLETED)
+- For Shawn (due 6/4/15) - Program the program advance method. (COMPLETED)
 
 Future major goals (pre June 8th):
 1. Shawn:
   a. Show danger for Protoman's slashes. (due Friday) (COMPLETED)
   b. Damage Protoman. (due Friday) (COMPLETED)
   c. Protoman's special attack. (due Saturday)
-  d. Program Advances. (due Saturday)
+  d. Program Advances. (due Saturday) (COMPLETED)
   e. transition. (due Sunday)
   f. beautification.
 
 2. Kah Soon:
-  a. Protoman's slash frames. (due Friday)
-  b. Chip animations. (due Saturday)
-  c. Protoman's HP. (due Friday)
-  d. Battle Start. (due Saturday)
+  a. Protoman's slash frames. (due Friday) (COMPLETED)
+  b. Chip animations. (due Saturday) (COMPLETED)
+  c. Protoman's HP. (due Friday) (COMPLETED)
+  d. Battle Start. (due Saturday) (COMPLETED)
   e. beautification.
   f. Crosses. (optional).
 
