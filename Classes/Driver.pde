@@ -226,8 +226,16 @@ void draw() {
     charge();
     attacks.move(Grid);
     if (isTutorial) {
-      mettaurMove();
       mettaur.getHurt(Grid);
+      if (mettaur.HP < 1){
+        if (mettaur.death.currentFrame < 14){
+         mettaur.death.displayChips(Grid[mettaur.getRow()][mettaur.getCol()].getLocationX()-40, Grid[mettaur.getRow()][mettaur.getCol()].getLocationY());
+        } else {
+         exit(); 
+        }
+      } else{
+        mettaurMove();
+      }
       mettaurTimer++;
     } else {
       protoman.hurt(Grid, MODE, megaman);
@@ -535,7 +543,7 @@ void keyPressed() {
 
     if (keyCode == 16) {
       if (!currentlyMoving()) {
-        protoman.HP = 0;
+        mettaur.HP = 0;
       }
     }
 
