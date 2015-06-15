@@ -540,13 +540,13 @@ void keyPressed() {
     if (keyCode == 32) {
       OST.nextSong();
     }
-
+/*
     if (keyCode == 16) {
       if (!currentlyMoving()) {
         mettaur.HP = 0;
       }
     }
-
+*/
     println(keyCode);
   }
 }

@@ -70,7 +70,7 @@ public class ChipLinkedList {
       doubleHero = true;
       PAStartIndex = counter;
     }
-    if (selected.get(counter).name.equals("ColonelSP") && selected.get(counter + 1).chipID == 188 && selected.get(counter + 2).name.equals("Protomn")) {
+    if (selected.get(counter).name.equals("ColonelSP") && selected.get(counter + 1).chipID == 70 && selected.get(counter + 2).name.equals("Protomn")) {
       PAExists = true;
       twinLeaders = true;
       PAStartIndex = counter;
