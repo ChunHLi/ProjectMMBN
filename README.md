@@ -7,6 +7,8 @@ Megaman Battle Network Virus Battle Simulator;
 Working version as of 06-01-2015 is in branch called "06-01-2015"
 Working version as of 06-08-2015 is in branch called "06-08-2015"
 
+**WORKS WITH PROCESSING VERSION 2.2.1**
+
 How to Use
 =========================================================================================================================
 After running the game, you will be promted to choose between "Tutorial" and "Protoman". Use your mouse to select one. 
